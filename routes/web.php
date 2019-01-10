@@ -32,5 +32,9 @@ Route::group(['namespace'=>'Admin'], function() {
 	    Route::get('/home', 'DashboardController@getHome');
 
 	    Route::resource('posts', 'PostsController');
+
+	    Route::get('/profile', 'DashboardController@getProfile');
+	    Route::get('/profile/edit', 'DashboardController@editProfile');
+	    Route::post('/profile/edit', 'DashboardController@postEditProfile');
 	});
 });
