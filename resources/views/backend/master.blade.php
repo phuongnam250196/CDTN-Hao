@@ -27,6 +27,7 @@
     <link rel="stylesheet" href="{{asset('/backend')}}/assets/css/style.css">
 
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
+    @yield('style-rewrite')
     <script src="{{asset('/backend')}}/vendors/jquery/dist/jquery.min.js"></script>
     <script src="{{asset('/backend')}}/vendors/popper.js/dist/umd/popper.min.js"></script>
     <script src="{{asset('/backend')}}/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
@@ -78,31 +79,26 @@
                     <li>
                         <a href="{{url('/admin/posts/')}}"> <i class="menu-icon fa fa-laptop"></i>Quản lý bài viết</a>
                     </li>
-                    <li class="menu-item-has-children dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i>Quản lý lịch trực</a>
-                        <ul class="sub-menu children dropdown-menu">
-                            <li><i class="fa fa-table"></i><a href="tables-basic.html">Basic Table</a></li>
-                            <li><i class="fa fa-table"></i><a href="tables-data.html">Data Table</a></li>
-                        </ul>
+                    <li>
+                        <a href="{{url('/admin/calendar/')}}" class="dropdown-toggle" > <i class="menu-icon fa fa-table"></i>Quản lý lịch trực</a>
                     </li>
-                    <li class="menu-item-has-children dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-th"></i>Quản lý trang thiết bị</a>
-                        <ul class="sub-menu children dropdown-menu">
-                            <li><i class="menu-icon fa fa-th"></i><a href="forms-basic.html">Basic Form</a></li>
-                            <li><i class="menu-icon fa fa-th"></i><a href="forms-advanced.html">Advanced Form</a></li>
-                        </ul>
+                    <li>
+                        <a href="{{url('/admin/devices/')}}" class="dropdown-toggle"> <i class="menu-icon fa fa-th"></i>Quản lý trang thiết bị</a>
                     </li>
-                    <li class="menu-item-has-children dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-th"></i>Quản lý sinh viên</a>
+                    <li>
+                        <a href="{{url('/admin/projects/')}}" class="dropdown-toggle"> <i class="menu-icon fa fa-th"></i>Quản lý đồ án</a>
                     </li>
-                    <li class="menu-item-has-children dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-th"></i>Quản lý giáo viên</a>
+                    <li>
+                        <a href="{{url('/admin/students/')}}"> <i class="menu-icon fa fa-th"></i>Quản lý sinh viên</a>
+                    </li>
+                    <li>
+                        <a href="{{url('/admin/teachers/')}}"> <i class="menu-icon fa fa-th"></i>Quản lý giáo viên</a>
                     </li>
 
                     <h3 class="menu-title">Các chức năng phụ</h3><!-- /.menu-title -->
 
                     <li class="menu-item-has-children dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-tasks"></i>Quản lý khoa</a>
+                        <a href="#"> <i class="menu-icon fa fa-tasks"></i>Quản lý khoa</a>
                     </li>
                 </ul>
             </div><!-- /.navbar-collapse -->
@@ -277,6 +273,7 @@
             });
         });
     </script>
+    @yield('script-rewrite')
 
 </body>
 

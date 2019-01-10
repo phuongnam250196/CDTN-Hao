@@ -8,7 +8,8 @@
                     <div class="card">
                         <div class="card-header">
                             <strong class="card-title">Danh sách bài viết</strong>
-                            <a href="{{url('/admin/posts/create')}}" class="btn btn-outline-success pull-right">Thêm mới</a href="{{url('/admin/posts/')}}">
+                            <a href="{{url('/admin/posts/create')}}" class="btn btn-outline-danger pull-right">Duyệt bài</a>
+                            <a href="{{url('/admin/posts/create')}}" class="btn btn-outline-success pull-right">Thêm mới</a>
                         </div>
                         <div class="card-body">
                             @if(session('messages'))

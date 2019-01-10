@@ -36,5 +36,28 @@ Route::group(['namespace'=>'Admin'], function() {
 	    Route::get('/profile', 'DashboardController@getProfile');
 	    Route::get('/profile/edit', 'DashboardController@editProfile');
 	    Route::post('/profile/edit', 'DashboardController@postEditProfile');
+
+	    Route::get('/calendar', 'CalendarController@getIndex');
+
+	    Route::group(['prefix'=>'students'], function() {
+	    	Route::get('/', 'StudentsController@getIndex');
+	    });
+
+	    Route::group(['prefix'=>'teachers'], function() {
+	    	Route::get('/', 'TeachersController@getIndex');
+	    });
+
+	    Route::group(['prefix'=>'devices'], function() {
+	    	Route::get('/', 'DevicesController@getIndex');
+	    });
+
+	    Route::group(['prefix'=>'projects'], function() {
+	    	Route::get('/', 'ProjectsController@getIndex');
+	    	Route::get('/create', 'ProjectsController@getCreate');
+	    	Route::post('/create', 'ProjectsController@postCreate');
+	    	Route::get('/edit/{id}', 'ProjectsController@getEdit');
+	    	Route::post('/edit/{id}', 'ProjectsController@postEdit');
+	    	Route::get('/delete/{id}', 'ProjectsController@getDelete');
+	    });
 	});
 });
