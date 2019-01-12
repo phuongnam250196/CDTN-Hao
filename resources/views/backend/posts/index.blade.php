@@ -7,9 +7,10 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-header">
-                            <strong class="card-title">Danh sách bài viết</strong>
-                            <a href="{{url('/admin/posts/create')}}" class="btn btn-outline-danger pull-right">Duyệt bài</a>
-                            <a href="{{url('/admin/posts/create')}}" class="btn btn-outline-success pull-right">Thêm mới</a>
+                            <strong class="card-title">Danh sách bài viết chờ duyệt</strong>
+                            <a href="{{url('/admin/post/deny')}}" class="btn btn-outline-secondary pull-right">Bài đã ẩn</a>
+                            <a href="{{url('/admin/post/allow')}}" class="btn btn-outline-success pull-right mr-2">Bài viết đã duyệt</a>
+                            <a href="{{url('/admin/posts/create')}}" class="btn btn-outline-info pull-right mr-2">Thêm mới</a>
                         </div>
                         <div class="card-body">
                             @if(session('messages'))
@@ -22,7 +23,7 @@
                                         <th scope="col"  width="15%">Tiêu đề</th>
                                         <th scope="col" width="20%">Ảnh minh họa</th>
                                         <th scope="col">Nội dung</th>
-                                        <th class="text-center" colspan="2" width="5%">Tùy chọn</th>
+                                        <th class="text-center" colspan="2" width="5%">Duyệt bài</th>
                                     </tr>
                                 </thead>
                                 <tbody {{$dem=1}}>
@@ -32,13 +33,9 @@
                                             <td>{{$dat->post_title}}</td>
                                             <td><img src="{{url('/').'/'.$dat->post_img}}" width="100" height="80"></td>
                                             <td><div class="post-content-text">{!! strip_tags(preg_replace("/<img[^>]+\>/i", "(image) ", $dat->post_content)) !!}</div></td>
-                                            <td><a href="{{url('admin/posts/'.$dat->id.'/edit')}}" class="btn btn-outline-info"><i class="fa  fa-pencil"></i></a></td>
+                                            <td><a href="{{url('admin/posts/allow/'.$dat->id)}}" onclick="return confirm('Bạn chắc chắn muốn duyệt bài viết này?');" class="btn btn-outline-info"><i class="fa  fa-check"></i></a></td>
                                             <td>
-                                                <form action="{{route('posts.destroy', $dat->id)}}" method="POST">
-                                                    @method('DELETE')
-                                                    <button onclick="return confirm('Bạn có chắc chắn muốn xóa không?');" class="btn btn-outline-danger"><i class="fa  fa-times"></i></button>
-                                                    {{csrf_field()}}
-                                                </form>
+                                                <a href="{{url('admin/posts/deny/'.$dat->id)}}" onclick="return confirm('Bạn có chắc chắn muốn ẩn bài viết này?');" class="btn btn-outline-danger"><i class="fa  fa-times"></i></a >
                                             </td>
                                         </tr>
                                     @endforeach

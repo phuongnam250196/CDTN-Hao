@@ -16,7 +16,7 @@ class PostsController extends Controller
      */
     public function index()
     {
-        $data = Posts::orderby('created_at', 'desc')->paginate(10);
+        $data = Posts::where('post_status', 0)->orderby('created_at', 'desc')->paginate(10);
         return view('backend.posts.index', compact('data'));
     }
 
@@ -57,6 +57,7 @@ class PostsController extends Controller
             $data->post_title = $request->post_title;
             $data->post_slug = str_slug($request->post_title);
             $data->post_content = $request->post_content;
+            $data->post_status = 0;
             if($data->save()) {
                 if(!empty($request->post_img) && $request->post_img != "undefined"){
                     $file =  $request->post_img;
@@ -148,5 +149,28 @@ class PostsController extends Controller
     {
         Posts::destroy($id);
         return back()->with("messages", "Bài viết được xóa thành công!");
+    }
+
+    public function getAllowList() {
+        // dd('a');
+        $data = Posts::where('post_status', 1)->orderBy('created_at', 'desc')->paginate(10);
+        return view('backend.posts.allow', compact('data'));
+    }
+    public function getAllow($id) {
+        $data = Posts::find($id);
+        $data->post_status = 1;
+        $data->save();
+        return back()->with('messages', 'Bài viết đã được hiển thị');
+    }
+
+    public function getDenyList() {
+        $data = Posts::where('post_status', 2)->orderBy('created_at', 'desc')->paginate(10);
+        return view('backend.posts.allow', compact('data'));
+    }
+    public function getDeny($id) {
+        $data = Posts::find($id);
+        $data->post_status = 2;
+        $data->save();
+        return back()->with('messages', 'Bài viết đã bị cấm hiển thị');
     }
 }
