@@ -258,7 +258,7 @@ img {
       right: 30px; } }
 
 .section-padding-100 {
-  padding: 100px 0; }
+  padding: 50px 0; }
 
 .section-padding-50 {
   padding: 50px 0; }
@@ -1267,5 +1267,34 @@ textarea:focus ~ .highlight {
       .footer-area .footer-single-widget form button i {
         font-size: 14px;
         color: #959595; }
-
+.post-sidebar-area-2 {
+  border: 2px solid #f1f1f1;
+}
+.post-sidebar-area-2 .sidebar-widget-area {
+  
+} 
+.post-sidebar-area-2 .sidebar-widget-area .title {
+  text-transform: uppercase;
+  padding-left: 0;
+  text-align: center;
+} 
+.post-sidebar-area-2 .sidebar-widget-area .widget-content {
+  padding: 0;
+}
+.post-sidebar-area-2 .sidebar-widget-area .widget-content ul {
+    text-transform: uppercase;
+}
+.post-sidebar-area-2 .sidebar-widget-area .widget-content li {
+  padding-left: 15px;
+  line-height: 2.5;
+}
+.post-sidebar-area-2 .sidebar-widget-area .widget-content li:hover {
+  background: #ddd;
+}
+.post-sidebar-area-2 .sidebar-widget-area .widget-content li a {
+  
+}
+.post-sidebar-area-2 .sidebar-widget-area .widget-content li:hover a {
+  color: blue;
+}
 /*# sourceMappingURL=style.css.map */

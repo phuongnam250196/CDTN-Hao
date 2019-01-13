@@ -11,9 +11,6 @@
 |
 */
 
-
-Auth::routes();
-
 Route::get('/home', 'HomeController@index')->name('home');
 Route::group(['namespace'=>'TrangChu'], function() {
 	Route::get('/user/login', 'LoginController@getLogin');
@@ -26,6 +23,33 @@ Route::group(['namespace'=>'TrangChu'], function() {
 	Route::get('/news', 'HomeController@getNews');
 	Route::get('/device', 'HomeController@getDevice');
 	Route::get('/project', 'HomeController@getProject');
+
+	Route::group(['prefix'=>'student'], function() {
+		Route::get('/', 'StudentsController@getIndex');
+
+		Route::group(['prefix'=>'info'], function() {
+			Route::get('/', 'StudentsController@getInfo');
+			Route::post('/', 'StudentsController@postInfo');
+			Route::get('/update', 'StudentsController@getUpdateInfo');
+			Route::post('/update', 'StudentsController@postUpdateInfo');
+		});
+
+		Route::group(['prefix'=>'posts'], function() {
+			Route::get('/', 'StudentsController@listPosts');
+		});
+
+		Route::group(['prefix'=>'devices'], function() {
+			Route::get('/', 'StudentsController@listDevices');
+		});
+
+		Route::group(['prefix'=>'calendars'], function() {
+			Route::get('/', 'StudentsController@listCalendars');
+		});
+	});
+
+	Route::group(['prefix'=>'teacher'], function() {
+		Route::get('/', 'TeachersController@getIndex');
+	});
 });
 
 
