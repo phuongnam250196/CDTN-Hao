@@ -33,7 +33,7 @@
                                             <th scope="row">{{$dem++}}</th>
                                             <td><a href="{{url("admin/devices/user/".$dat->id)}}">{{$dat->device_code}}</a></td>
                                             <td>{{$dat->device_name}}</td>
-                                            <td>{{$dat->device_count}}</td>
+                                            <td>{{$dat->device_count_change}}</td>
                                             <td>{{$dat->device_type}}</td>
                                             <td>
                                                 <a href="{{url('admin/devices/edit/'.$dat->id)}}" class="btn btn-outline-info"><i class="fa  fa-pencil"></i></a>

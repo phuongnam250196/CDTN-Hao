@@ -4,11 +4,15 @@ namespace App\Http\Controllers\TrangChu;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-
+use App\Posts;
+use App\Project;
+use App\Device;
 class HomeController extends Controller
 {
     public function getIndex() {
-    	return view('frontend.index');
+        $posts= Posts::orderBy('created_at', 'desc')->paginate(4);
+        $projects = Project::orderBy('created_at', 'desc')->paginate(4);
+    	return view('frontend.index', compact('posts', 'projects'));
     }
 
     public function getContact() {
@@ -24,7 +28,8 @@ class HomeController extends Controller
     }
 
     public function getDevice() {
-    	return view('frontend.device');
+        $data = Device::orderBy('created_at', 'desc')->paginate(7);
+    	return view('frontend.device', compact('data'));
     }
 
     public function getProject() {

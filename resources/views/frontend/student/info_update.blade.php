@@ -7,17 +7,7 @@
                 <div class="col-12 col-md-8 col-lg-3">
                     <div class="post-sidebar-area post-sidebar-area-2">
                         <!-- Widget Area -->
-                        <div class="sidebar-widget-area">
-                            <h5 class="title">Danh sách chức năng</h5>
-                            <div class="widget-content">
-                                <ul>
-                                	<li><a href="{{url('/student/info')}}">Xem thông tin</a></li>
-                                	<li><a href="{{url('/student/posts')}}">Viết bài</a></li>
-                                	<li><a href="{{url('/student/devices')}}">Mượn thiết bị</a></li>
-                                	<li><a href="{{url('/student/calendars')}}">Đăng ký lịch trực</a></li>
-                                </ul>
-                            </div>
-                        </div>
+                        @include('frontend.navbar.nav')
                     </div>
                 </div>
 
@@ -32,27 +22,38 @@
                             <div class="tab-content" id="myTabContent">
                                 <div class="row">
                                     <div class="col-md-10">
-                                        <form method="POST">
+                                        <form method="POST" enctype="multipart/form-data">
+                                            <div class="form-group">
+                                                <label class=" form-control-label">Ảnh đại diện</label> <br>
+                                                {{-- <input type="file" name="post-img" class="form-control"> --}}
+                                                <input id="img" type="file" name="student_avatar" class="form-control" style="display: none" onchange="changeImg(this)" >
+                                                @if(empty($data->student_avatar))
+                                                <img id="avatar" class="thumbnail" src="{{url('/uploads/images/new_seo-10-512.png')}}" width="300">
+                                                @else
+                                                <img id="avatar" class="thumbnail" src="{{url('/').'/'.$data->student_avatar}}" width="300">
+                                                @endif
+                                            </div>
                                           <div class="form-group">
                                             <label>Mã sinh viên</label>
-                                            <input type="text" class="form-control">
+                                            <input type="text" class="form-control" name="student_code" disabled value="{{Auth::user()->name}}">
                                           </div>
                                           <div class="form-group">
                                             <label>Họ tên</label>
-                                            <input type="text" class="form-control">
+                                            <input type="text" class="form-control" name="student_name" value="{{$data->student_name}}">
                                           </div>
                                           <div class="form-group">
                                             <label>Email</label>
-                                            <input type="text" class="form-control">
+                                            <input type="text" class="form-control" name="student_email" value="{{$data->student_email}}">
                                           </div>
                                           <div class="form-group">
                                             <label>Số điện thoại</label>
-                                            <input type="text" class="form-control">
+                                            <input type="text" class="form-control" name="student_phone" value="{{$data->student_phone}}">
                                           </div>
                                           <div class="form-group">
                                             <button type="submit" class="btn btn-primary">Cập nhật</button>
+                                            <a href="{{url('student/info')}}" class="btn btn-secondary">Hủy bỏ</a>
                                           </div>
-                                          
+                                          {{csrf_field()}}
                                         </form>
                                     </div>
                                 </div>

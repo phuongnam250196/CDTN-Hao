@@ -72,26 +72,26 @@
 
             <div id="main-menu" class="main-menu collapse navbar-collapse">
                 <ul class="nav navbar-nav">
-                    <li class="active">
+                    <li class="@if(Request::is('admin')) active @endif">
                         <a href="{{url("/admin")}}"> <i class="menu-icon fa fa-dashboard"></i>Trang chủ </a>
                     </li>
                     <h3 class="menu-title">Các chức năng chính</h3><!-- /.menu-title -->
-                    <li>
+                    <li class="@if(Request::is('admin/posts') || Request::is('admin/posts/*') || Request::is('admin/post/*')) active @endif">
                         <a href="{{url('/admin/posts/')}}"> <i class="menu-icon fa fa-laptop"></i>Quản lý bài viết</a>
                     </li>
-                    <li>
+                    <li class="@if(Request::is('admin/calendar')) active @endif">
                         <a href="{{url('/admin/calendar/')}}" class="dropdown-toggle" > <i class="menu-icon fa fa-table"></i>Quản lý lịch trực</a>
                     </li>
-                    <li>
+                    <li class="@if(Request::is('admin/devices') || Request::is('admin/devices/*')) active @endif">
                         <a href="{{url('/admin/devices/')}}" class="dropdown-toggle"> <i class="menu-icon fa fa-th"></i>Quản lý trang thiết bị</a>
                     </li>
-                    <li>
+                    <li class="@if(Request::is('admin/projects') || Request::is('admin/projects/*')) active @endif">
                         <a href="{{url('/admin/projects/')}}" class="dropdown-toggle"> <i class="menu-icon fa fa-th"></i>Quản lý đồ án</a>
                     </li>
-                    <li>
+                    <li class="@if(Request::is('admin/students') || Request::is('admin/students/*')) active @endif">
                         <a href="{{url('/admin/students/')}}"> <i class="menu-icon fa fa-th"></i>Quản lý sinh viên</a>
                     </li>
-                    <li>
+                    <li class="@if(Request::is('admin/teachers') || Request::is('admin/teachers/*')) active @endif">
                         <a href="{{url('/admin/teachers/')}}"> <i class="menu-icon fa fa-th"></i>Quản lý giáo viên</a>
                     </li>
 

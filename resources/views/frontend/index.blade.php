@@ -30,143 +30,49 @@
                                         <div class="col-12 col-md-6">
                                             <div class="world-catagory-slider owl-carousel wow fadeInUpBig" data-wow-delay="0.1s">
 
-                                                <!-- Single Blog Post -->
+                                                @foreach($posts as $post)
                                                 <div class="single-blog-post">
                                                     <!-- Post Thumbnail -->
                                                     <div class="post-thumbnail">
-                                                        <img src="{{asset('/frontend')}}/img/blog-img/b1.jpg" alt="">
+                                                        <img src="{{url('/').'/'.$post->post_img}}" alt="">
                                                         <!-- Catagory -->
                                                         <div class="post-cta"><a href="#">travel</a></div>
                                                     </div>
                                                     <!-- Post Content -->
                                                     <div class="post-content">
                                                         <a href="#" class="headline">
-                                                            <h5>How Did van Gogh’s Turbulent Mind Depict One of the Most Complex Concepts in Physics?</h5>
+                                                            <h5>{{$post->post_title}}</h5>
                                                         </a>
-                                                        <p>How Did van Gogh’s Turbulent Mind Depict One of the Most Complex Concepts in...</p>
+                                                        <p>{!! $post->post_content !!}</p>
                                                         <!-- Post Meta -->
                                                         <div class="post-meta">
-                                                            <p><a href="#" class="post-author">Katy Liu</a> on <a href="#" class="post-date">Sep 29, 2017 at 9:48 am</a></p>
+                                                            <p><a href="#" class="post-author">{{(empty($post->Student->student_name)?"":($post->Student->student_name))}}</a> on <a href="#" class="post-date">{{(empty($post->created_at)?"":($post->created_at))}}</a></p>
                                                         </div>
                                                     </div>
                                                 </div>
-
-                                                <!-- Single Blog Post -->
-                                                <div class="single-blog-post">
-                                                    <!-- Post Thumbnail -->
-                                                    <div class="post-thumbnail">
-                                                        <img src="{{asset('/frontend')}}/img/blog-img/b2.jpg" alt="">
-                                                        <!-- Catagory -->
-                                                        <div class="post-cta"><a href="#">travel</a></div>
-                                                    </div>
-                                                    <!-- Post Content -->
-                                                    <div class="post-content">
-                                                        <a href="#" class="headline">
-                                                            <h5>How Did van Gogh’s Turbulent Mind Depict One of the Most Complex Concepts in Physics?</h5>
-                                                        </a>
-                                                        <p>How Did van Gogh’s Turbulent Mind Depict One of the Most Complex Concepts in...</p>
-                                                        <!-- Post Meta -->
-                                                        <div class="post-meta">
-                                                            <p><a href="#" class="post-author">Katy Liu</a> on <a href="#" class="post-date">Sep 29, 2017 at 9:48 am</a></p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <!-- Single Blog Post -->
-                                                <div class="single-blog-post">
-                                                    <!-- Post Thumbnail -->
-                                                    <div class="post-thumbnail">
-                                                        <img src="{{asset('/frontend')}}/img/blog-img/b3.jpg" alt="">
-                                                        <!-- Catagory -->
-                                                        <div class="post-cta"><a href="#">travel</a></div>
-                                                    </div>
-                                                    <!-- Post Content -->
-                                                    <div class="post-content">
-                                                        <a href="#" class="headline">
-                                                            <h5>How Did van Gogh’s Turbulent Mind Depict One of the Most Complex Concepts in Physics?</h5>
-                                                        </a>
-                                                        <p>How Did van Gogh’s Turbulent Mind Depict One of the Most Complex Concepts in...</p>
-                                                        <!-- Post Meta -->
-                                                        <div class="post-meta">
-                                                            <p><a href="#" class="post-author">Katy Liu</a> on <a href="#" class="post-date">Sep 29, 2017 at 9:48 am</a></p>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                                @endforeach
                                             </div>
                                         </div>
 
                                         <div class="col-12 col-md-6">
-                                            <!-- Single Blog Post -->
+                                            @foreach($posts as $post)
                                             <div class="single-blog-post post-style-2 d-flex align-items-center wow fadeInUpBig" data-wow-delay="0.2s">
                                                 <!-- Post Thumbnail -->
                                                 <div class="post-thumbnail">
-                                                    <img src="{{asset('/frontend')}}/img/blog-img/b10.jpg" alt="">
+                                                    <img width="97" style="height: 97px !important;" src="{{url('/').'/'.$post->post_img}}" alt="">
                                                 </div>
                                                 <!-- Post Content -->
                                                 <div class="post-content">
                                                     <a href="#" class="headline">
-                                                        <h5>How Did van Gogh’s Turbulent Mind Depict One of the Most</h5>
+                                                        <h5>{{$post->post_title}}</h5>
                                                     </a>
                                                     <!-- Post Meta -->
                                                     <div class="post-meta">
-                                                        <p><a href="#" class="post-author">Katy Liu</a> on <a href="#" class="post-date">Sep 29, 2017 at 9:48 am</a></p>
+                                                        <p><a href="#" class="post-author">{{(empty($post->Student->student_name)?"":($post->Student->student_name))}}</a> on <a href="#" class="post-date">{{(empty($post->created_at)?"":($post->created_at))}}</a></p>
                                                     </div>
                                                 </div>
                                             </div>
-
-                                            <!-- Single Blog Post -->
-                                            <div class="single-blog-post post-style-2 d-flex align-items-center wow fadeInUpBig" data-wow-delay="0.3s">
-                                                <!-- Post Thumbnail -->
-                                                <div class="post-thumbnail">
-                                                    <img src="{{asset('/frontend')}}/img/blog-img/b11.jpg" alt="">
-                                                </div>
-                                                <!-- Post Content -->
-                                                <div class="post-content">
-                                                    <a href="#" class="headline">
-                                                        <h5>How Did van Gogh’s Turbulent Mind Depict One of the Most</h5>
-                                                    </a>
-                                                    <!-- Post Meta -->
-                                                    <div class="post-meta">
-                                                        <p><a href="#" class="post-author">Katy Liu</a> on <a href="#" class="post-date">Sep 29, 2017 at 9:48 am</a></p>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <!-- Single Blog Post -->
-                                            <div class="single-blog-post post-style-2 d-flex align-items-center wow fadeInUpBig" data-wow-delay="0.4s">
-                                                <!-- Post Thumbnail -->
-                                                <div class="post-thumbnail">
-                                                    <img src="{{asset('/frontend')}}/img/blog-img/b12.jpg" alt="">
-                                                </div>
-                                                <!-- Post Content -->
-                                                <div class="post-content">
-                                                    <a href="#" class="headline">
-                                                        <h5>How Did van Gogh’s Turbulent Mind Depict One of the Most</h5>
-                                                    </a>
-                                                    <!-- Post Meta -->
-                                                    <div class="post-meta">
-                                                        <p><a href="#" class="post-author">Katy Liu</a> on <a href="#" class="post-date">Sep 29, 2017 at 9:48 am</a></p>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <!-- Single Blog Post -->
-                                            <div class="single-blog-post post-style-2 d-flex align-items-center wow fadeInUpBig" data-wow-delay="0.5s">
-                                                <!-- Post Thumbnail -->
-                                                <div class="post-thumbnail">
-                                                    <img src="{{asset('/frontend')}}/img/blog-img/b13.jpg" alt="">
-                                                </div>
-                                                <!-- Post Content -->
-                                                <div class="post-content">
-                                                    <a href="#" class="headline">
-                                                        <h5>How Did van Gogh’s Turbulent Mind Depict One of the Most</h5>
-                                                    </a>
-                                                    <!-- Post Meta -->
-                                                    <div class="post-meta">
-                                                        <p><a href="#" class="post-author">Katy Liu</a> on <a href="#" class="post-date">Sep 29, 2017 at 9:48 am</a></p>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                            @endforeach
                                         </div>
                                     </div>
                                 </div>
@@ -357,7 +263,7 @@
                             <h5>Đồ án mẫu</h5>
                         </div>
 
-                        <!-- Single Blog Post -->
+                        @foreach($projects as $project)
                         <div class="single-blog-post post-style-4 d-flex align-items-center wow fadeInUpBig" data-wow-delay="0.2s">
                             <!-- Post Thumbnail -->
                             <div class="post-thumbnail">
@@ -366,15 +272,16 @@
                             <!-- Post Content -->
                             <div class="post-content">
                                 <a href="#" class="headline">
-                                    <h5>How Did van Gogh’s Turbulent Mind Depict One of the Most Complex Concepts in Physics?</h5>
+                                    <h5>{{$project->project_name}}</h5>
                                 </a>
-                                <p>Pick the yellow peach that looks like a sunset with its red, orange, and pink coat skin, peel it off with your teeth. Sink them into unripened...</p>
+                                <p>{!! $project->project_content !!}</p>
                                 <!-- Post Meta -->
                                 <div class="post-meta">
-                                    <p><a href="#" class="post-author">Katy Liu</a> on <a href="#" class="post-date">Sep 29, 2017 at 9:48 am</a></p>
+                                    <p><a href="#" class="post-author">{{$project->project_confectioner}}</a> on <a href="#" class="post-date">Sep 29, 2017 at 9:48 am</a></p>
                                 </div>
                             </div>
                         </div>
+                        @endforeach
 
                         <!-- Single Blog Post -->
                         <div class="single-blog-post post-style-4 d-flex align-items-center wow fadeInUpBig" data-wow-delay="0.3s">
@@ -485,15 +392,6 @@
                             </div>
                         </div>
 
-                    </div>
-                </div>
-            </div>
-
-            <!-- Load More btn -->
-            <div class="row">
-                <div class="col-12">
-                    <div class="load-more-btn mt-50 text-center">
-                        <a href="#" class="btn world-btn">Load More</a>
                     </div>
                 </div>
             </div>

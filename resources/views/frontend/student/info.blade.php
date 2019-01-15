@@ -7,17 +7,7 @@
                 <div class="col-12 col-md-8 col-lg-3">
                     <div class="post-sidebar-area post-sidebar-area-2">
                         <!-- Widget Area -->
-                        <div class="sidebar-widget-area">
-                            <h5 class="title">Danh sách chức năng</h5>
-                            <div class="widget-content">
-                                <ul>
-                                	<li><a href="{{url('/student/info')}}">Xem thông tin</a></li>
-                                	<li><a href="{{url('/student/posts')}}">Viết bài</a></li>
-                                	<li><a href="{{url('/student/devices')}}">Mượn thiết bị</a></li>
-                                	<li><a href="{{url('/student/calendars')}}">Đăng ký lịch trực</a></li>
-                                </ul>
-                            </div>
-                        </div>
+                        @include('frontend.navbar.nav')
                     </div>
                 </div>
 
@@ -35,11 +25,11 @@
                             <div class="tab-content" id="myTabContent">
 
                                 <div class="info">
-                                    <p>Họ tên: Trần văn A</p>
-                                    <p>Mã sinh viên: A24365</p>
-                                    <p>Email: haoti27@gmail.com</p>
-                                    <p>Số điện thoại: 0978 534 324</p>
-                                    <p>Ảnh đại điện: <img src="" alt=""></p>
+                                    <p>Họ tên: {{$data->student_name}}</p>
+                                    <p>Mã sinh viên: {{$data->student_code}}</p>
+                                    <p>Email: {{$data->student_email}}</p>
+                                    <p>Số điện thoại: {{$data->student_phone}}</p>
+                                    <p>Ảnh đại điện: <br> <img width="300" src="{{url('').'/'.$data->student_avatar}}" alt=""></p>
                                 </div>
                             </div>
                         </div>

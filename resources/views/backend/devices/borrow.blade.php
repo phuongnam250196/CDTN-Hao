@@ -17,26 +17,34 @@
                                 <thead>
                                     <tr>
                                         <th scope="col">STT</th>
-                                        <th scope="col">Mã thiết bị</th>
+                                        <th scope="col">Người mượn</th>
                                         <th scope="col">Tên thiết bị</th>
-                                        <th scope="col">Số lượng</th>
-                                        <th scope="col">Loại</th>
-                                        <th class="text-center" colspan="2">Tùy chọn</th>
+                                        <th scope="col">Trạng thái</th>
+                                        <th scope="col">Ngày mượn</th>
+                                        <th class="text-center" colspan="2" width="15%">Tùy chọn</th>
                                     </tr>
                                 </thead>
                                 <tbody {{$dem=1}}>
                                     @foreach($data as $dat)
                                         <tr>
                                             <th scope="row">{{$dem++}}</th>
-                                            <td><a href="{{url("admin/devices/user/".$dat->id)}}">{{$dat->device_code}}</a></td>
-                                            <td>{{$dat->device_name}}</td>
-                                            <td>{{$dat->device_count}}</td>
-                                            <td>{{$dat->device_type}}</td>
+                                            <td><a href="{{url("admin/devices/user/".$dat->id)}}">{{$dat->Students->student_name}}</a></td>
+                                            <td>{{$dat->Devices->device_name}}</td>
                                             <td>
-                                                <a href="{{url('admin/devices/edit/'.$dat->id)}}" class="btn btn-outline-info"><i class="fa  fa-pencil"></i></a>
+                                                @if($dat->status==0)
+                                                    <span class="text-warning">Chờ</span>
+                                                @elseif($dat->status==1)
+                                                    <span class="text-success">Ok</span>
+                                                @else
+                                                    <span class="text-danger">Hủy</span>
+                                                @endif
+                                            </td>
+                                            <td>{{$dat->created_at}}</td>
+                                            <td>
+                                                <a href="{{url('admin/devices/borrow/'.$dat->id)}}" onclick="return confirm('Bạn có chắc muốn cho mượn!');" class="btn btn-outline-info"><i class="fa  fa-check"></i></a>
                                             </td>
                                             <td>
-                                                <a href="{{url('admin/devices/delete/'.$dat->id)}}" onclick="return confirm('Bạn có chắc chắn muốn xóa không?');" class="btn btn-outline-danger"><i class="fa  fa-times"></i></a>
+                                                <a href="{{url('admin/devices/borrow_del/'.$dat->id)}}" onclick="return confirm('Bạn có chắc chắn muốn xóa không?');" class="btn btn-outline-danger"><i class="fa  fa-times"></i></a>
                                             </td>
                                         </tr>
                                     @endforeach

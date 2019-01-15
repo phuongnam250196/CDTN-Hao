@@ -24,7 +24,7 @@
                             <div class="tab-content" id="myTabContent">
 
                                 <div class="tab-pane fade show active" id="world-tab-1" role="tabpanel" aria-labelledby="tab1">
-                                    <!-- Single Blog Post -->
+                                    @foreach($data as $dat)
                                     <div class="single-blog-post post-style-4 d-flex align-items-center">
                                         <!-- Post Thumbnail -->
                                         <div class="post-thumbnail">
@@ -33,110 +33,16 @@
                                         <!-- Post Content -->
                                         <div class="post-content">
                                             <a href="#" class="headline">
-                                                <h5>How Did van Gogh’s Turbulent Mind Depict One of the Most Complex Concepts in Physics?</h5>
+                                                <h5>{{$dat->device_name}}</h5>
                                             </a>
-                                            <p>Pick the yellow peach that looks like a sunset with its red, orange, and pink coat skin, peel it off with your teeth. Sink them into unripened...</p>
+                                            <p>{!! $dat->device_description !!}</p>
                                             <!-- Post Meta -->
                                             <div class="post-meta">
-                                                <p><a href="#" class="post-author">Katy Liu</a> on <a href="#" class="post-date">Sep 29, 2017 at 9:48 am</a></p>
+                                                <p><a href="#" class="post-author">{{(empty($dat->Student->student_name)?'':$dat->Student->student_name)}}</a> on <a href="#" class="post-date">Sep 29, 2017 at 9:48 am</a></p>
                                             </div>
                                         </div>
                                     </div>
-
-                                    <!-- Single Blog Post -->
-                                    <div class="single-blog-post post-style-4 d-flex align-items-center">
-                                        <!-- Post Thumbnail -->
-                                        <div class="post-thumbnail">
-                                            <img src="{{asset('/frontend')}}/img/blog-img/b19.jpg" alt="">
-                                        </div>
-                                        <!-- Post Content -->
-                                        <div class="post-content">
-                                            <a href="#" class="headline">
-                                                <h5>How Did van Gogh’s Turbulent Mind Depict One of the Most Complex Concepts in Physics?</h5>
-                                            </a>
-                                            <p>Pick the yellow peach that looks like a sunset with its red, orange, and pink coat skin, peel it off with your teeth. Sink them into unripened...</p>
-                                            <!-- Post Meta -->
-                                            <div class="post-meta">
-                                                <p><a href="#" class="post-author">Katy Liu</a> on <a href="#" class="post-date">Sep 29, 2017 at 9:48 am</a></p>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!-- Single Blog Post -->
-                                    <div class="single-blog-post post-style-4 d-flex align-items-center">
-                                        <!-- Post Thumbnail -->
-                                        <div class="post-thumbnail">
-                                            <img src="{{asset('/frontend')}}/img/blog-img/b20.jpg" alt="">
-                                        </div>
-                                        <!-- Post Content -->
-                                        <div class="post-content">
-                                            <a href="#" class="headline">
-                                                <h5>How Did van Gogh’s Turbulent Mind Depict One of the Most Complex Concepts in Physics?</h5>
-                                            </a>
-                                            <p>Pick the yellow peach that looks like a sunset with its red, orange, and pink coat skin, peel it off with your teeth. Sink them into unripened...</p>
-                                            <!-- Post Meta -->
-                                            <div class="post-meta">
-                                                <p><a href="#" class="post-author">Katy Liu</a> on <a href="#" class="post-date">Sep 29, 2017 at 9:48 am</a></p>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!-- Single Blog Post -->
-                                    <div class="single-blog-post post-style-4 d-flex align-items-center">
-                                        <!-- Post Thumbnail -->
-                                        <div class="post-thumbnail">
-                                            <img src="{{asset('/frontend')}}/img/blog-img/b21.jpg" alt="">
-                                        </div>
-                                        <!-- Post Content -->
-                                        <div class="post-content">
-                                            <a href="#" class="headline">
-                                                <h5>How Did van Gogh’s Turbulent Mind Depict One of the Most Complex Concepts in Physics?</h5>
-                                            </a>
-                                            <p>Pick the yellow peach that looks like a sunset with its red, orange, and pink coat skin, peel it off with your teeth. Sink them into unripened...</p>
-                                            <!-- Post Meta -->
-                                            <div class="post-meta">
-                                                <p><a href="#" class="post-author">Katy Liu</a> on <a href="#" class="post-date">Sep 29, 2017 at 9:48 am</a></p>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!-- Single Blog Post -->
-                                    <div class="single-blog-post post-style-4 d-flex align-items-center">
-                                        <!-- Post Thumbnail -->
-                                        <div class="post-thumbnail">
-                                            <img src="{{asset('/frontend')}}/img/blog-img/b23.jpg" alt="">
-                                        </div>
-                                        <!-- Post Content -->
-                                        <div class="post-content">
-                                            <a href="#" class="headline">
-                                                <h5>How Did van Gogh’s Turbulent Mind Depict One of the Most Complex Concepts in Physics?</h5>
-                                            </a>
-                                            <p>Pick the yellow peach that looks like a sunset with its red, orange, and pink coat skin, peel it off with your teeth. Sink them into unripened...</p>
-                                            <!-- Post Meta -->
-                                            <div class="post-meta">
-                                                <p><a href="#" class="post-author">Katy Liu</a> on <a href="#" class="post-date">Sep 29, 2017 at 9:48 am</a></p>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!-- Single Blog Post -->
-                                    <div class="single-blog-post post-style-4 d-flex align-items-center">
-                                        <!-- Post Thumbnail -->
-                                        <div class="post-thumbnail">
-                                            <img src="{{asset('/frontend')}}/img/blog-img/b24.jpg" alt="">
-                                        </div>
-                                        <!-- Post Content -->
-                                        <div class="post-content">
-                                            <a href="#" class="headline">
-                                                <h5>How Did van Gogh’s Turbulent Mind Depict One of the Most Complex Concepts in Physics?</h5>
-                                            </a>
-                                            <p>Pick the yellow peach that looks like a sunset with its red, orange, and pink coat skin, peel it off with your teeth. Sink them into unripened...</p>
-                                            <!-- Post Meta -->
-                                            <div class="post-meta">
-                                                <p><a href="#" class="post-author">Katy Liu</a> on <a href="#" class="post-date">Sep 29, 2017 at 9:48 am</a></p>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    @endforeach
                                 </div>
 
                                 <div class="tab-pane fade" id="world-tab-2" role="tabpanel" aria-labelledby="tab2">
@@ -335,39 +241,6 @@
                                     <div class="post-content">
                                         <a href="#" class="headline">
                                             <h5 class="mb-0">How Did van Gogh’s Turbulent Mind Depict One of the Most</h5>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Widget Area -->
-                        <div class="sidebar-widget-area">
-                            <h5 class="title">Stay Connected</h5>
-                            <div class="widget-content">
-                                <div class="social-area d-flex justify-content-between">
-                                    <a href="#"><i class="fa fa-facebook"></i></a>
-                                    <a href="#"><i class="fa fa-twitter"></i></a>
-                                    <a href="#"><i class="fa fa-pinterest"></i></a>
-                                    <a href="#"><i class="fa fa-vimeo"></i></a>
-                                    <a href="#"><i class="fa fa-instagram"></i></a>
-                                    <a href="#"><i class="fa fa-google"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Widget Area -->
-                        <div class="sidebar-widget-area">
-                            <h5 class="title">Today’s Pick</h5>
-                            <div class="widget-content">
-                                <!-- Single Blog Post -->
-                                <div class="single-blog-post todays-pick">
-                                    <!-- Post Thumbnail -->
-                                    <div class="post-thumbnail">
-                                        <img src="{{asset('/frontend')}}/img/blog-img/b22.jpg" alt="">
-                                    </div>
-                                    <!-- Post Content -->
-                                    <div class="post-content px-0 pb-0">
-                                        <a href="#" class="headline">
-                                            <h5>How Did van Gogh’s Turbulent Mind Depict One of the Most Complex Concepts in Physics?</h5>
                                         </a>
                                     </div>
                                 </div>

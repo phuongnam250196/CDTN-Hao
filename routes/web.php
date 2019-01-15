@@ -14,6 +14,9 @@
 Route::get('/home', 'HomeController@index')->name('home');
 Route::group(['namespace'=>'TrangChu'], function() {
 	Route::get('/user/login', 'LoginController@getLogin');
+	Route::post('/user/login', 'LoginController@postLogin');
+
+	Route::get('/user/logout', 'LoginController@getLogout');
 
 	Route::get('/', 'HomeController@getIndex');
 
@@ -24,7 +27,7 @@ Route::group(['namespace'=>'TrangChu'], function() {
 	Route::get('/device', 'HomeController@getDevice');
 	Route::get('/project', 'HomeController@getProject');
 
-	Route::group(['prefix'=>'student'], function() {
+	Route::group(['prefix'=>'student', 'middleware'=>['checkstudent']], function() {
 		Route::get('/', 'StudentsController@getIndex');
 
 		Route::group(['prefix'=>'info'], function() {
@@ -36,18 +39,27 @@ Route::group(['namespace'=>'TrangChu'], function() {
 
 		Route::group(['prefix'=>'posts'], function() {
 			Route::get('/', 'StudentsController@listPosts');
+			Route::get('/create', 'StudentsController@getCreatePosts');
+			Route::post('/create', 'StudentsController@postCreatePosts');
+			Route::get('/edit/{id}', 'StudentsController@getEditPosts');
+			Route::post('/edit/{id}', 'StudentsController@postEditPosts');
+			Route::get('/delete/{id}', 'StudentsController@getDeletePosts');
 		});
 
 		Route::group(['prefix'=>'devices'], function() {
 			Route::get('/', 'StudentsController@listDevices');
+			Route::get('/all', 'StudentsController@allDevices');
+			Route::get('/{id}', 'StudentsController@getDevices');
 		});
 
 		Route::group(['prefix'=>'calendars'], function() {
 			Route::get('/', 'StudentsController@listCalendars');
+			Route::get('/register', 'StudentsController@registerCalendars');
+			Route::post('/register', 'StudentsController@registerPostCalendars');
 		});
 	});
 
-	Route::group(['prefix'=>'teacher'], function() {
+	Route::group(['prefix'=>'teacher', 'middleware'=>['checkteacher']], function() {
 		Route::get('/', 'TeachersController@getIndex');
 	});
 });
@@ -61,7 +73,7 @@ Route::group(['namespace'=>'Admin'], function() {
 
 	Route::get('/logout', 'DashboardController@getLogout');
 
-	Route::group(['prefix'=>'admin', 'middleware'=>'checklogout'], function() {
+	Route::group(['prefix'=>'admin', 'middleware'=>['checklogout', 'checkadmin']], function() {
 	    Route::get('/', 'DashboardController@getHome');
 	    Route::get('/home', 'DashboardController@getHome');
 
@@ -104,6 +116,8 @@ Route::group(['namespace'=>'Admin'], function() {
 	    	Route::get('/delete/{id}', 'DevicesController@getDelete');
 
 	    	Route::get('/borrow', "DevicesController@getBorrow");
+	    	Route::get('/borrow/{id}', "DevicesController@getBorrowUpdate");
+	    	Route::get('/borrow_del/{id}', "DevicesController@getBorrowDel");
 	    	Route::get('/return', "DevicesController@getReturn");
 	    });
 

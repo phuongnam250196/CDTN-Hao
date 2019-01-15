@@ -1,23 +1,13 @@
 @extends('frontend.master')
-@section('title', 'Sinh viên')
+@section('title', 'Sinh viên | Thiết bị')
 @section('main')
-	<div class="main-content-wrapper section-padding-100">
+    <div class="main-content-wrapper section-padding-100">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-12 col-md-8 col-lg-3">
                     <div class="post-sidebar-area post-sidebar-area-2">
                         <!-- Widget Area -->
-                        <div class="sidebar-widget-area">
-                            <h5 class="title">Danh sách chức năng</h5>
-                            <div class="widget-content">
-                                <ul>
-                                	<li><a href="{{url('/student/info')}}">Xem thông tin</a></li>
-                                	<li><a href="{{url('/student/posts')}}">Viết bài</a></li>
-                                	<li><a href="{{url('/student/devices')}}">Mượn thiết bị</a></li>
-                                	<li><a href="{{url('/student/calendars')}}">Đăng ký lịch trực</a></li>
-                                </ul>
-                            </div>
-                        </div>
+                        @include('frontend.navbar.nav')
                     </div>
                 </div>
 
@@ -26,23 +16,51 @@
                         <!-- Catagory Area -->
                         <div class="world-catagory-area">
                             <ul class="nav nav-tabs" id="myTab" role="tablist">
-                                <li class="title">Danh sách bài viết</li>
+                                <li class="title">Danh sách thiết bị của tôi</li>
+                                <li class="nav-item">
+                                    <a class="btn btn-primary"  href="{{url('student/devices/all')}}">Mượn</a>
+                                </li>
                             </ul>
 
-                            <div class="tab-content" id="myTabContent">
-
-                                abc
+                            <div >
+                                @if(session('messages'))
+                                    <p class="alert alert-success">{{session('messages')}}</p>
+                                @endif
+                                <div class="info">
+                                    <table class="table table-hover">
+                                        <thead>
+                                          <tr>
+                                            <th>STT</th>
+                                            <th>Tên thiết bị</th>
+                                            <th>Loại</th>
+                                            <th>Trạng thái</th>
+                                            <th>Ngày mượn</th>
+                                          </tr>
+                                        </thead>
+                                        <tbody {{$dem =1}}>
+                                          @foreach($data as $dat)
+                                          <tr>
+                                            <td>{{$dem++}}</td>
+                                            <td>{{$dat->Devices->device_name}}</td>
+                                            <td>{{$dat->Devices->device_type}}</td>
+                                            <td>
+                                                @if($dat->status==0)
+                                                    <span class="text-warning">Chờ</span>
+                                                @elseif($dat->status==1)
+                                                    <span class="text-success">Ok</span>
+                                                @else
+                                                    <span class="text-danger">Hủy</span>
+                                                @endif
+                                            </td>
+                                            <td>{{$dat->Devices->created_at}}</td>
+                                          </tr>
+                                          @endforeach
+                                        </tbody>
+                                      </table>
+                                </div>
+                                {{-- {{$data->links()}} --}}
                             </div>
                         </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Load More btn -->
-            <div class="row">
-                <div class="col-12">
-                    <div class="load-more-btn mt-50 text-center">
-                        <a href="#" class="btn world-btn">Load More</a>
                     </div>
                 </div>
             </div>

@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Session;
+use Auth;
 class checkadmin
 {
     /**
@@ -15,9 +16,20 @@ class checkadmin
      */
     public function handle($request, Closure $next)
     {
-        if(Session::has('email')) {
-            return redirect()->intended('admin/home');
+        if(Auth::check()) {
+            if( Auth::user()->level ==1)
+            {
+              return $next($request);
+            }
+            if( Auth::user()->level == 3)
+            {
+                return redirect('/teacher');
+            }
+            if( Auth::user()->level == 2)
+            {
+                return redirect('/student');
+            }
         }
-        return $next($request);
+         return redirect('/');
     }
 }

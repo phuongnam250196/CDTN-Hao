@@ -1,5 +1,5 @@
 @extends('frontend.master')
-@section('title', 'Liên hệ')
+@section('title', 'Đăng nhập')
 @section('main')
 	<section class="contact-area section-padding-100">
         <div class="container">
@@ -9,7 +9,10 @@
                     <div class="contact-form">
                         <h5>Đăng nhập để sử dụng hệ thống</h5>
                         <!-- Contact Form -->
-                        <form action="#" method="post">
+                        <form method="post">
+                            @if(session('error'))
+                                <p class="alert alert-danger">{{session('error')}}</p>
+                            @endif
                             <div class="row">
                                 <div class="col-12 col-md-12">
                                     <div class="group">
@@ -17,14 +20,20 @@
                                         <span class="highlight"></span>
                                         <span class="bar"></span>
                                         <label>Tài khoản</label>
+                                        @if($errors->has('name'))
+                                          <p class="help text-danger">{{ $errors->first('name') }}</p>
+                                        @endif
                                     </div>
                                 </div>
                                 <div class="col-12 col-md-12">
                                     <div class="group">
-                                        <input type="email" name="email" id="email" required>
+                                        <input type="password" name="password" id="password" required>
                                         <span class="highlight"></span>
                                         <span class="bar"></span>
                                         <label>Mật khẩu</label>
+                                        @if($errors->any())
+                                          <p class="help text-danger">{{ $errors->first('password') }}</p>
+                                        @endif
                                     </div>
                                 </div>
                                 <div class="form-group form-check" style="padding-left: 2.25rem; width:100%;" >
@@ -43,6 +52,7 @@
                                     <button type="submit" class="btn world-btn">Đăng nhập</button>
                                 </div>
                             </div>
+                            {{csrf_field()}}
                         </form>
                     </div>
                 </div>

@@ -16,7 +16,95 @@
 
     <!-- Style CSS -->
     <link rel="stylesheet" href="{{asset('/frontend')}}/style.css">
+    <script type="text/javascript" src="{{asset('Backend')}}/ckeditor/ckeditor.js"></script>
+    <script type="text/javascript" src="{{asset('Backend')}}/ckfinder/ckfinder.js"></script>
+    @yield('custom-style')
+    <script type="text/javascript" src="{{asset('/frontend')}}/CalenStyle-master/demo/js/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="{{asset('/frontend')}}/CalenStyle-master/demo/js/jquery-ui-custom-1.11.2.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="{{asset('/frontend')}}/CalenStyle-master/demo/css/jquery-ui-custom-1.11.2.min.css" />
+        
+    <link rel="stylesheet" type="text/css" href="{{asset('/frontend')}}/CalenStyle-master/src/calenstyle.css" />
+    <link rel="stylesheet" type="text/css" href="{{asset('/frontend')}}/CalenStyle-master/src/calenstyle-jquery-ui-override.css" />
+    <link rel="stylesheet" type="text/css" href="{{asset('/frontend')}}/CalenStyle-master/src/calenstyle-iconfont.css" />
+    <script type="text/javascript" src="{{asset('/frontend')}}/CalenStyle-master/src/calenstyle.js"></script>
 
+    <script type="text/javascript" src="{{asset('/frontend')}}/CalenStyle-master/demo/js/CalJsonGenerator.js"></script>
+    <style type="text/css">
+    
+        .calendarContOuter
+        {
+            width: 90%;
+            height: 600px;
+            margin: 0px auto;
+        
+            font-size: 14px;
+        }
+        
+        .cElemDatePicker
+        {
+            font-size: 14px;
+        }
+
+        .cActionBar
+        {
+            line-height: 30px;
+            background: #F5F5F5;
+        }
+    
+        .reload
+        {
+            margin-left: 10px;
+            padding: 3px 5px;
+            border-radius: 2px;
+            background: #444444;
+            font-size: 80%;
+            color: #FFFFFF;
+
+            cursor: pointer;
+        }  
+    </style>
+
+    <script type="text/javascript">
+    
+        $(function() 
+        {
+            
+            $(".calendarContOuter").CalenStyle(
+            {
+            
+                sectionsList: ["Header", "ActionBar", "Calendar"],
+            
+                visibleView: "DetailedMonthView",
+
+                calDataSource: 
+                [
+                    {
+                        sourceFetchType: "ALL",
+                        sourceType: "JSON",                     
+                        source: {
+
+                            @yield('source')
+                        }
+                        
+                    }
+                ],
+            
+                modifyActionBarView: function(actionBar, visibleViewName)
+                {
+                    var thisObj = this;
+                
+                    $(actionBar).empty();
+                    $(actionBar).append("<span class='reload'>Reload</span>");
+                    $(".reload").click(function()
+                    {
+                        thisObj.reloadData();
+                    });
+                }
+            
+            });
+            
+        }); 
+    </script>
 </head>
 
 <body>
@@ -56,9 +144,27 @@
                                 <li class="nav-item @if(Request::is('contact')) active @endif">
                                     <a class="nav-link text-uppercase" href="{{url('/contact')}}">Liên hệ</a>
                                 </li>
-                                <li class="nav-item @if(Request::is('user/login')) active @endif">
+                                
+                                @if(Auth::user())
+                                <li class="nav-item">
+                                    <div class="btn-group">
+                                      <div class="btn-group">
+                                        <button class=" dropdown-toggle" data-toggle="dropdown">
+                                            <i class="fa fa-user-circle"></i> - {{ Auth::user()->name}}
+                                        </button>
+                                        <div class="dropdown-menu">
+                                            <a class="dropdown-item" href="{{url('/student/info')}}">Xem thông tin</a>
+                                          <a class="dropdown-item" href="{{url('/user/logout')}}">Đăng xuất</a>
+                                          
+                                        </div>
+                                      </div>
+                                    </div>
+                                </li>
+                                @else
+                                <li class="nav-item">
                                     <a class="nav-link text-uppercase" href="{{url('/user/login')}}">Đăng nhập</a>
                                 </li>
+                                @endif
                             </ul>
                             <!-- Search Form  -->
                             <div id="search-wrapper">
@@ -186,7 +292,8 @@
     <!-- ***** Footer Area End ***** -->
 
     <!-- jQuery (Necessary for All JavaScript Plugins) -->
-    <script src="{{asset('/frontend')}}/js/jquery/jquery-2.2.4.min.js"></script>
+    {{-- <script src="{{asset('/frontend')}}/js/jquery/jquery-2.2.4.min.js"></script> --}}
+    {{-- <script type="text/javascript" src="{{asset('/frontend')}}/CalenStyle-master/js/jquery-1.11.1.min.js"></script> --}}
     <!-- Popper js -->
     <script src="{{asset('/frontend')}}/js/popper.min.js"></script>
     <!-- Bootstrap js -->
@@ -195,7 +302,27 @@
     <script src="{{asset('/frontend')}}/js/plugins.js"></script>
     <!-- Active js -->
     <script src="{{asset('/frontend')}}/js/active.js"></script>
-
+    <script>
+        // js chon anh
+        function changeImg(input){
+            //Nếu như tồn thuộc tính file, đồng nghĩa người dùng đã chọn file mới
+            if(input.files && input.files[0]){
+                var reader = new FileReader();
+                //Sự kiện file đã được load vào website
+                reader.onload = function(e){
+                    //Thay đổi đường dẫn ảnh
+                    jQuery('#avatar').attr('src',e.target.result);
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+        jQuery(document).ready(function($){
+            jQuery('#avatar').click(function($){
+                jQuery('#img').click();
+            });
+        });
+    </script>
+    @yield('custom-script')
 </body>
 
 </html>

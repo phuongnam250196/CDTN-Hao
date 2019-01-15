@@ -7,17 +7,7 @@
                 <div class="col-12 col-md-8 col-lg-3">
                     <div class="post-sidebar-area post-sidebar-area-2">
                         <!-- Widget Area -->
-                        <div class="sidebar-widget-area">
-                            <h5 class="title">Danh sách chức năng</h5>
-                            <div class="widget-content">
-                                <ul>
-                                	<li><a href="{{url('/student/info')}}">Xem thông tin</a></li>
-                                	<li><a href="{{url('/student/posts')}}">Viết bài</a></li>
-                                	<li><a href="{{url('/student/devices')}}">Mượn thiết bị</a></li>
-                                	<li><a href="{{url('/student/calendars')}}">Đăng ký lịch trực</a></li>
-                                </ul>
-                            </div>
-                        </div>
+                        @include('frontend.navbar.nav')
                     </div>
                 </div>
 

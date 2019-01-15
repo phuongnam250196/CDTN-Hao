@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Device;
+use App\User_Device;
 use Validator;
 
 class DevicesController extends Controller
@@ -89,8 +90,25 @@ class DevicesController extends Controller
     }
 
     public function getBorrow() {
-    	$data = Device::get();
+    	$data = User_Device::orderBy('created_at', 'desc')->paginate(10);
     	return view('backend.devices.borrow', compact('data'));
+    }
+    public function getBorrowUpdate($id) {
+        $data = User_Device::find($id);
+        $data->status = 1;
+        if($data->save()) {
+             $device = Device::find($data->device_id);
+             $device->device_count_change = $device->device_count_change - 1;
+             $device->save();
+             // dd($device);
+        }
+        return back()->with('messages', 'Cho phép mượn thiết bị!!');
+    }
+    public function getBorrowDel($id) {
+        $data = User_Device::find($id);
+        $data->status = 2;
+        $data->save();
+        return back()->with('messages', 'Không mượn thiết bị!!');
     }
 
     public function getReturn() {

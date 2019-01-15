@@ -744,7 +744,8 @@ img {
     border-bottom: 2px solid #f1f1f1;
     padding-left: 30px; }
   .sidebar-widget-area .widget-content {
-    padding: 30px 0 30px 30px; }
+    padding: 30px 0 30px 30px;
+    border-bottom: 2px solid #f1f1f1; }
     @media only screen and (max-width: 767px) {
       .sidebar-widget-area .widget-content {
         padding: 30px 0 30px 15px; } }
@@ -1288,6 +1289,12 @@ textarea:focus ~ .highlight {
   padding-left: 15px;
   line-height: 2.5;
 }
+.post-sidebar-area-2 .sidebar-widget-area .widget-content li.active {
+  background: #ddd;
+}
+.post-sidebar-area-2 .sidebar-widget-area .widget-content li.active a {
+    color: blue;
+}
 .post-sidebar-area-2 .sidebar-widget-area .widget-content li:hover {
   background: #ddd;
 }
@@ -1296,5 +1303,8 @@ textarea:focus ~ .highlight {
 }
 .post-sidebar-area-2 .sidebar-widget-area .widget-content li:hover a {
   color: blue;
+}
+.calendarContOuter {
+  width: 100% !important;
 }
 /*# sourceMappingURL=style.css.map */

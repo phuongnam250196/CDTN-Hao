@@ -42,13 +42,15 @@ class StudentsController extends Controller
             $data->student_code = $request->student_code;
             $data->student_phone = $request->student_phone;
             $data->student_email = $request->student_email;
-            $user = new User;
-            $user->name = $request->student_code;
-            $user->email = $request->student_email;
-            $user->password = bcrypt($request->password);
-            $user->level = 2;
-            $user->save();
+
             if($data->save()) {
+                $user = new User;
+                $user->name = $request->student_code;
+                $user->email = $request->student_email;
+                $user->student_id = $data->id;
+                $user->password = bcrypt($request->password);
+                $user->level = 2;
+                $user->save();
                 if(!empty($request->student_avatar) && $request->student_avatar != "undefined"){
                     $file =  $request->student_avatar;
                     $path = 'uploads/students/'.$data->id.'/';

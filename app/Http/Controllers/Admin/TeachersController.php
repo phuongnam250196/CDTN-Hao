@@ -39,13 +39,15 @@ class TeachersController extends Controller
             $data->teacher_name = $request->teacher_name;
             $data->teacher_phone = $request->teacher_phone;
             $data->teacher_email = $request->teacher_email;
-            $user = new User;
-            $user->name = $request->teacher_email;
-            $user->email = $request->teacher_email;
-            $user->password = bcrypt($request->password);
-            $user->level = 3;
-            $user->save();
+            
             if($data->save()) {
+                $user = new User;
+                $user->name = $request->teacher_email;
+                $user->email = $request->teacher_email;
+                $user->teacher_id = $data->id;
+                $user->password = bcrypt($request->password);
+                $user->level = 3;
+                $user->save();
                 if(!empty($request->teacher_avatar) && $request->teacher_avatar != "undefined"){
                     $file =  $request->teacher_avatar;
                     $path = 'uploads/teachers/'.$data->id.'/';
