@@ -76,6 +76,10 @@ class StudentsController extends Controller
         }
     }
 
+    public function getChange() {
+        return view('frontend.student.change_password');
+    }
+
     public function listPosts() {
     	$data = Posts::where('student_id', Auth::user()->student_id)->orderBy('created_at', 'desc')->paginate(5);
     	return view('frontend.student.posts', compact('data'));

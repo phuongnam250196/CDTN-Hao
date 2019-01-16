@@ -32,13 +32,13 @@
                                         </div>
                                         <!-- Post Content -->
                                         <div class="post-content">
-                                            <a href="#" class="headline">
+                                            <a href="{{url('/device/'.$dat->id)}}" class="headline">
                                                 <h5>{{$dat->device_name}}</h5>
                                             </a>
                                             <p>{!! $dat->device_description !!}</p>
                                             <!-- Post Meta -->
                                             <div class="post-meta">
-                                                <p><a href="#" class="post-author">{{(empty($dat->Student->student_name)?'':$dat->Student->student_name)}}</a> on <a href="#" class="post-date">Sep 29, 2017 at 9:48 am</a></p>
+                                                <p><a href="#" class="post-author">{{(empty($dat->Student->student_name)?'':$dat->Student->student_name)}}</a> on <a href="#" class="post-date">{{$dat->created_at->toDayDateTimeString()}}</a></p>
                                             </div>
                                         </div>
                                     </div>
@@ -179,71 +179,20 @@
                         <div class="sidebar-widget-area">
                             <h5 class="title">Thiết bị mới</h5>
                             <div class="widget-content">
-                                <!-- Single Blog Post -->
-                                <div class="single-blog-post post-style-2 d-flex align-items-center widget-post">
-                                    <!-- Post Thumbnail -->
-                                    <div class="post-thumbnail">
-                                        <img src="{{asset('/frontend')}}/img/blog-img/b11.jpg" alt="">
+                                @foreach($data as $dat)
+                                    <div class="single-blog-post post-style-2 d-flex align-items-center widget-post">
+                                        <!-- Post Thumbnail -->
+                                        <div class="post-thumbnail">
+                                            <img src="{{asset('/frontend')}}/img/blog-img/b11.jpg" alt="">
+                                        </div>
+                                        <!-- Post Content -->
+                                        <div class="post-content">
+                                            <a href="{{url('/device/'.$dat->id)}}" class="headline">
+                                                <h5 class="mb-0">{{$dat->device_name}}</h5>
+                                            </a>
+                                        </div>
                                     </div>
-                                    <!-- Post Content -->
-                                    <div class="post-content">
-                                        <a href="#" class="headline">
-                                            <h5 class="mb-0">How Did van Gogh’s Turbulent Mind Depict One of the Most</h5>
-                                        </a>
-                                    </div>
-                                </div>
-                                <!-- Single Blog Post -->
-                                <div class="single-blog-post post-style-2 d-flex align-items-center widget-post">
-                                    <!-- Post Thumbnail -->
-                                    <div class="post-thumbnail">
-                                        <img src="{{asset('/frontend')}}/img/blog-img/b13.jpg" alt="">
-                                    </div>
-                                    <!-- Post Content -->
-                                    <div class="post-content">
-                                        <a href="#" class="headline">
-                                            <h5 class="mb-0">How Did van Gogh’s Turbulent Mind Depict One of the Most</h5>
-                                        </a>
-                                    </div>
-                                </div>
-                                <!-- Single Blog Post -->
-                                <div class="single-blog-post post-style-2 d-flex align-items-center widget-post">
-                                    <!-- Post Thumbnail -->
-                                    <div class="post-thumbnail">
-                                        <img src="{{asset('/frontend')}}/img/blog-img/b14.jpg" alt="">
-                                    </div>
-                                    <!-- Post Content -->
-                                    <div class="post-content">
-                                        <a href="#" class="headline">
-                                            <h5 class="mb-0">How Did van Gogh’s Turbulent Mind Depict One of the Most</h5>
-                                        </a>
-                                    </div>
-                                </div>
-                                <!-- Single Blog Post -->
-                                <div class="single-blog-post post-style-2 d-flex align-items-center widget-post">
-                                    <!-- Post Thumbnail -->
-                                    <div class="post-thumbnail">
-                                        <img src="{{asset('/frontend')}}/img/blog-img/b10.jpg" alt="">
-                                    </div>
-                                    <!-- Post Content -->
-                                    <div class="post-content">
-                                        <a href="#" class="headline">
-                                            <h5 class="mb-0">How Did van Gogh’s Turbulent Mind Depict One of the Most</h5>
-                                        </a>
-                                    </div>
-                                </div>
-                                <!-- Single Blog Post -->
-                                <div class="single-blog-post post-style-2 d-flex align-items-center widget-post">
-                                    <!-- Post Thumbnail -->
-                                    <div class="post-thumbnail">
-                                        <img src="{{asset('/frontend')}}/img/blog-img/b12.jpg" alt="">
-                                    </div>
-                                    <!-- Post Content -->
-                                    <div class="post-content">
-                                        <a href="#" class="headline">
-                                            <h5 class="mb-0">How Did van Gogh’s Turbulent Mind Depict One of the Most</h5>
-                                        </a>
-                                    </div>
-                                </div>
+                                @endforeach
                             </div>
                         </div>
                     </div>
@@ -254,7 +203,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="load-more-btn mt-50 text-center">
-                        <a href="#" class="btn world-btn">Load More</a>
+                        {{$data->links()}}
                     </div>
                 </div>
             </div>

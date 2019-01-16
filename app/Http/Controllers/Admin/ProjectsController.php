@@ -45,6 +45,18 @@ class ProjectsController extends Controller
             $data->project_content = $request->project_content;
             $data->project_data_start = $request->project_data_start;
             $data->project_data_finish = $request->project_data_finish;
+            // if($request->hasfile('project_gallery'))
+            //  {
+
+            //     foreach($request->file('project_gallery') as $file)
+            //     {
+            //         $name=$file->getClientOriginalName();
+            //         $file->move(public_path().'/projects/', $name);  
+            //         $data[] = $name;  
+            //     }
+            //  }
+            //  $data->project_gallery=json_encode($data);
+             
             $data->save();
             return redirect()->intended('admin/projects')->with('messages', 'Thêm mới thành công!');
         }

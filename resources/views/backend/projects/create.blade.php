@@ -49,6 +49,10 @@
                                     });
                                   </script>
                                 </div>
+                                {{-- <div class="form-group">
+                                    <label class=" form-control-label">Thư viện ảnh</label>
+                                    <input required type="file" class="form-control" name="project_gallery[]" placeholder="address" multiple>
+                                </div> --}}
                             </div>
                             <div class="card-footer">
                                 <button type="submit" class="btn btn-primary btn-sm">

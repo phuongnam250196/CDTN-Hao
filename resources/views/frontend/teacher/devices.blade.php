@@ -1,5 +1,5 @@
 @extends('frontend.master')
-@section('title', 'Sinh viên | Mượn thiết bị')
+@section('title', 'Giáo viên | Thiết bị')
 @section('main')
     <div class="main-content-wrapper section-padding-100">
         <div class="container">
@@ -7,7 +7,7 @@
                 <div class="col-12 col-md-8 col-lg-3">
                     <div class="post-sidebar-area post-sidebar-area-2">
                         <!-- Widget Area -->
-                        @include('frontend.navbar.nav')
+                        @include('frontend.navbar.nav_teacher')
                     </div>
                 </div>
 
@@ -16,10 +16,16 @@
                         <!-- Catagory Area -->
                         <div class="world-catagory-area">
                             <ul class="nav nav-tabs" id="myTab" role="tablist">
-                                <li class="title">Tất cả thiết bị</li>
+                                <li class="title">Danh sách thiết bị của tôi</li>
+                                <li class="nav-item">
+                                    <a class="btn btn-primary"  href="{{url('teacher/devices/all')}}">Mượn</a>
+                                </li>
                             </ul>
 
                             <div >
+                                @if(session('messages'))
+                                    <p class="alert alert-success">{{session('messages')}}</p>
+                                @endif
                                 <div class="info">
                                     <table class="table table-hover">
                                         <thead>
@@ -27,30 +33,32 @@
                                             <th>STT</th>
                                             <th>Tên thiết bị</th>
                                             <th>Loại</th>
-                                            <th class="text-center">SL hiện có</th>
-                                            <th></th>
+                                            <th>Trạng thái</th>
+                                            <th>Ngày mượn</th>
                                           </tr>
                                         </thead>
                                         <tbody {{$dem =1}}>
                                           @foreach($data as $dat)
                                           <tr>
                                             <td>{{$dem++}}</td>
-                                            <td>{{$dat->device_name}}</td>
-                                            <td>{{$dat->device_type}}</td>
-                                            <td class="text-center">{{$dat->device_count_change}}</td>
+                                            <td>{{$dat->Devices->device_name}}</td>
+                                            <td>{{$dat->Devices->device_type}}</td>
                                             <td>
-                                                @if($dat->device_count_change == 0)
-                                                    <p class="text-danger">Hết thiết bị</p>
+                                                @if($dat->status==0)
+                                                    <span class="text-warning">Chờ</span>
+                                                @elseif($dat->status==1)
+                                                    <span class="text-success">Ok</span>
                                                 @else
-                                                    <a href="{{url('student/devices/'.$dat->id)}}" class="btn btn-primary" onclick="return confirm('Bạn có chắc chắn muốn mượn chứ!');">Mượn</a>
+                                                    <span class="text-danger">Hủy</span>
                                                 @endif
                                             </td>
+                                            <td>{{$dat->Devices->created_at}}</td>
                                           </tr>
                                           @endforeach
                                         </tbody>
                                       </table>
                                 </div>
-                                {{$data->links()}}
+                                {{-- {{$data->links()}} --}}
                             </div>
                         </div>
                     </div>

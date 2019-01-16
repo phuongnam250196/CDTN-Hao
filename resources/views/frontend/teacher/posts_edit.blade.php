@@ -1,5 +1,5 @@
 @extends('frontend.master')
-@section('title', 'Sinh viên | Cập nhật bài viết')
+@section('title', 'Giáo viên | Cập nhật bài viết')
 @section('main')
 	<div class="main-content-wrapper section-padding-100">
         <div class="container">
@@ -7,7 +7,7 @@
                 <div class="col-12 col-md-8 col-lg-3">
                     <div class="post-sidebar-area post-sidebar-area-2">
                         <!-- Widget Area -->
-                        @include('frontend.navbar.nav')
+                        @include('frontend.navbar.nav_teacher')
                     </div>
                 </div>
 
@@ -56,7 +56,7 @@
                                             </div>
                                               <div class="form-group">
                                                 <button type="submit" class="btn btn-primary">Cập nhật</button>
-                                                <a href="{{url('student/posts')}}" class="btn btn-secondary">Hủy bỏ</a>
+                                                <a href="{{url('teacher/posts')}}" class="btn btn-secondary">Hủy bỏ</a>
                                               </div>
                                               {{csrf_field()}}
                                         </form>

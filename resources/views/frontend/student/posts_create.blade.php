@@ -71,3 +71,6 @@
         </div>
     </div>
 @endsection
+@section('jquery-click-img')
+    <script src="{{asset('/frontend')}}/js/jquery/jquery-2.2.4.min.js"></script>
+@stop

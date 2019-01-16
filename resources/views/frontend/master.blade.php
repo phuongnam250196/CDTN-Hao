@@ -132,13 +132,13 @@
                                 <li class="nav-item @if(Request::is('intro')) active @endif" >
                                     <a class="nav-link text-uppercase" href="{{url('/intro')}}">Giới thiệu</a>
                                 </li>
-                                <li class="nav-item @if(Request::is('news')) active @endif">
+                                <li class="nav-item @if(Request::is('news') || Request::is('news/*')) active @endif">
                                     <a class="nav-link text-uppercase" href="{{url('/news')}}">Bài viết</a>
                                 </li>
-                                <li class="nav-item @if(Request::is('device')) active @endif">
+                                <li class="nav-item @if(Request::is('device') || Request::is('device/*')) active @endif">
                                     <a class="nav-link text-uppercase" href="{{url('/device')}}">Trang thiết bị</a>
                                 </li>
-                                <li class="nav-item @if(Request::is('project')) active @endif">
+                                <li class="nav-item @if(Request::is('project') || Request::is('project/*')) active @endif">
                                     <a class="nav-link text-uppercase" href="{{url('/project')}}">Đồ án</a>
                                 </li>
                                 <li class="nav-item @if(Request::is('contact')) active @endif">
@@ -154,6 +154,7 @@
                                         </button>
                                         <div class="dropdown-menu">
                                             <a class="dropdown-item" href="{{url('/student/info')}}">Xem thông tin</a>
+                                            <a class="dropdown-item" href="{{url('/student/change')}}">Đổi mật khẩu</a>
                                           <a class="dropdown-item" href="{{url('/user/logout')}}">Đăng xuất</a>
                                           
                                         </div>
@@ -168,11 +169,12 @@
                             </ul>
                             <!-- Search Form  -->
                             <div id="search-wrapper">
-                                <form action="#">
+                                <form action="#" method="POST">
                                     <input type="text" id="search" placeholder="Tìm kiếm ít thôi">
                                     <div id="close-icon"></div>
                                     <input class="d-none" type="submit" value="">
                                 </form>
+                                {{csrf_field()}}
                             </div>
                         </div>
                     </nav>
@@ -292,8 +294,9 @@
     <!-- ***** Footer Area End ***** -->
 
     <!-- jQuery (Necessary for All JavaScript Plugins) -->
-    {{-- <script src="{{asset('/frontend')}}/js/jquery/jquery-2.2.4.min.js"></script> --}}
+   
     {{-- <script type="text/javascript" src="{{asset('/frontend')}}/CalenStyle-master/js/jquery-1.11.1.min.js"></script> --}}
+     @yield('jquery-click-img')
     <!-- Popper js -->
     <script src="{{asset('/frontend')}}/js/popper.min.js"></script>
     <!-- Bootstrap js -->

@@ -1,5 +1,5 @@
 @extends('frontend.master')
-@section('title', 'Sinh viên | Cập nhật bài viết')
+@section('title', 'Giáo viên | Tạo bài viết')
 @section('main')
 	<div class="main-content-wrapper section-padding-100">
         <div class="container">
@@ -7,7 +7,7 @@
                 <div class="col-12 col-md-8 col-lg-3">
                     <div class="post-sidebar-area post-sidebar-area-2">
                         <!-- Widget Area -->
-                        @include('frontend.navbar.nav')
+                        @include('frontend.navbar.nav_teacher')
                     </div>
                 </div>
 
@@ -16,7 +16,7 @@
                         <!-- Catagory Area -->
                         <div class="world-catagory-area">
                             <ul class="nav nav-tabs" id="myTab" role="tablist">
-                                <li class="title">Cập nhật bài viết</li>
+                                <li class="title">Viết bài</li>
                             </ul>
 
                             <div class="tab-content" id="myTabContent">
@@ -25,22 +25,23 @@
                                         <form method="POST" enctype="multipart/form-data">
                                             <div class="form-group">
                                                 <label>Tiêu đề bài viết</label>
-                                                <input type="text" class="form-control" name="post_title" value="{{$data->post_title}}">
+                                                <input type="text" class="form-control" name="post_title">
                                                 @if($errors->has('post_title'))
                                                   <p class="help text-danger">{{ $errors->first('post_title') }}</p>
                                                 @endif
                                               </div>
                                             <div class="form-group">
                                                 <label class=" form-control-label">Ảnh minh họa</label> <br>
-                                                <input id="img" type="file" name="post_img" value="{{$data->post_img}}" class="form-control" style="display: none" onchange="changeImg(this)" >
-                                                <img id="avatar" class="thumbnail" src="{{url('/').'/'.$data->post_img}}" width="200">
+                                                <input id="img" type="file" name="post_img" class="form-control" style="display: none" onchange="changeImg(this)" >
+                                                <img id="avatar" class="thumbnail" src="{{url('/uploads/images/new_seo-10-512.png')}}" width="200">
                                                 @if($errors->has('post_img'))
                                                   <p class="help text-danger">{{ $errors->first('post_img') }}</p>
                                                 @endif
                                             </div>
                                               <div class="form-group">
                                                 <label class=" form-control-label">Nội dung</label>
-                                                <textarea name="post_content" class="ckeditor" id="post_content" cols="30" rows="10" class="form-control">{{$data->post_content}}</textarea>
+                                                <textarea name="post_content" class="ckeditor" id="post_content" cols="30" rows="10" class="form-control"></textarea>
+                                                </textarea>
                                                 @if($errors->has('post_content'))
                                                   <p class="help text-danger">{{ $errors->first('post_content') }}</p>
                                                 @endif
@@ -55,8 +56,8 @@
                                               </script>
                                             </div>
                                               <div class="form-group">
-                                                <button type="submit" class="btn btn-primary">Cập nhật</button>
-                                                <a href="{{url('student/posts')}}" class="btn btn-secondary">Hủy bỏ</a>
+                                                <button type="submit" class="btn btn-primary">Thêm mới</button>
+                                                <a href="{{url('teacher/posts')}}" class="btn btn-secondary">Hủy bỏ</a>
                                               </div>
                                               {{csrf_field()}}
                                         </form>

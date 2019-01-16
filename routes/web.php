@@ -24,11 +24,16 @@ Route::group(['namespace'=>'TrangChu'], function() {
 	Route::get('/intro', 'HomeController@getIntro');
 
 	Route::get('/news', 'HomeController@getNews');
+	Route::get('/news/{id}', 'HomeController@getNewsDetail');
 	Route::get('/device', 'HomeController@getDevice');
+	Route::get('/device/{id}', 'HomeController@getDeviceDetail');
 	Route::get('/project', 'HomeController@getProject');
+	Route::get('/project/{id}', 'HomeController@getProjectDetail');
 
 	Route::group(['prefix'=>'student', 'middleware'=>['checkstudent']], function() {
 		Route::get('/', 'StudentsController@getIndex');
+		Route::get('/change', 'StudentsController@getChange');
+		Route::post('/change', 'StudentsController@postChange');
 
 		Route::group(['prefix'=>'info'], function() {
 			Route::get('/', 'StudentsController@getInfo');
@@ -61,6 +66,28 @@ Route::group(['namespace'=>'TrangChu'], function() {
 
 	Route::group(['prefix'=>'teacher', 'middleware'=>['checkteacher']], function() {
 		Route::get('/', 'TeachersController@getIndex');
+
+		Route::group(['prefix'=>'info'], function() {
+			Route::get('/', 'TeachersController@getInfo');
+			Route::post('/', 'TeachersController@postInfo');
+			Route::get('/update', 'TeachersController@getUpdateInfo');
+			Route::post('/update', 'TeachersController@postUpdateInfo');
+		});
+
+		Route::group(['prefix'=>'posts'], function() {
+			Route::get('/', 'TeachersController@listPosts');
+			Route::get('/create', 'TeachersController@getCreatePosts');
+			Route::post('/create', 'TeachersController@postCreatePosts');
+			Route::get('/edit/{id}', 'TeachersController@getEditPosts');
+			Route::post('/edit/{id}', 'TeachersController@postEditPosts');
+			Route::get('/delete/{id}', 'TeachersController@getDeletePosts');
+		});
+
+		Route::group(['prefix'=>'devices'], function() {
+			Route::get('/', 'TeachersController@listDevices');
+			Route::get('/all', 'TeachersController@allDevices');
+			Route::get('/{id}', 'TeachersController@getDevices');
+		});
 	});
 });
 

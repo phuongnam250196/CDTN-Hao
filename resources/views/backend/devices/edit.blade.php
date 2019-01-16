@@ -12,6 +12,16 @@
                         <form method="POST" enctype="multipart/form-data">
                             <div class="card-body card-block">
                                 <div class="form-group">
+                                    <label class=" form-control-label">Ảnh minh họa</label>
+                                    <input id="img" type="file" value="{{$data->device_img}}" name="device_img" class="form-control" style="display: none" onchange="changeImg(this)" ><br>
+                                    @if(!empty($data->device_img))
+                                        <img id="avatar" class="thumbnail" src="{{url('/').'/'.$data->device_img}}" width="100%">
+                                    @else
+                                    
+                                        <img id="avatar" class="thumbnail" src="{{url('/uploads/images/new_seo-10-512.png')}}" width="200">
+                                    @endif
+                                </div>
+                                <div class="form-group">
                                     <label class="form-control-label">Mã thiết bị</label>
                                     <input type="text" name="device_code" value="{{$data->device_code}}" placeholder="VD: TB01" class="form-control">
                                     {{-- <span class="help-block">Please enter your email</span> --}}

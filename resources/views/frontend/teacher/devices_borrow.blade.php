@@ -1,5 +1,5 @@
 @extends('frontend.master')
-@section('title', 'Sinh viên | Mượn thiết bị')
+@section('title', 'Giáo viên | Mượn thiết bị')
 @section('main')
     <div class="main-content-wrapper section-padding-100">
         <div class="container">
@@ -7,7 +7,7 @@
                 <div class="col-12 col-md-8 col-lg-3">
                     <div class="post-sidebar-area post-sidebar-area-2">
                         <!-- Widget Area -->
-                        @include('frontend.navbar.nav')
+                        @include('frontend.navbar.nav_teacher')
                     </div>
                 </div>
 
@@ -42,7 +42,7 @@
                                                 @if($dat->device_count_change == 0)
                                                     <p class="text-danger">Hết thiết bị</p>
                                                 @else
-                                                    <a href="{{url('student/devices/'.$dat->id)}}" class="btn btn-primary" onclick="return confirm('Bạn có chắc chắn muốn mượn chứ!');">Mượn</a>
+                                                    <a href="{{url('teacher/devices/'.$dat->id)}}" class="btn btn-primary" onclick="return confirm('Bạn có chắc chắn muốn mượn chứ!');">Mượn</a>
                                                 @endif
                                             </td>
                                           </tr>

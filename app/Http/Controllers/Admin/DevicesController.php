@@ -25,6 +25,7 @@ class DevicesController extends Controller
             'device_count' => 'required',
             'device_type' => 'required',
             'device_description' => 'required',
+            'device_img' => 'mines:jpg,png,jpeg',
         ];
         $messages = [
             'device_code.required' => 'Mã thiết bị không được để trống',
@@ -32,6 +33,7 @@ class DevicesController extends Controller
             'device_count.required' => 'Số lượng thiết bị không được để trống',
             'device_type.required' => 'Loại thiết bị không được để trống',
             'device_description.required' => 'Mô tả không được để trống',
+            'device_img.mimes' => 'Ảnh minh họa không đúng định dạng',
         ];
         $validator = Validator::make($request->all(), $rules, $messages);
         if ($validator->fails()) {
@@ -45,7 +47,17 @@ class DevicesController extends Controller
             $data->device_type = $request->device_type;
             $data->device_description = $request->device_description;
             $data->device_status = 0;
-            $data->save();
+            if($data->save()) {
+                if(!empty($request->device_img) && $request->device_img != "undefined"){
+                    $file =  $request->device_img;
+                    $path = 'uploads/devices/'.$data->id.'/';
+                    $modifiedFileName = time().'-'.$file->getClientOriginalName();
+                    if($file->move($path,$modifiedFileName)){
+                        $data->device_img = $path.$modifiedFileName;
+                        $data->save();
+                    }
+                }
+            }
             return redirect()->intended('admin/devices')->with('messages', 'Thêm mới thành công!');
         }
     }
@@ -61,6 +73,7 @@ class DevicesController extends Controller
             'device_count' => 'required',
             'device_type' => 'required',
             'device_description' => 'required',
+            'device_img' => 'mimes:jpg,jpeg,png',
         ];
         $messages = [
             'device_code.required' => 'Mã thiết bị không được để trống',
@@ -68,6 +81,7 @@ class DevicesController extends Controller
             'device_count.required' => 'Số lượng thiết bị không được để trống',
             'device_type.required' => 'Loại thiết bị không được để trống',
             'device_description.required' => 'Mô tả không được để trống',
+            'device_img.mimes' => 'Ảnh minh họa không đúng định dạng',
         ];
         $validator = Validator::make($request->all(), $rules, $messages);
         if ($validator->fails()) {
@@ -79,6 +93,14 @@ class DevicesController extends Controller
             $data->device_count = $request->device_count;
             $data->device_type = $request->device_type;
             $data->device_description = $request->device_description;
+            if(!empty($request->device_img) && $request->device_img != "undefined"){
+                    $file =  $request->device_img;
+                    $path = 'uploads/devices/'.$data->id.'/';
+                    $modifiedFileName = time().'-'.$file->getClientOriginalName();
+                    if($file->move($path,$modifiedFileName)){
+                        $data->device_img = $path.$modifiedFileName;
+                    }
+                }
             $data->save();
             return redirect()->intended('admin/devices')->with('messages', 'Cập nhật thành công!');
         }
