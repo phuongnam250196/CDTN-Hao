@@ -55,6 +55,7 @@ Route::group(['namespace'=>'TrangChu'], function() {
 			Route::get('/', 'StudentsController@listDevices');
 			Route::get('/all', 'StudentsController@allDevices');
 			Route::get('/{id}', 'StudentsController@getDevices');
+			Route::post('/{id}', 'StudentsController@postDevices');
 		});
 
 		Route::group(['prefix'=>'calendars'], function() {
@@ -87,6 +88,14 @@ Route::group(['namespace'=>'TrangChu'], function() {
 			Route::get('/', 'TeachersController@listDevices');
 			Route::get('/all', 'TeachersController@allDevices');
 			Route::get('/{id}', 'TeachersController@getDevices');
+			Route::post('/{id}', 'TeachersController@postDevices');
+			// Route::get('/{id}', 'TeachersController@getDevicesAdd');
+		});
+
+		Route::group(['prefix'=>'calendars'], function() {
+			Route::get('/', 'TeachersController@listCalendars');
+			Route::get('/register', 'TeachersController@registerCalendars');
+			Route::post('/register', 'TeachersController@registerPostCalendars');
 		});
 	});
 });
@@ -144,6 +153,8 @@ Route::group(['namespace'=>'Admin'], function() {
 
 	    	Route::get('/borrow', "DevicesController@getBorrow");
 	    	Route::get('/borrow/{id}', "DevicesController@getBorrowUpdate");
+	    	Route::get('/return/{id}', "DevicesController@getReturnUpdate");
+	    	Route::post('/return/{id}', "DevicesController@postReturnUpdate");
 	    	Route::get('/borrow_del/{id}', "DevicesController@getBorrowDel");
 	    	Route::get('/return', "DevicesController@getReturn");
 	    });

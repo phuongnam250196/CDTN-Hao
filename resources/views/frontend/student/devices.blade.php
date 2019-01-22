@@ -47,7 +47,9 @@
                                                 @if($dat->status==0)
                                                     <span class="text-warning">Chờ</span>
                                                 @elseif($dat->status==1)
-                                                    <span class="text-success">Ok</span>
+                                                    <span class="text-primary">Đang mượn</span>
+                                                @elseif($dat->status==3)
+                                                    <span class="text-success">Đã trả</span>
                                                 @else
                                                     <span class="text-danger">Hủy</span>
                                                 @endif

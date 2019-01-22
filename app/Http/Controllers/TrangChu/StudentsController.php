@@ -174,22 +174,44 @@ class StudentsController extends Controller
     }
 
     public function allDevices() {
-    	$data = Device::paginate(10);
+    	$data = Device::orderBy('created_at', 'desc')->paginate(10);
     	return view('frontend.student.devices_borrow', compact('data'));
     }
     public function getDevices($id) {
-    	$data = new User_Device;
-    	$data->count = 1;
-    	$data->status = 0;
-    	$data->student_id = Auth::user()->student_id;
-    	$data->device_id = $id;
-    	$data->save();
-    	// if($data->save()) {
-    	// 	$device = Device::find($id);
-    	// 	$device->device_count_change = $device->device_count - $data->count;
-    	// 	$device->save();
-    	// }
-    	return redirect('student/devices')->with('messages', 'Bạn đã đăng ký mượn thiết bị thành công. Chờ xác nhận của admin nhé.');
+    	// $data = new User_Device;
+    	// $data->count = 1;
+    	// $data->status = 0;
+    	// $data->student_id = Auth::user()->student_id;
+    	// $data->device_id = $id;
+    	// $data->save();
+   
+    	// return redirect('student/devices')->with('messages', 'Bạn đã đăng ký mượn thiết bị thành công. Chờ xác nhận của admin nhé.');
+        $data = Device::find($id);
+        return view('frontend.student.devices_borrow_add', compact('data'));
+    }
+    public function postDevices(Request $request, $id) {
+        $rules = [
+            'count' => 'required',
+            'type' => 'required',
+        ];
+        $messages = [
+            'count.required' => 'Số lượng không được để trống',
+            'type.required' => 'Loại không được để trống',
+        ];
+        $validator = Validator::make($request->all(), $rules, $messages);
+        if ($validator->fails()) {
+            return back()->withInput()->withErrors($validator->errors());
+        } else {
+            $data = new User_Device;
+            $data->count = $request->count;
+            $data->type = $request->type;
+            $data->status = 0;
+            $data->student_id = Auth::user()->student_id;
+            $data->device_id = $id;
+            $data->save();
+       
+            return redirect('student/devices')->with('messages', 'Bạn đã đăng ký mượn thiết bị thành công. Chờ xác nhận của admin nhé.');
+        }
     }
 
 

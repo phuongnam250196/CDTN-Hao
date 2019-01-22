@@ -8,6 +8,7 @@
                     <div class="card">
                         <div class="card-header">
                             <strong class="card-title">Danh sách người trả trang thiết bị</strong>
+                            <a href="{{url('/admin/devices/borrow')}}" class="btn btn-outline-danger pull-right mr-2">Người mượn</a>
                         </div>
                         <div class="card-body">
                             @if(session('messages'))
@@ -17,32 +18,30 @@
                                 <thead>
                                     <tr>
                                         <th scope="col">STT</th>
-                                        <th scope="col">Mã thiết bị</th>
                                         <th scope="col">Tên thiết bị</th>
-                                        <th scope="col">Số lượng</th>
+                                        <th scope="col">Người trả</th>
+                                        <th class="text-center" scope="col">Số lượng mượn</th>
                                         <th scope="col">Loại</th>
-                                        <th class="text-center" colspan="2">Tùy chọn</th>
+                                        <th>Ngày trả</th>
                                     </tr>
                                 </thead>
                                 <tbody {{$dem=1}}>
                                     @foreach($data as $dat)
                                         <tr>
                                             <th scope="row">{{$dem++}}</th>
-                                            <td><a href="{{url("admin/devices/user/".$dat->id)}}">{{$dat->device_code}}</a></td>
-                                            <td>{{$dat->device_name}}</td>
-                                            <td>{{$dat->device_count}}</td>
-                                            <td>{{$dat->device_type}}</td>
+                                            <td>{{$dat->Devices->device_name}}</td>
+                                            <td>{{(!empty($dat->Students->student_name))?($dat->Students->student_name):($dat->Teachers->teacher_name)}}</td>
+                                            <td class="text-center">{{$dat->count}}</td>
+                                            <td>{{$dat->type}}</td>
                                             <td>
-                                                <a href="{{url('admin/devices/edit/'.$dat->id)}}" class="btn btn-outline-info"><i class="fa  fa-pencil"></i></a>
-                                            </td>
-                                            <td>
-                                                <a href="{{url('admin/devices/delete/'.$dat->id)}}" onclick="return confirm('Bạn có chắc chắn muốn xóa không?');" class="btn btn-outline-danger"><i class="fa  fa-times"></i></a>
+                                                {{$dat->date_finish}}
                                             </td>
                                         </tr>
                                     @endforeach
                                 </tbody>
                             </table>
                         </div>
+                        {{$data->links()}}
                     </div>
                 </div>
 

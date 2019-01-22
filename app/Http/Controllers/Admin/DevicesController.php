@@ -112,7 +112,7 @@ class DevicesController extends Controller
     }
 
     public function getBorrow() {
-    	$data = User_Device::orderBy('created_at', 'desc')->paginate(10);
+    	$data = User_Device::where('status', '!=', 3)->where('status', '!=', 2)->orderBy('created_at', 'desc')->paginate(5);
     	return view('backend.devices.borrow', compact('data'));
     }
     public function getBorrowUpdate($id) {
@@ -120,12 +120,40 @@ class DevicesController extends Controller
         $data->status = 1;
         if($data->save()) {
              $device = Device::find($data->device_id);
-             $device->device_count_change = $device->device_count_change - 1;
+             $device->device_count_change = $device->device_count_change - $data->count;
              $device->save();
              // dd($device);
         }
         return back()->with('messages', 'Cho phép mượn thiết bị!!');
     }
+
+    public function getReturnUpdate($id) {
+        $data = User_Device::find($id);
+        return view('backend.devices.return_add', compact('data'));
+    }
+    public function postReturnUpdate(Request $request, $id) {
+        $rules = [
+            'date_finish' => 'required',
+        ];
+        $messages = [
+            'date_finish.required' => 'Ngày trả không được để trống',
+        ];
+        $validator = Validator::make($request->all(), $rules, $messages);
+        if ($validator->fails()) {
+            return back()->withInput()->withErrors($validator->errors());
+        } else {
+            $data = User_Device::find($id);
+            $data->date_finish = $request->date_finish;
+            $data->status = 3;
+            if($data->save()) {
+                $user = Device::where('id', $data->device_id)->first();
+                $user->device_count_change = $user->device_count_change + $data->count;
+                $user->save();
+            }
+        }
+        return redirect()->intended('admin/devices/return')->with('messages', 'Xác nhận trả thành công!');
+    }
+
     public function getBorrowDel($id) {
         $data = User_Device::find($id);
         $data->status = 2;
@@ -134,7 +162,10 @@ class DevicesController extends Controller
     }
 
     public function getReturn() {
-    	$data = Device::get();
+
+        // Đang sửa
+    	$data = User_Device::where('status', 3)->with("Devices")->paginate(10);
+        // dd($data);
     	return view('backend.devices.return', compact('data'));
     }
 }

@@ -8,6 +8,8 @@ use App\User;
 use App\Teacher;
 use App\Posts;
 use App\Device;
+use App\User_Device;
+use App\Calendar;
 use Auth;
 use Validator;
 
@@ -147,28 +149,77 @@ class TeachersController extends Controller
     }
 
     public function listDevices () {
-    	$data = Teacher::find(Auth::user()->teacher_id)->Device;
-    	// $data = teacher::with('User');
-    	// dd($data);
-    	return view('frontend.teacher.devices', compact('data'));
+        $data = Teacher::find(Auth::user()->teacher_id)->Device;
+        return view('frontend.teacher.devices', compact('data'));
     }
 
     public function allDevices() {
-    	$data = Device::paginate(10);
-    	return view('frontend.teacher.devices_borrow', compact('data'));
+        $data = Device::orderBy('created_at', 'desc')->paginate(10);
+        return view('frontend.teacher.devices_borrow', compact('data'));
     }
     public function getDevices($id) {
-    	$data = new User_Device;
-    	$data->count = 1;
-    	$data->status = 0;
-    	$data->teacher_id = Auth::user()->teacher_id;
-    	$data->device_id = $id;
-    	$data->save();
-    	// if($data->save()) {
-    	// 	$device = Device::find($id);
-    	// 	$device->device_count_change = $device->device_count - $data->count;
-    	// 	$device->save();
-    	// }
-    	return redirect('teacher/devices')->with('messages', 'Bạn đã đăng ký mượn thiết bị thành công. Chờ xác nhận của admin nhé.');
+        $data = Device::find($id);
+        return view('frontend.teacher.devices_borrow_add', compact('data'));
+    }
+    public function postDevices(Request $request, $id) {
+        $rules = [
+            'count' => 'required',
+            'type' => 'required',
+        ];
+        $messages = [
+            'count.required' => 'Số lượng không được để trống',
+            'type.required' => 'Loại không được để trống',
+        ];
+        $validator = Validator::make($request->all(), $rules, $messages);
+        if ($validator->fails()) {
+            return back()->withInput()->withErrors($validator->errors());
+        } else {
+            $data = new User_Device;
+            $data->count = $request->count;
+            $data->type = $request->type;
+            $data->status = 0;
+            $data->teacher_id = Auth::user()->teacher_id;
+            $data->device_id = $id;
+            $data->save();
+       
+            return redirect('teacher/devices')->with('messages', 'Bạn đã đăng ký mượn thiết bị thành công. Chờ xác nhận của admin nhé.');
+        }
+    }
+
+    public function listCalendars() {
+        $data = Calendar::all();
+        // dd($data);
+        return view('frontend.teacher.calendars', compact('data'));
+    }
+    public function registerCalendars() {
+        return view('frontend.teacher.calendars_register');
+    }
+    public function registerPostCalendars(Request $request) {
+        $rules = [
+            'title' => 'required',
+            'date_borrow' => 'required',
+            'start' => 'required',
+            'end' => 'required',
+        ];
+        $messages = [
+            'title.required' => 'Tiêu đề không được để trống',
+            'date_borrow.required' => 'Ngày trực không được để trống',
+            'start.required' => 'Thời gian bắt đầu không được để trống',
+            'end.required' => 'Thời gian kết thúc không được để trống',
+        ];
+        $validator = Validator::make($request->all(), $rules, $messages);
+        if ($validator->fails()) {
+            return back()->withInput()->withErrors($validator->errors());
+        } else {
+            $data = new Calendar;
+            $data->title = $request->title;
+            $data->start = date('d-m-Y', strtotime($request->date_borrow)).' '.$request->start;
+            $data->end = date('d-m-Y', strtotime($request->date_borrow)).' '.$request->end;
+            $data->description = $request->description;
+            $data->teacher_id = Auth::user()->teacher_id;
+           
+            $data->save();
+            return redirect()->intended('teacher/calendars')->with('messages', 'Đăng ký thành công!');
+        }
     }
 }

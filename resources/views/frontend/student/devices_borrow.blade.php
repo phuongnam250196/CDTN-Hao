@@ -26,7 +26,7 @@
                                           <tr>
                                             <th>STT</th>
                                             <th>Tên thiết bị</th>
-                                            <th>Loại</th>
+                                            {{-- <th>Loại</th> --}}
                                             <th class="text-center">SL hiện có</th>
                                             <th></th>
                                           </tr>
@@ -36,11 +36,11 @@
                                           <tr>
                                             <td>{{$dem++}}</td>
                                             <td>{{$dat->device_name}}</td>
-                                            <td>{{$dat->device_type}}</td>
+                                            {{-- <td>{{$dat->device_type}}</td> --}}
                                             <td class="text-center">{{$dat->device_count_change}}</td>
                                             <td>
-                                                @if($dat->device_count_change == 0)
-                                                    <p class="text-danger">Hết thiết bị</p>
+                                                @if($dat->device_count_change <= 0)
+                                                    <a href="#" class="btn btn-secondary">Mượn</a>
                                                 @else
                                                     <a href="{{url('student/devices/'.$dat->id)}}" class="btn btn-primary" onclick="return confirm('Bạn có chắc chắn muốn mượn chứ!');">Mượn</a>
                                                 @endif

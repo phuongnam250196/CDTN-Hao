@@ -33,8 +33,15 @@
                                 </div>
                                 <div class="form-group">
                                     <label class="form-control-label">Loại</label>
-                                    <input type="text" name="device_type"  class="form-control">
-                                    {{-- <span class="help-block">Please enter your email</span> --}}
+                                    {{-- <input type="text" name="device_type"  class="form-control"> --}}
+                                    <select name="device_type" class="form-control">
+                                        <option value="">Chọn loại sản phẩm</option>
+                                        <option value="Cảm biến nhiệt">Cảm biến nhiệt</option>
+                                        <option value="Cảm biến ánh sáng">Cảm biến ánh sáng</option>
+                                        <option value="Cảm biến độ ẩm">Cảm biến độ ẩm</option>
+                                    </select>
+                                    {{-- <span class="help-block">Please enter your email</span> 
+                                    --}}
                                 </div>
                                 <div class="form-group">
                                     <label class=" form-control-label">Mô tả</label>
