@@ -17,6 +17,12 @@
                                     {{-- <span class="help-block">Please enter your email</span> --}}
                                 </div>
                                 <div class="form-group">
+                                    <label class=" form-control-label">Ảnh minh họa</label>
+                                    {{-- <input type="file" name="post-img" class="form-control"> --}}
+                                    <input id="img" type="file" name="project_img" class="form-control" style="display: none" onchange="changeImg(this)" ><br>
+                                    <img id="avatar" class="thumbnail" src="{{url('/uploads/images/new_seo-10-512.png')}}" width="200">
+                                </div>
+                                <div class="form-group">
                                     <label class="form-control-label">Người hướng dẫn</label>
                                     <input type="text" name="project_instructor" placeholder="VD: GV. Mai Thúy Nga" class="form-control">
                                     {{-- <span class="help-block">Please enter your email</span> --}}

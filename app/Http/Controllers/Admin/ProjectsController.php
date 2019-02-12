@@ -19,6 +19,7 @@ class ProjectsController extends Controller
     }
     public function postCreate(Request $request) {
     	$rules = [
+            'project_img' => 'required | mimes:jpg,png,jpeg',
             'project_instructor' => 'required',
             'project_confectioner' => 'required',
             'project_name' => 'required',
@@ -27,6 +28,8 @@ class ProjectsController extends Controller
             'project_data_finish' => 'required',
         ];
         $messages = [
+            'project_img.required' => 'Ảnh minh họa không được để trống',
+            'project_img.mimes' => 'Ảnh minh họa không đúng định dạng',
             'project_instructor.required' => 'Người hướng dẫn không được để trống',
             'project_confectioner.required' => 'Người thực hiện không được để trống',
             'project_name.required' => 'Tên đề tài không được để trống',
@@ -45,19 +48,17 @@ class ProjectsController extends Controller
             $data->project_content = $request->project_content;
             $data->project_data_start = $request->project_data_start;
             $data->project_data_finish = $request->project_data_finish;
-            // if($request->hasfile('project_gallery'))
-            //  {
-
-            //     foreach($request->file('project_gallery') as $file)
-            //     {
-            //         $name=$file->getClientOriginalName();
-            //         $file->move(public_path().'/projects/', $name);  
-            //         $data[] = $name;  
-            //     }
-            //  }
-            //  $data->project_gallery=json_encode($data);
-             
-            $data->save();
+            if($data->save()) {
+                if(!empty($request->project_img) && $request->project_img != "undefined"){
+                    $file =  $request->project_img;
+                    $path = 'uploads/projects/'.$data->id.'/';
+                    $modifiedFileName = time().'-'.$file->getClientOriginalName();
+                    if($file->move($path,$modifiedFileName)){
+                        $data->project_img = $path.$modifiedFileName;
+                        $data->save();
+                    }
+                }
+            }
             return redirect()->intended('admin/projects')->with('messages', 'Thêm mới thành công!');
         }
     }
@@ -68,6 +69,7 @@ class ProjectsController extends Controller
     }
     public function postEdit(Request $request, $id) {
     	$rules = [
+            'project_img' => 'required | mimes:jpg,png,jpeg',
             'project_instructor' => 'required',
             'project_confectioner' => 'required',
             'project_name' => 'required',
@@ -76,6 +78,8 @@ class ProjectsController extends Controller
             'project_data_finish' => 'required',
         ];
         $messages = [
+            'project_img.required' => 'Ảnh minh họa không được để trống',
+            'project_img.mimes' => 'Ảnh minh họa không đúng định dạng',
             'project_instructor.required' => 'Người hướng dẫn không được để trống',
             'project_confectioner.required' => 'Người thực hiện không được để trống',
             'project_name.required' => 'Tên đề tài không được để trống',
@@ -94,6 +98,15 @@ class ProjectsController extends Controller
             $data->project_content = $request->project_content;
             $data->project_data_start = $request->project_data_start;
             $data->project_data_finish = $request->project_data_finish;
+            if(!empty($request->project_img) && $request->project_img != "undefined"){
+                $file =  $request->project_img;
+                $path = 'uploads/projects/'.$data->id.'/';
+                $modifiedFileName = time().'-'.$file->getClientOriginalName();
+                if($file->move($path,$modifiedFileName)){
+                    $data->project_img = $path.$modifiedFileName;
+                    $data->save();
+                }
+            }
             $data->save();
             return redirect()->intended('admin/projects')->with('messages', 'Cập nhật thành công!');
         }

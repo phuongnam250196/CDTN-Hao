@@ -17,6 +17,16 @@
                                     {{-- <span class="help-block">Please enter your email</span> --}}
                                 </div>
                                 <div class="form-group">
+                                    <label class=" form-control-label">Ảnh minh họa</label>
+                                    <input id="img" type="file" name="project_img" value="{{$data->project_img}}" class="form-control" style="display: none" onchange="changeImg(this)" ><br>
+                                    @if(!empty($data->project_img))
+                                    <img id="avatar" class="thumbnail" src="{{url('/').'/'.$data->project_img}}" width="100%">
+                                    @else
+                                        <img id="avatar" class="thumbnail" src="{{url('/uploads/images/new_seo-10-512.png')}}" width="200">
+                                        
+                                    @endif
+                                </div>
+                                <div class="form-group">
                                     <label class="form-control-label">Người hướng dẫn</label>
                                     <input type="text" name="project_instructor" value="{{$data->project_instructor}}" class="form-control">
                                     {{-- <span class="help-block">Please enter your email</span> --}}

@@ -34,16 +34,16 @@
                                                 <div class="single-blog-post">
                                                     <!-- Post Thumbnail -->
                                                     <div class="post-thumbnail">
-                                                        <img src="{{url('/').'/'.$post->post_img}}" alt="">
+                                                        <img style="height: 340px;" src="{{url('/').'/'.$post->post_img}}" alt="">
                                                         <!-- Catagory -->
-                                                        <div class="post-cta"><a href="#">travel</a></div>
+                                                        <div class="post-cta"><a href="{{url('/news/'.$post->id)}}">Detail</a></div>
                                                     </div>
                                                     <!-- Post Content -->
                                                     <div class="post-content">
-                                                        <a href="#" class="headline">
+                                                        <a href="{{url('/news/'.$post->id)}}" class="headline">
                                                             <h5>{{$post->post_title}}</h5>
                                                         </a>
-                                                        <p>{!! $post->post_content !!}</p>
+                                                        <p style="overflow: hidden;text-overflow: ellipsis;-webkit-line-clamp: 3;display: -webkit-box;-webkit-box-orient: vertical;">{!! strip_tags(preg_replace("/<img[^>]+\>/i", "(image) ", $post->post_content)) !!}</p>
                                                         <!-- Post Meta -->
                                                         <div class="post-meta">
                                                             <p><a href="#" class="post-author">{{(empty($post->Student->student_name)?"":($post->Student->student_name))}}</a> on <a href="#" class="post-date">{{(empty($post->created_at)?"":($post->created_at))}}</a></p>
@@ -184,7 +184,7 @@
                 </div>
             </div>
             <div class="title wow fadeInUpBig">
-                <h5>Gương mặt tiêu biểu của năm</h5>
+                <h5>Trang thiết bị </h5>
             </div>
             <div class="row justify-content-center">
                 @foreach($devices as $device)
@@ -192,14 +192,17 @@
                     <div class="single-blog-post post-style-3 mt-50 wow fadeInUpBig" data-wow-delay="0.2s">
                         <!-- Post Thumbnail -->
                         <div class="post-thumbnail">
-                            <img src="{{asset('/frontend')}}/img/blog-img/b4.jpg" alt="">
-                            <!-- Post Content -->
+                            @if(!empty($device->device_img))
+                                <img style="height: 190px;" src="{{url('/').'/'.$device->device_img}}" alt="">
+                            @else
+                                <img style="height: 190px;" src="{{url('/')}}/uploads/images/nen.png" alt="">
+                            @endif
                             <div class="post-content d-flex align-items-center justify-content-between">
                                 <!-- Catagory -->
-                                <div class="post-tag"><a href="#">travel</a></div>
+                                <div class="post-tag"><a href="#">New</a></div>
                                 <!-- Headline -->
                                 <a href="#" class="headline">
-                                    <h5>{{$device->device_name}}</h5>
+                                    <h5 style="overflow: hidden;text-overflow: ellipsis;-webkit-line-clamp: 2;display: -webkit-box;-webkit-box-orient: vertical;">{{$device->device_name}}</h5>
                                 </a>
                                 <!-- Post Meta -->
                                 <div class="post-meta">
@@ -210,6 +213,7 @@
                     </div>
                 </div>
                 @endforeach
+
             </div>
 
             <div class="world-latest-articles">
@@ -223,14 +227,18 @@
                         <div class="single-blog-post post-style-4 d-flex align-items-center wow fadeInUpBig" data-wow-delay="0.2s">
                             <!-- Post Thumbnail -->
                             <div class="post-thumbnail">
-                                <img src="{{asset('/frontend')}}/img/blog-img/b18.jpg" alt="">
+                                @if(!empty($project->project_img))
+                                    <img style="height: 180px;" src="{{url('/').'/'.$project->project_img}}" alt="">
+                                @else
+                                    <img style="height: 180px;" src="{{url('/')}}/uploads/images/nen.png" alt="">
+                                @endif
                             </div>
                             <!-- Post Content -->
                             <div class="post-content">
                                 <a href="#" class="headline">
-                                    <h5>{{$project->project_name}}</h5>
+                                    <h5 style="overflow: hidden;text-overflow: ellipsis;-webkit-line-clamp: 2;display: -webkit-box;-webkit-box-orient: vertical;">{{$project->project_name}}</h5>
                                 </a>
-                                <p>{!! $project->project_content !!}</p>
+                                <p style="overflow: hidden;text-overflow: ellipsis;-webkit-line-clamp: 3;display: -webkit-box;-webkit-box-orient: vertical;">{!! $project->project_content !!}</p>
                                 <!-- Post Meta -->
                                 <div class="post-meta">
                                     <p><a href="#" class="post-author">{{$project->project_confectioner}}</a> on <a href="#" class="post-date">Sep 29, 2017 at 9:48 am</a></p>
@@ -238,63 +246,8 @@
                             </div>
                         </div>
                         @endforeach
-
-                        <!-- Single Blog Post -->
-                        <div class="single-blog-post post-style-4 d-flex align-items-center wow fadeInUpBig" data-wow-delay="0.3s">
-                            <!-- Post Thumbnail -->
-                            <div class="post-thumbnail">
-                                <img src="{{asset('/frontend')}}/img/blog-img/b19.jpg" alt="">
-                            </div>
-                            <!-- Post Content -->
-                            <div class="post-content">
-                                <a href="#" class="headline">
-                                    <h5>How Did van Gogh’s Turbulent Mind Depict One of the Most Complex Concepts in Physics?</h5>
-                                </a>
-                                <p>Pick the yellow peach that looks like a sunset with its red, orange, and pink coat skin, peel it off with your teeth. Sink them into unripened...</p>
-                                <!-- Post Meta -->
-                                <div class="post-meta">
-                                    <p><a href="#" class="post-author">Katy Liu</a> on <a href="#" class="post-date">Sep 29, 2017 at 9:48 am</a></p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Single Blog Post -->
-                        <div class="single-blog-post post-style-4 d-flex align-items-center wow fadeInUpBig" data-wow-delay="0.4s">
-                            <!-- Post Thumbnail -->
-                            <div class="post-thumbnail">
-                                <img src="{{asset('/frontend')}}/img/blog-img/b20.jpg" alt="">
-                            </div>
-                            <!-- Post Content -->
-                            <div class="post-content">
-                                <a href="#" class="headline">
-                                    <h5>How Did van Gogh’s Turbulent Mind Depict One of the Most Complex Concepts in Physics?</h5>
-                                </a>
-                                <p>Pick the yellow peach that looks like a sunset with its red, orange, and pink coat skin, peel it off with your teeth. Sink them into unripened...</p>
-                                <!-- Post Meta -->
-                                <div class="post-meta">
-                                    <p><a href="#" class="post-author">Katy Liu</a> on <a href="#" class="post-date">Sep 29, 2017 at 9:48 am</a></p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Single Blog Post -->
-                        <div class="single-blog-post post-style-4 d-flex align-items-center wow fadeInUpBig" data-wow-delay="0.5s">
-                            <!-- Post Thumbnail -->
-                            <div class="post-thumbnail">
-                                <img src="{{asset('/frontend')}}/img/blog-img/b21.jpg" alt="">
-                            </div>
-                            <!-- Post Content -->
-                            <div class="post-content">
-                                <a href="#" class="headline">
-                                    <h5>How Did van Gogh’s Turbulent Mind Depict One of the Most Complex Concepts in Physics?</h5>
-                                </a>
-                                <p>Pick the yellow peach that looks like a sunset with its red, orange, and pink coat skin, peel it off with your teeth. Sink them into unripened...</p>
-                                <!-- Post Meta -->
-                                <div class="post-meta">
-                                    <p><a href="#" class="post-author">Katy Liu</a> on <a href="#" class="post-date">Sep 29, 2017 at 9:48 am</a></p>
-                                </div>
-                            </div>
-                        </div>
+                        <br>
+                        {{$projects->links()}}
                     </div>
 
                     <div class="col-12 col-lg-4">

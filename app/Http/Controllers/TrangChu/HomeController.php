@@ -11,9 +11,9 @@ use App\Device;
 class HomeController extends Controller
 {
     public function getIndex() {
-        $posts= Posts::orderBy('created_at', 'desc')->where('post_status', 1)->paginate(4);
-        $projects = Project::orderBy('created_at', 'desc')->paginate(4);
-        $devices = Device::paginate(3);
+        $posts= Posts::orderBy('created_at', 'desc')->where('post_status', 1)->limit(5)->get();
+        $projects = Project::orderBy('created_at', 'desc')->paginate(5);
+        $devices = Device::limit(3)->get();
     	return view('frontend.index', compact('posts', 'projects', 'devices'));
     }
 

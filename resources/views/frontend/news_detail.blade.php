@@ -9,7 +9,7 @@
                     <div class="single-blog-content mb-100">
                         <!-- Post Meta -->
                         <div class="post-meta">
-                            <p>Bài viết: <span class="text-uppercase">{{$data->post_title}}</span> by {{(!empty($data->Student->student_name)?($data->Student->student_name):"Vô danh")}}</a> on <a href="#" class="post-date">{{$data->created_at->toDayDateTimeString()}}</a></p>
+                            <p class="text-center">Bài viết<br> <strong><span style="font-size: 18px;" class="text-uppercase">{{$data->post_title}}</span></strong></p>
                         </div>
                         <!-- Post Content -->
                         <div class="post-content">
@@ -47,7 +47,7 @@
                                 <div class="single-blog-post post-style-2 d-flex align-items-center widget-post">
                                     <!-- Post Thumbnail -->
                                     <div class="post-thumbnail">
-                                        <img src="{{asset('/frontend')}}/img/blog-img/b11.jpg" alt="">
+                                        <img style="height: 70px;" src="{{url('/').'/'.$post->post_img}}" alt="">
                                     </div>
                                     <!-- Post Content -->
                                     <div class="post-content">
@@ -84,7 +84,7 @@
                             <div class="single-blog-post">
                                 <!-- Post Thumbnail -->
                                 <div class="post-thumbnail">
-                                    <img src="{{asset('/frontend')}}/img/blog-img/b1.jpg" alt="">
+                                    <img style="height: 155px;" src="{{url('/').'/'.$project->project_img}}" alt="">
                                     <!-- Catagory -->
                                     <div class="post-cta"><a href="#">travel</a></div>
                                 </div>

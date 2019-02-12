@@ -22,18 +22,30 @@
                             <div class="tab-content" id="myTabContent">
                                 <div class="row">
                                     <div class="col-md-10">
+                                        @if(session('messages'))
+                                            <p class="alert alert-info">{{session('messages')}}</p>
+                                        @endif
                                         <form method="POST" enctype="multipart/form-data">
                                           <div class="form-group">
                                             <label>Mật khẩu cũ</label>
-                                            <input type="password" class="form-control" name="password_old" value="{{old('password_old')}}">
+                                            <input type="password" class="form-control" name="password" value="{{old('password')}}">
+                                            @if($errors->has('password'))
+                                              <p class="help text-danger">{{ $errors->first('password') }}</p>
+                                            @endif
                                           </div>
                                           <div class="form-group">
                                             <label>Mật khẩu mới</label>
-                                            <input type="password" class="form-control" name="password" value="{{old('password')}}">
+                                            <input type="password" class="form-control" name="password_new" value="{{old('password_new')}}">
+                                            @if($errors->has('password_new'))
+                                              <p class="help text-danger">{{ $errors->first('password_new') }}</p>
+                                            @endif
                                           </div>
                                           <div class="form-group">
                                             <label>Nhập lại mật khẩu mới</label>
-                                            <input type="password" class="form-control" name="password_2" value="{{old('password_2')}}">
+                                            <input type="password" class="form-control" name="password_rep" value="{{old('password_rep')}}">
+                                            @if($errors->has('password_rep'))
+                                              <p class="help text-danger">{{ $errors->first('password_rep') }}</p>
+                                            @endif
                                           </div>
                                           <div class="form-group">
                                             <button type="submit" class="btn btn-primary">Xác nhận</button>

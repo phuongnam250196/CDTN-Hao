@@ -12,6 +12,7 @@ use App\Device;
 use App\Calendar;
 use App\User_Device;
 use Validator;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\OrderShipped;
 
@@ -78,6 +79,38 @@ class StudentsController extends Controller
 
     public function getChange() {
         return view('frontend.student.change_password');
+    }
+    public function postChange(Request $request) {
+        $rules = [
+            'password' => 'required | min:6 | max:255',
+            'password_new' => 'required | min:6 | max:255',
+            'password_rep' => 'required | min:6 | max:255 | same:password_new',
+        ];
+        $messages = [
+            'password.required' => 'Mật khẩu hiện tại không được để trống',
+            'password.min' => 'Mật khẩu hiện tại nhỏ hơn 6 ký tự',
+            'password.max' => 'Mật khẩu hiện tại lớn hơn 255 ký tự',
+            'password_new.required' => 'Mật khẩu mới không được để trống',
+            'password_new.min' => 'Mật khẩu mới nhỏ hơn 6 ký tự',
+            'password_new.max' => 'Mật khẩu mới lớn hơn 255 ký tự',
+            'password_rep.required' => 'Mật khẩu nhập lại không được để trống',
+            'password_rep.same' => 'Mật khẩu nhập lại không khớp',
+            'password_rep.min' => 'Mật khẩu nhập lại nhỏ hơn 6 ký tự',
+            'password_rep.max' => 'Mật khẩu nhập lại lớn hơn 255 ký tự',
+        ];
+        $validator = Validator::make($request->all(), $rules, $messages);
+        if ($validator->fails()) {
+            return back()->withInput()->withErrors($validator->errors());
+        } else {
+            $data = User::find(Auth::id());
+            if(Hash::check($request->password, $data->password)) {
+                $data->password = Hash::make($request->password_new);
+                $data->save();
+                return redirect()->intended('student/info')->with('messages', 'Đổi mật khẩu thành công!');
+            } else {
+                return back()->with('messages', 'Mật khẩu cũ không đúng!');
+            }
+        }
     }
 
     public function listPosts() {
