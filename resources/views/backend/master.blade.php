@@ -29,6 +29,7 @@
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
     @yield('style-rewrite')
     <script src="{{asset('/backend')}}/vendors/jquery/dist/jquery.min.js"></script>
+    @yield('add')
     <script src="{{asset('/backend')}}/vendors/popper.js/dist/umd/popper.min.js"></script>
     <script src="{{asset('/backend')}}/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="{{asset('/backend')}}/assets/js/main.js"></script>
@@ -42,6 +43,9 @@
     <script src="{{asset('/backend')}}/vendors/jqvmap/dist/maps/jquery.vmap.world.js"></script>
     <script type="text/javascript" src="{{asset('Backend')}}/ckeditor/ckeditor.js"></script>
     <script type="text/javascript" src="{{asset('Backend')}}/ckfinder/ckfinder.js"></script>
+
+    @yield('style-calendar')
+    
     <style>
         .post-content-text {
             text-align: justify;
@@ -51,7 +55,54 @@
             display: -webkit-box;
             -webkit-box-orient: vertical;
         }
+        .calendarContOuter
+        {
+            width: 100%;
+            height: 600px;
+            margin: 0px auto;
+        
+            font-size: 14px;
+        }
     </style>
+     <script type="text/javascript">
+
+        jQuery(function($){
+            $(".calendarContOuter").CalenStyle(
+            {
+            
+                sectionsList: ["Header", "ActionBar", "Calendar"],
+            
+                visibleView: "DetailedMonthView",
+
+                calDataSource: 
+                [
+                    {
+                        sourceFetchType: "ALL",
+                        sourceType: "JSON",                     
+                        source: {
+
+                            @yield('source')
+                        }
+                        
+                    }
+                ],
+            
+                modifyActionBarView: function(actionBar, visibleViewName)
+                {
+                    var thisObj = this;
+                
+                    $(actionBar).empty();
+                    $(actionBar).append("<span class='reload'>Reload</span>");
+                    $(".reload").click(function()
+                    {
+                        thisObj.reloadData();
+                    });
+                }
+            
+            });
+        });
+        
+    </script>
 </head>
 
 <body>
@@ -79,20 +130,20 @@
                     <li class="@if(Request::is('admin/posts') || Request::is('admin/posts/*') || Request::is('admin/post/*')) active @endif">
                         <a href="{{url('/admin/posts/')}}"> <i class="menu-icon fa fa-laptop"></i>Quản lý bài viết</a>
                     </li>
-                    <li class="@if(Request::is('admin/calendar')) active @endif">
-                        <a href="{{url('/admin/calendar/')}}" class="dropdown-toggle" > <i class="menu-icon fa fa-table"></i>Quản lý lịch trực</a>
+                    <li class="@if(Request::is('admin/calendars') || Request::is('admin/calendars/*')) active @endif">
+                        <a href="{{url('/admin/calendars/')}}" class="dropdown-toggle" > <i class="menu-icon fa fa-table"></i>Quản lý lịch trực</a>
                     </li>
                     <li class="@if(Request::is('admin/devices') || Request::is('admin/devices/*')) active @endif">
-                        <a href="{{url('/admin/devices/')}}" class="dropdown-toggle"> <i class="menu-icon fa fa-th"></i>Quản lý trang thiết bị</a>
+                        <a href="{{url('/admin/devices/')}}" class="dropdown-toggle"> <i class="menu-icon fa fa-share-alt-square"></i>Quản lý trang thiết bị</a>
                     </li>
                     <li class="@if(Request::is('admin/projects') || Request::is('admin/projects/*')) active @endif">
-                        <a href="{{url('/admin/projects/')}}" class="dropdown-toggle"> <i class="menu-icon fa fa-th"></i>Quản lý đồ án</a>
+                        <a href="{{url('/admin/projects/')}}" class="dropdown-toggle"> <i class="menu-icon fa fa-product-hunt"></i></i>Quản lý đồ án</a>
                     </li>
                     <li class="@if(Request::is('admin/students') || Request::is('admin/students/*')) active @endif">
-                        <a href="{{url('/admin/students/')}}"> <i class="menu-icon fa fa-th"></i>Quản lý sinh viên</a>
+                        <a href="{{url('/admin/students/')}}"> <i class="menu-icon fa fa-graduation-cap"></i>Quản lý sinh viên</a>
                     </li>
                     <li class="@if(Request::is('admin/teachers') || Request::is('admin/teachers/*')) active @endif">
-                        <a href="{{url('/admin/teachers/')}}"> <i class="menu-icon fa fa-th"></i>Quản lý giáo viên</a>
+                        <a href="{{url('/admin/teachers/')}}"> <i class="menu-icon fa fa-object-ungroup"></i>Quản lý giáo viên</a>
                     </li>
 
                     <h3 class="menu-title">Các chức năng phụ</h3><!-- /.menu-title -->

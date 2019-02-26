@@ -34,7 +34,7 @@
                                                 <div class="single-blog-post">
                                                     <!-- Post Thumbnail -->
                                                     <div class="post-thumbnail">
-                                                        <img style="height: 340px;" src="{{url('/').'/'.$post->post_img}}" alt="">
+                                                        <a href="{{url('/news/'.$post->id)}}"><img style="height: 340px;" src="{{url('/').'/'.$post->post_img}}" alt=""></a>
                                                         <!-- Catagory -->
                                                         <div class="post-cta"><a href="{{url('/news/'.$post->id)}}">Detail</a></div>
                                                     </div>
@@ -43,7 +43,7 @@
                                                         <a href="{{url('/news/'.$post->id)}}" class="headline">
                                                             <h5>{{$post->post_title}}</h5>
                                                         </a>
-                                                        <p style="overflow: hidden;text-overflow: ellipsis;-webkit-line-clamp: 3;display: -webkit-box;-webkit-box-orient: vertical;">{!! strip_tags(preg_replace("/<img[^>]+\>/i", "(image) ", $post->post_content)) !!}</p>
+                                                        <p style="overflow: hidden;text-overflow: ellipsis;-webkit-line-clamp: 3 !important;display: -webkit-box;-webkit-box-orient: vertical;">{!! strip_tags(preg_replace("/<img[^>]+\>/i", "(image) ", $post->post_content)) !!}</p>
                                                         <!-- Post Meta -->
                                                         <div class="post-meta">
                                                             <p><a href="#" class="post-author">{{(empty($post->Student->student_name)?"":($post->Student->student_name))}}</a> on <a href="#" class="post-date">{{(empty($post->created_at)?"":($post->created_at))}}</a></p>
@@ -59,11 +59,11 @@
                                             <div class="single-blog-post post-style-2 d-flex align-items-center wow fadeInUpBig" data-wow-delay="0.2s">
                                                 <!-- Post Thumbnail -->
                                                 <div class="post-thumbnail">
-                                                    <img width="97" style="height: 97px !important;" src="{{url('/').'/'.$post->post_img}}" alt="">
+                                                    <a href="{{url('/news/'.$post->id)}}"><img width="97" style="height: 97px !important;" src="{{url('/').'/'.$post->post_img}}" alt=""></a>
                                                 </div>
                                                 <!-- Post Content -->
                                                 <div class="post-content">
-                                                    <a href="#" class="headline">
+                                                    <a href="{{url('/news/'.$post->id)}}" class="headline">
                                                         <h5>{{$post->post_title}}</h5>
                                                     </a>
                                                     <!-- Post Meta -->
@@ -202,7 +202,7 @@
                                 <div class="post-tag"><a href="#">New</a></div>
                                 <!-- Headline -->
                                 <a href="#" class="headline">
-                                    <h5 style="overflow: hidden;text-overflow: ellipsis;-webkit-line-clamp: 2;display: -webkit-box;-webkit-box-orient: vertical;">{{$device->device_name}}</h5>
+                                    <a href="{{url('device/'.$device->id)}}" ><h5 style="overflow: hidden;text-overflow: ellipsis;-webkit-line-clamp: 2;display: -webkit-box;-webkit-box-orient: vertical; color: inherit;">{{$device->device_name}}<h5></a>
                                 </a>
                                 <!-- Post Meta -->
                                 <div class="post-meta">
@@ -228,14 +228,16 @@
                             <!-- Post Thumbnail -->
                             <div class="post-thumbnail">
                                 @if(!empty($project->project_img))
-                                    <img style="height: 180px;" src="{{url('/').'/'.$project->project_img}}" alt="">
+                                    <a href="{{url('project/'.$project->id)}}"><img style="height: 180px;" src="{{url('/').'/'.$project->project_img}}" alt=""></a>
                                 @else
+                                <a href="{{url('project/'.$project->id)}}">
                                     <img style="height: 180px;" src="{{url('/')}}/uploads/images/nen.png" alt="">
+                                </a>
                                 @endif
                             </div>
                             <!-- Post Content -->
                             <div class="post-content">
-                                <a href="#" class="headline">
+                                <a href="{{url('project/'.$project->id)}}" class="headline">
                                     <h5 style="overflow: hidden;text-overflow: ellipsis;-webkit-line-clamp: 2;display: -webkit-box;-webkit-box-orient: vertical;">{{$project->project_name}}</h5>
                                 </a>
                                 <p style="overflow: hidden;text-overflow: ellipsis;-webkit-line-clamp: 3;display: -webkit-box;-webkit-box-orient: vertical;">{!! $project->project_content !!}</p>
@@ -280,25 +282,7 @@
 
                         <!-- Single Blog Post -->
                         <div class="single-blog-post wow fadeInUpBig" data-wow-delay="0.4s">
-                            <!-- Post Thumbnail -->
-                            <div class="post-thumbnail">
-                                <img src="{{asset('/frontend')}}/img/blog-img/b8.jpg" alt="">
-                                <!-- Catagory -->
-                                <div class="post-cta"><a href="#">travel</a></div>
-                                <!-- Video Button -->
-                                <a href="https://www.youtube.com/watch?v=IhnqEwFSJRg" class="video-btn"><i class="fa fa-play"></i></a>
-                            </div>
-                            <!-- Post Content -->
-                            <div class="post-content">
-                                <a href="#" class="headline">
-                                    <h5>How Did van Gogh’s Turbulent Mind Depict One of the Most Complex Concepts in Physics?</h5>
-                                </a>
-                                <p>How Did van Gogh’s Turbulent Mind Depict One of the Most Complex Concepts in...</p>
-                                <!-- Post Meta -->
-                                <div class="post-meta">
-                                    <p><a href="#" class="post-author">Katy Liu</a> on <a href="#" class="post-date">Sep 29, 2017 at 9:48 am</a></p>
-                                </div>
-                            </div>
+                            <iframe width="100%" height="auto" src="https://www.youtube.com/embed/E0XKOfvuPmk" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                         </div>
 
                     </div>

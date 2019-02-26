@@ -7,6 +7,9 @@ use App\Http\Controllers\Controller;
 use App\Posts;
 use App\Project;
 use App\Device;
+use App\Contact;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\OrderShipped;
 
 class HomeController extends Controller
 {
@@ -18,7 +21,17 @@ class HomeController extends Controller
     }
 
     public function getContact() {
-    	return view('frontend.contact');
+    	$name = 'a';
+            Mail::send('emails.test',['name'=> $name], function($m) use ($name) {
+                        $m->to('phuongnam250196@gmail.com')->subject('test');
+                    });
+    }
+    public function postContact(Request $request) {
+        
+            $name = 'a';
+            Mail::send('emails.test',['name'=> $name], function($m) use ($name) {
+                        $m->to('phuongnam250196@gmail.com')->subject('test');
+                    });
     }
 
     public function getIntro() {
@@ -27,18 +40,21 @@ class HomeController extends Controller
 
     public function getNews() {
         $data = Posts::where('post_status', 1)->orderBy('created_at', 'desc')->paginate(7);
-    	return view('frontend.news', compact('data')); 
+        $projects = Project::orderBy('created_at', 'desc')->limit(5)->get();
+        $devices = Device::orderBy('created_at', 'desc')->limit(5)->get();
+    	return view('frontend.news', compact('data', 'projects', 'devices')); 
     }
     public function getNewsDetail($id) {
         $data = Posts::find($id);
         $posts = Posts::where('post_status', 1)->where('id', '!=', $id)->orderBy('created_at', 'desc')->paginate(5);
-        $projects = Project::orderBy('created_at', 'desc')->paginate(3);
+        $projects = Project::orderBy('created_at', 'desc')->limit(3)->get();
         return view('frontend.news_detail', compact('data', 'posts', 'projects'));
     }
 
     public function getDevice() {
         $data = Device::orderBy('created_at', 'desc')->paginate(5);
-    	return view('frontend.device', compact('data'));
+        $posts = Posts::where('post_status', 1)->orderBy('created_at', 'desc')->limit(5)->get();
+    	return view('frontend.device', compact('data', 'posts'));
     }
     public function getDeviceDetail($id) {
         $data = Device::find($id);
@@ -48,12 +64,16 @@ class HomeController extends Controller
 
     public function getProject() {
         $data = Project::orderBy('created_at', 'desc')->paginate(9);
-        $posts = Posts::where('post_status', 1)->orderBy('created_at', 'desc')->paginate(5);
+        $posts = Posts::where('post_status', 1)->orderBy('created_at', 'desc')->limit(5)->get();
     	return view('frontend.project', compact('data', 'posts'));
     }
     public function getProjectDetail($id) {
         $data = Project::find($id);
-        $posts = Posts::where('post_status', 1)->orderBy('created_at', 'desc')->paginate(5);
+        $posts = Posts::where('post_status', 1)->orderBy('created_at', 'desc')->limit(5)->get();
         return view('frontend.project_detail', compact('data', 'posts'));
+    }
+
+    public function getSearch(Request $request) {
+        return view('frontend.search');
     }
 }

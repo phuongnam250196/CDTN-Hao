@@ -3,6 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -19,7 +20,9 @@
     <script type="text/javascript" src="{{asset('Backend')}}/ckeditor/ckeditor.js"></script>
     <script type="text/javascript" src="{{asset('Backend')}}/ckfinder/ckfinder.js"></script>
     @yield('custom-style')
+   
     <script type="text/javascript" src="{{asset('/frontend')}}/CalenStyle-master/demo/js/jquery-1.11.1.min.js"></script>
+     @yield('first')
     <script type="text/javascript" src="{{asset('/frontend')}}/CalenStyle-master/demo/js/jquery-ui-custom-1.11.2.min.js"></script>
     <link rel="stylesheet" type="text/css" href="{{asset('/frontend')}}/CalenStyle-master/demo/css/jquery-ui-custom-1.11.2.min.css" />
         

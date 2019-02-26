@@ -21,7 +21,10 @@ Route::group(['namespace'=>'TrangChu'], function() {
 	Route::get('/', 'HomeController@getIndex');
 
 	Route::get('/contact', 'HomeController@getContact');
+	Route::post('/contact', 'HomeController@postContact');
 	Route::get('/intro', 'HomeController@getIntro');
+
+	Route::get('/search', 'HomeController@getSearch');
 
 	Route::get('/news', 'HomeController@getNews');
 	Route::get('/news/{id}', 'HomeController@getNewsDetail');
@@ -62,6 +65,8 @@ Route::group(['namespace'=>'TrangChu'], function() {
 			Route::get('/', 'StudentsController@listCalendars');
 			Route::get('/register', 'StudentsController@registerCalendars');
 			Route::post('/register', 'StudentsController@registerPostCalendars');
+
+			Route::get('/change_date/{date}', 'StudentsController@changeDate');
 		});
 	});
 
@@ -123,7 +128,16 @@ Route::group(['namespace'=>'Admin'], function() {
 	    Route::get('/profile/edit', 'DashboardController@editProfile');
 	    Route::post('/profile/edit', 'DashboardController@postEditProfile');
 
-	    Route::get('/calendar', 'CalendarController@getIndex');
+	    
+	    Route::group(['prefix'=>'calendars'], function() {
+	    	Route::get('/', 'CalendarController@getIndex');	
+	    	Route::get('/list_teacher', 'CalendarController@getCalendarListTeacher');
+
+	    	Route::get('/show/{id}', 'CalendarController@getShowCalendar');
+
+	    	Route::get('/edit/{id}', 'CalendarController@getEditCalendar');
+	    	Route::get('/delete/{id}', 'CalendarController@getDeleteCalendar');
+	    });
 
 	    Route::group(['prefix'=>'students'], function() {
 	    	Route::get('/', 'StudentsController@getIndex');

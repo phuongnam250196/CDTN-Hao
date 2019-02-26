@@ -19,7 +19,8 @@ use App\Mail\OrderShipped;
 class StudentsController extends Controller
 {
     public function getIndex() {
-    	return view('frontend.student.index');
+        $posts= Posts::orderBy('created_at', 'desc')->where('post_status', 1)->paginate(5);
+    	return view('frontend.student.index', compact('posts'));
     }
 
     public function getInfo() {
@@ -54,13 +55,13 @@ class StudentsController extends Controller
             $data->student_name = $request->student_name;
             $data->student_phone = $request->student_phone;
             $data->student_email = $request->student_email;
-            $to_name = 'a';
-			$to_email = 'phuongnam250196@gmail.com';
-			$data = array('name'=>"Sam Jose", "body" => "Test mail");
+   //          $to_name = 'a';
+			// $to_email = 'phuongnam250196@gmail.com';
+			// $data = array('name'=>"Sam Jose", "body" => "Test mail");
 			    
-			$name = 'Krunal';
-   				Mail::to('phuongnam250196@gmail.com')->send(new OrderShipped($name));
-	    	dd($a);
+			// $name = 'Krunal';
+   // 				Mail::to('phuongnam250196@gmail.com')->send(new OrderShipped($name));
+	  //   	dd($a);
 
             // if($data->save()) {
             //     if(!empty($request->student_avatar) && $request->student_avatar != "undefined"){
@@ -249,7 +250,7 @@ class StudentsController extends Controller
 
 
     public function listCalendars() {
-    	$data = Calendar::all();
+    	$data = Calendar::where('status', 0)->where('student_id', Auth::user()->student_id)->get();
     	// dd($data);
     	return view('frontend.student.calendars', compact('data'));
     }
@@ -260,28 +261,75 @@ class StudentsController extends Controller
     	$rules = [
             'title' => 'required',
             'date_borrow' => 'required',
-            'start' => 'required',
-            'end' => 'required',
+            'ca' => 'required',
         ];
         $messages = [
             'title.required' => 'Tiêu đề không được để trống',
             'date_borrow.required' => 'Ngày trực không được để trống',
-            'start.required' => 'Thời gian bắt đầu không được để trống',
-            'end.required' => 'Thời gian kết thúc không được để trống',
+            'ca.required' => 'Ca đăng ký không được để trống',
         ];
         $validator = Validator::make($request->all(), $rules, $messages);
         if ($validator->fails()) {
             return back()->withInput()->withErrors($validator->errors());
         } else {
-            $data = new Calendar;
-            $data->title = $request->title;
-            $data->start = date('d-m-Y', strtotime($request->date_borrow)).' '.$request->start;
-            $data->end = date('d-m-Y', strtotime($request->date_borrow)).' '.$request->end;
-            $data->description = $request->description;
-            $data->student_id = Auth::user()->student_id;
-           
-            $data->save();
-            return redirect()->intended('student/calendars')->with('messages', 'Đăng ký thành công!');
+            $data = Calendar::where('student_id', Auth::user()->student_id)->where('type', $request->ca)->first();
+            // dd($data);
+            if(!empty($data)) {
+                return back()->with('messages', 'Bạn đăng ký mượn phòng!');
+            } else {
+                $data = new Calendar;
+                $data->title = $request->title;
+                if($request->ca == 1) {
+                    $data->title = "Ca 1-2: ".$request->title;
+                    $data->type = 1;
+                    $data->start = date('d-m-Y', strtotime($request->date_borrow)).' '.'07:00';
+                    $data->end = date('d-m-Y', strtotime($request->date_borrow)).' '.'09:00';
+                } elseif ($request->ca == 2) {
+                    $data->title = "Ca 3-4-5: ".$request->title;
+                    $data->type = 2;
+                    $data->start = date('d-m-Y', strtotime($request->date_borrow)).' '.'09:30';
+                    $data->end = date('d-m-Y', strtotime($request->date_borrow)).' '.'12:30';
+                } elseif ($request->ca == 3) {
+                    $data->title = "Ca 6-7: ".$request->title;
+                    $data->type = 3;
+                    $data->start = date('d-m-Y', strtotime($request->date_borrow)).' '.'13:00';
+                    $data->end = date('d-m-Y', strtotime($request->date_borrow)).' '.'15:00';
+                } elseif ($request->ca == 4) {
+                    $data->type = 4;
+                    $data->title = "Ca 8-9: ".$request->title;
+                    $data->start = date('d-m-Y', strtotime($request->date_borrow)).' '.'15:30';
+                    $data->end = date('d-m-Y', strtotime($request->date_borrow)).' '.'17:30';
+                } elseif ($request->ca == 5) {
+                    $data->type = 5;
+                    $data->title = "Buổi sáng: ".$request->title;
+                    $data->start = date('d-m-Y', strtotime($request->date_borrow)).' '.'07:00';
+                    $data->end = date('d-m-Y', strtotime($request->date_borrow)).' '.'12:30';
+                } elseif ($request->ca == 6) {
+                    $data->title = "Buổi chiều: ".$request->title;
+                    $data->type = 6;
+                    $data->start = date('d-m-Y', strtotime($request->date_borrow)).' '.'01:00';
+                    $data->end = date('d-m-Y', strtotime($request->date_borrow)).' '.'17:30';
+                } else {
+                    $data->title = "Cả ngày: ".$request->title;
+                    $data->type = 7;
+                    $data->start = date('d-m-Y', strtotime($request->date_borrow)).' '.'07:00';
+                    $data->end = date('d-m-Y', strtotime($request->date_borrow)).' '.'17:30';
+                }
+                $data->date_borrow = date('d-m-Y', strtotime($request->date_borrow));
+                $data->description = $request->description;
+                $data->student_id = Auth::user()->student_id;
+                $data->status = 0;
+               
+                $data->save();
+                return redirect()->intended('student/calendars')->with('messages', 'Đăng ký thành công!');
+            }
+
         }
+    }
+
+    public function changeDate($date) {
+        $calendars = Calendar::whereNotNull('teacher_id')->where('date_borrow', date("d-m-Y", strtotime($date)))->get();
+        // dd($calendars);
+        return response()->json(compact('calendars'));
     }
 }

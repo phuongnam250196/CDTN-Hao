@@ -10,15 +10,15 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 class OrderShipped extends Mailable
 {
     use Queueable, SerializesModels;
-
+    public $name;
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($name)
     {
-        //
+        $this->name = $name;
     }
 
     /**
@@ -28,7 +28,6 @@ class OrderShipped extends Mailable
      */
     public function build()
     {
-        return $this->from('phuongnam250196@gmail.com')
-                ->view('emails.test');
+         return $this->view('emails.test');
     }
 }

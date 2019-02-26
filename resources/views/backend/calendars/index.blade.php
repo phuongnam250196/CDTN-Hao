@@ -8,11 +8,13 @@
                     <div class="card">
                         <div class="card-header">
                             <strong class="card-title">Quản lý lịch trực</strong>
+                            <a href="{{url('/admin/calendars/list_teacher')}}" class="btn btn-outline-success pull-right">Giáo viên</a href="{{url('/admin/posts/')}}">
+
                             <a href="{{url('/admin/posts/create')}}" class="btn btn-outline-success pull-right">Thêm mới</a href="{{url('/admin/posts/')}}">
                         </div>
-                        <div class="card-body">
-                            <div id='calendar'></div>
-                        </div>
+                        {{-- <div class="card-body"> --}}
+                            <div class="calendarContOuter"></div>
+                        {{-- </div> --}}
                     </div>
                 </div>
 
@@ -21,100 +23,47 @@
     </div>
 @stop
 @section('style-rewrite')
-    <link href='{{asset('/backend')}}/assets/fullcalendar/fullcalendar.min.css' rel='stylesheet' />
-    <link href='{{asset('/backend')}}/assets/fullcalendar/fullcalendar.print.min.css' rel='stylesheet' media='print' />
+    
+    
+    {{-- <link rel="stylesheet" type="text/css" href="{{asset('/frontend')}}/CalenStyle-master/src/calenstyle.css" />
+    <link rel="stylesheet" type="text/css" href="{{asset('/frontend')}}/CalenStyle-master/src/calenstyle-jquery-ui-override.css" />
+    <link rel="stylesheet" type="text/css" href="{{asset('/frontend')}}/CalenStyle-master/src/calenstyle-iconfont.css" /> --}}
+    
 @stop
-@section('script-rewrite')
-    <script src='{{asset('/backend')}}/assets/fullcalendar/lib/moment.min.js'></script>
-    <script src='{{asset('/backend')}}/assets/fullcalendar/lib/jquery.min.js'></script>
-    <script src='{{asset('/backend')}}/assets/fullcalendar/fullcalendar.min.js'></script>
-    <script>
+@section('style-calendar')
+    <script type="text/javascript" src="{{asset('/frontend')}}/CalenStyle-master/demo/js/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="{{asset('/frontend')}}/CalenStyle-master/demo/js/jquery-ui-custom-1.11.2.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="{{asset('/frontend')}}/CalenStyle-master/src/calenstyle.css" />
+    <link rel="stylesheet" type="text/css" href="{{asset('/frontend')}}/CalenStyle-master/src/calenstyle-jquery-ui-override.css" />
+    <link rel="stylesheet" type="text/css" href="{{asset('/frontend')}}/CalenStyle-master/src/calenstyle-iconfont.css" />
+    <script type="text/javascript" src="{{asset('/frontend')}}/CalenStyle-master/src/calenstyle.js"></script>
 
-        $(document).ready(function() {
-            $('#calendar').fullCalendar({
-                header: {
-                    left: 'prev,next today',
-                    center: 'title',
-                    right: 'month,agendaWeek,agendaDay'
-                },
-                defaultDate: '{{$date}}',
-                navLinks: true, // can click day/week names to navigate views
-                selectable: true,
-                selectHelper: true,
-                select: function(start, end) {
-                    var title = prompt('Event Title:');
-                    var eventData;
-                    if (title) {
-                        eventData = {
-                            title: title,
-                            start: start,
-                            end: end
-                        };
-                        $('#calendar').fullCalendar('renderEvent', eventData, true); // stick? = true
-                    }
-                    $('#calendar').fullCalendar('unselect');
-                },
-                editable: true,
-                eventLimit: true, // allow "more" link when too many events
-                events: [
-                    {
-                        title: 'All Day Event',
-                        start: '2017-10-01'
-                    },
-                    {
-                        title: 'Long Event',
-                        start: '2017-10-07',
-                        end: '2017-10-10'
-                    },
-                    {
-                        id: 999,
-                        title: 'Repeating Event',
-                        start: '2017-10-09T16:00:00'
-                    },
-                    {
-                        id: 999,
-                        title: 'Repeating Event',
-                        start: '2017-10-16T16:00:00'
-                    },
-                    {
-                        title: 'Conference',
-                        start: '2017-10-11',
-                        end: '2017-10-13'
-                    },
-                    {
-                        title: 'Meeting',
-                        start: '2017-10-12T10:30:00',
-                        end: '2017-10-12T12:30:00'
-                    },
-                    {
-                        title: 'Lunch',
-                        start: '2017-10-12T12:00:00'
-                    },
-                    {
-                        title: 'Meeting',
-                        start: '2017-10-12T14:30:00'
-                    },
-                    {
-                        title: 'Happy Hour',
-                        start: '2017-10-12T17:30:00'
-                    },
-                    {
-                        title: 'Dinner',
-                        start: '2019-01-09T20:00:00'
-                    },
-                    {
-                        title: 'Hôm nay không có gì chỉ vắng 2 học sinh  có gì chỉ vắng 2 học sinh',
-                        start: '2019-01-10T08:00-12:00'
-                    },
-                    {
-                        title: 'Click for Google',
-                        url: 'http://google.com/',
-                        start: '2017-10-28'
-                    }
-                ]
-            });
-            
-        });
+    <script type="text/javascript" src="{{asset('/frontend')}}/CalenStyle-master/demo/js/CalJsonGenerator.js"></script>
+@endsection
+@section('source')
+    eventSource: [
+        @foreach($data as $dat)
+        {
+          "identifier": "{{$dat->id}}", 
+          "isAllDay": false, 
+          "start": "{{$dat->start}}",
+          "end": "{{$dat->end}}",
+          "calendar": "Meeting", 
+          "tag": "Work",
+          "title": "{{$dat->title}}", 
+          "description": "{{$dat->description}}", 
+          "url": "{{$dat->url}}", 
 
-    </script>
-@stop
+          "icon": "cs-icon-Meeting", 
+          "color": "20DAEC", 
+          "borderColor": "000000", 
+          "textColor": "000000",
+          "nonAllDayEventsTextColor": "000000",
+
+          "isDragNDropInMonthView": true, 
+          "isDragNDropInDetailView": true, 
+          "isResizeInDetailView": true 
+        },
+        @endforeach
+    ]
+@endsection

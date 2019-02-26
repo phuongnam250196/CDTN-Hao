@@ -21,27 +21,39 @@
                             <div class="tab-content" id="myTabContent">
                                 <div class="row">
                                     <div class="col-md-10">
+                                      @if(session('messages'))
+                                      <p class="alert alert-danger">{{session('messages')}}
+                                      </p>
+                                      @endif
                                         <form method="POST" enctype="multipart/form-data">
                                           <div class="form-group">
                                             <label>Lý do mượn phòng</label>
                                             <input type="text" class="form-control" name="title">
+                                            @if($errors->has('title'))
+                                              <p class="help text-danger">{{ $errors->first('title') }}</p>
+                                            @endif
                                           </div>
                                           <div class="form-group">
                                             <label>Ngày mượn</label>
                                             <input type="date" class="form-control" name="date_borrow">
+                                            @if($errors->has('date_borrow'))
+                                              <p class="help text-danger">{{ $errors->first('date_borrow') }}</p>
+                                            @endif
                                           </div>
                                           <div class="form-group">
-                                            <label>Thời gian bắt đầu</label>
-                                            <input type="time" class="form-control" name="start">
+                                            <label>Ca có thể đăng ký</label>
+                                            <select name="ca" class="form-control">
+                                              <option value="">Chọn ca trực</option>
+                                            </select>
+                                            @if($errors->has('ca'))
+                                              <p class="help text-danger">{{ $errors->first('ca') }}</p>
+                                            @endif
                                           </div>
-                                          <div class="form-group">
-                                            <label>Thời gian kết thúc</label>
-                                            <input type="time" class="form-control" name="end">
-                                          </div>
-                                          <div class="form-group">
+                                          
+                                          {{-- <div class="form-group">
                                             <label>Nhận xét</label>
                                             <textarea name="description" id="" class="form-control" cols="30" rows="4"></textarea>
-                                          </div>
+                                          </div> --}}
                                           <div class="form-group">
                                             <button type="submit" class="btn btn-primary">Đăng ký</button>
                                             <a href="{{url('student/calendars')}}" class="btn btn-secondary">Hủy bỏ</a>
@@ -57,6 +69,79 @@
             </div>
         </div>
     </div>
+    {{-- <script>
+        $(document).ready(function(){
+          $selectUser = $('input[name = "date_borrow"]')
+            $($selectUser).change(function(){
+                var id = this.value
+
+                $.ajax({
+                    url: '/admin/doanhnghiep/taikhoan/get-avatar/'+id,
+                    type: 'get',
+                    success:function(data){
+                        $('#image-avatar').attr('src','{{asset('local/storage/app/public/')}}/' +data+'?'+new Date())
+                        console.log(data)
+                    },
+                    errors: function (err) {
+                        console.log(err)
+                    }
+                })
+
+            })
+        })
+    </script> --}}
+@endsection
+
+@section('first')
+<script>
+
+  $(document).ready(function(){
+          $selectUser = $('input[name = "date_borrow"]')
+            $($selectUser).change(function(){
+              // alert('hello')
+                var date = $('input[name = "date_borrow"]').val();
+                // alert(date);
+
+                $.ajax({
+                    url: '/student/calendars/change_date/' + date,
+                    type: 'get',
+                    headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+                    success:function(data){
+                      for(var i in data.calendars) {
+                        console.log(i + data.calendars[i].type)
+                        if(data.calendars[i].type == 1) {
+                          $('select[name = "ca"]').append("<option value='1'>Ca 1-2</option>")
+                        }
+                        if(data.calendars[i].type == 2) {
+                          $('select[name = "ca"]').append("<option value='2'>Ca 3-4-5</option>")
+                        }
+                        if(data.calendars[i].type == 3) {
+                          $('select[name = "ca"]').append("<option value='3'>Ca 6-7</option>")
+                        }
+                        if(data.calendars[i].type == 4) {
+                          $('select[name = "ca"]').append("<option value='4'>Ca 8-9</option>")
+                        }
+                        if(data.calendars[i].type == 5) {
+                          $('select[name = "ca"]').append("<option value='5'>Buổi sáng</option>")
+                        }
+                        if(data.calendars[i].type == 6) {
+                          $('select[name = "ca"]').append("<option value='6'>Buổi chiều</option>")
+                        }
+                        if(data.calendars[i].type == 7) {
+                          $('select[name = "ca"]').append("<option value='7'>Cả ngày</option>")
+                        }
+                      }
+                        // console.log(data.calendars)
+                      
+                    },
+                    errors: function (err) {
+                        console.log(err)
+                    }
+                })
+
+            })
+        })
+</script>
 @endsection
 {{-- @section('custom-style')
     <script type="text/javascript">

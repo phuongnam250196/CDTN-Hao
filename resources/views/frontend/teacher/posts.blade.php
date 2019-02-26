@@ -51,14 +51,14 @@
                                             </td>
                                             <td>
                                                 @if($dat->post_status == 1 || $dat->post_status == 2)
-                                                    block
+                                                    <a href="#" class="btn btn-secondary"><i class="fa fa-check"></i></a>
                                                 @else
                                                     <a href="{{url('teacher/posts/edit/'.$dat->id)}}" class="btn btn-info"><i class="fa fa-check"></i></a>
                                                 @endif
                                             </td>
                                             <td>
                                                 @if($dat->post_status == 1 || $dat->post_status == 2)
-                                                    block
+                                                    <a href="#" class="btn btn-secondary"><i class="fa fa-times"></i></a>
                                                 @else
                                                     <a href="{{url('teacher/posts/delete/'.$dat->id)}}" onclick="return confirm('Bạn có chắc muốn xóa??');" class="btn btn-danger"><i class="fa fa-times"></i></a>
                                                 @endif

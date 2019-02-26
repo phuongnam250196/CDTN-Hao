@@ -9,10 +9,15 @@
                     <div class="single-blog-content mb-100">
                         <!-- Post Meta -->
                         <div class="post-meta">
-                            <p><a href="#" class="post-author text-uppercase text-orange">Đề tài: {{$data->project_name}}</a> - Người làm: {{$data->project_confectioner}} - Người hướng dẫn: {{$data->project_instructor}}</p>
+
+                            <p><a href="#" class="post-author text-uppercase text-orange">Đề tài: {{$data->project_name}}</a><br>Người làm: {{$data->project_confectioner}} <br>Người hướng dẫn: {{$data->project_instructor}}</p>
                         </div>
                         <!-- Post Content -->
                         <div class="post-content">
+                            <div class="text-center">
+                                <img style="width: 50%;" src="{{url('/'.$data->project_img)}}" alt="">
+                            </div>
+                            <br>
                             <h6>{!! $data->project_content !!}</h6>
                             <!-- Post Tags -->
                             <ul class="post-tags">
@@ -44,18 +49,22 @@
                             <h5 class="title">Bài viết liên quan</h5>
                             <div class="widget-content">
                                 @foreach($posts as $post)
-                                <div class="single-blog-post post-style-2 d-flex align-items-center widget-post">
-                                    <!-- Post Thumbnail -->
-                                    <div class="post-thumbnail">
-                                        <img src="{{asset('/frontend')}}/img/blog-img/b11.jpg" alt="">
+                                    <div class="single-blog-post post-style-2 d-flex align-items-center widget-post">
+                                        <!-- Post Thumbnail -->
+                                        <div class="post-thumbnail">
+                                            @if(!empty($post->post_img))
+                                                <a href="{{url('/news/'.$post->id)}}"><img style="height: 70px;" src="{{url('/'.$post->post_img)}}" alt=""></a>
+                                            @else
+                                                <a href="{{url('/news/'.$post->id)}}"><img style="height: 70px;" src="{{url('/')}}/uploads/images/nen.png" alt=""></a>
+                                            @endif
+                                        </div>
+                                        <!-- Post Content -->
+                                        <div class="post-content">
+                                            <a href="{{url('/news/'.$post->id)}}" class="headline">
+                                                <h5 class="mb-0" style="overflow: hidden;text-overflow: ellipsis;-webkit-line-clamp: 4;display: -webkit-box;-webkit-box-orient: vertical;">{{$post->post_title}}</h5>
+                                            </a>
+                                        </div>
                                     </div>
-                                    <!-- Post Content -->
-                                    <div class="post-content">
-                                        <a href="{{url('/news/'.$post->id)}}" class="headline">
-                                            <h5 class="mb-0">{{$post->post_title}}</h5>
-                                        </a>
-                                    </div>
-                                </div>
                                 @endforeach
                             </div>
                         </div>

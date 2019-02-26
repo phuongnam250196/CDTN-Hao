@@ -24,15 +24,20 @@
 
                             <div class="tab-content" id="myTabContent">
 
-                                <div class="info">
-                                    <p>Họ tên: {{$data->teacher_name}}</p>
-                                    <p>Email: {{$data->teacher_email}}</p>
-                                    <p>Số điện thoại: {{$data->teacher_phone}}</p>
-                                    @if(!empty($data->teacher_avatar))
-                                        <p>Ảnh đại điện: <br> <img width="300" src="{{url('/').'/'.$data->teacher_avatar}}" alt=""></p>
-                                    @else
-                                        <p>Ảnh đại điện: <br> <img width="300" src="{{url('/uploads/images/new_seo-10-512.png')}}" alt=""></p>
-                                    @endif
+                                <div class="info row">
+                                    <div class="col-md-8">
+                                        <p>Họ tên: {{$data->teacher_name}}</p>
+                                        <p>Email: {{$data->teacher_email}}</p>
+                                        <p>Số điện thoại: {{$data->teacher_phone}}</p>
+                                        
+                                    </div>
+                                    <div class="col-md-4">
+                                        @if(!empty($data->teacher_avatar))
+                                            <p>Ảnh đại điện: <br> <img style="width: 100%; height: 130px;" src="{{url('/').'/'.$data->teacher_avatar}}" alt=""></p>
+                                        @else
+                                            <p>Ảnh đại điện: <br> <img style="width: 100%; height: 130px;" src="{{url('/uploads/images/new_seo-10-512.png')}}" alt=""></p>
+                                        @endif
+                                    </div>
                                 </div>
                             </div>
                         </div>

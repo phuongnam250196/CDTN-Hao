@@ -90,7 +90,7 @@
           "isResizeInDetailView": true 
         },
         @endforeach
-        {
+        {{-- {
           "identifier": "1", 
           "isAllDay": false, 
           "start": "14-01-2019 02:00",
@@ -110,7 +110,7 @@
           "isDragNDropInMonthView": true, 
           "isDragNDropInDetailView": true, 
           "isResizeInDetailView": true 
-        },
+        }, --}}
     ]
 @endsection
 

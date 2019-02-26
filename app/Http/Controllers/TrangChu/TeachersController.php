@@ -16,7 +16,8 @@ use Validator;
 class TeachersController extends Controller
 {
     public function getIndex() {
-    	return view('frontend.teacher.index');
+        $posts= Posts::orderBy('created_at', 'desc')->where('post_status', 1)->paginate(3);
+    	return view('frontend.teacher.index', compact('posts'));
     }
 
     public function getInfo() {
@@ -187,7 +188,7 @@ class TeachersController extends Controller
     }
 
     public function listCalendars() {
-        $data = Calendar::all();
+        $data = Calendar::where('status', 0)->where('teacher_id', Auth::user()->teacher_id)->get();
         // dd($data);
         return view('frontend.teacher.calendars', compact('data'));
     }
@@ -195,31 +196,91 @@ class TeachersController extends Controller
         return view('frontend.teacher.calendars_register');
     }
     public function registerPostCalendars(Request $request) {
+        $mang = [];
+        $error = 0;
         $rules = [
             'title' => 'required',
             'date_borrow' => 'required',
-            'start' => 'required',
-            'end' => 'required',
+            'ca' => 'required',
         ];
         $messages = [
             'title.required' => 'Tiêu đề không được để trống',
             'date_borrow.required' => 'Ngày trực không được để trống',
-            'start.required' => 'Thời gian bắt đầu không được để trống',
-            'end.required' => 'Thời gian kết thúc không được để trống',
+            'ca.required' => 'Ca trông không được để trống',
         ];
         $validator = Validator::make($request->all(), $rules, $messages);
         if ($validator->fails()) {
             return back()->withInput()->withErrors($validator->errors());
         } else {
-            $data = new Calendar;
-            $data->title = $request->title;
-            $data->start = date('d-m-Y', strtotime($request->date_borrow)).' '.$request->start;
-            $data->end = date('d-m-Y', strtotime($request->date_borrow)).' '.$request->end;
-            $data->description = $request->description;
-            $data->teacher_id = Auth::user()->teacher_id;
-           
-            $data->save();
-            return redirect()->intended('teacher/calendars')->with('messages', 'Đăng ký thành công!');
+            $cals = Calendar::where('date_borrow', date('d-m-Y', strtotime($request->date_borrow)))->get();
+            foreach($cals as $cal) {
+                // $mang[] = $cal->type;
+                if($cal->type == $request->ca && $request->ca <5) {
+                    $error = 1;
+                }
+                if(($request->ca == 5 && $cal->type ==1) || ($request->ca == 5 && $cal->type ==2)) {
+                    $error = 2;
+                }
+                if (($request->ca == 6 && $cal->type ==3) || ($request->ca == 6 && $cal->type ==4)) {
+                    $error = 3;
+                } 
+                if($cal->type == 7 || ($cal->type !=7 && $request->ca == 7)) {
+                    $error = 4;
+                }
+            }
+            // dd($mang);
+            // $data = Calendar::where('date_borrow', date('d-m-Y', strtotime($request->date_borrow)))->whereIn('type', $mang)->first();
+            // dd($data);
+            if($error == 0) {
+                $data = new Calendar;
+                // $data->title = $request->title;
+                if($request->ca == 1) {
+                    $data->title = "Ca 1-2: ".$request->title;
+                    $data->type = 1;
+                    $data->start = date('d-m-Y', strtotime($request->date_borrow)).' '.'07:00';
+                    $data->end = date('d-m-Y', strtotime($request->date_borrow)).' '.'09:00';
+                } elseif ($request->ca == 2) {
+                    $data->title = "Ca 3-4-5: ".$request->title;
+                    $data->type = 2;
+                    $data->start = date('d-m-Y', strtotime($request->date_borrow)).' '.'09:30';
+                    $data->end = date('d-m-Y', strtotime($request->date_borrow)).' '.'12:30';
+                } elseif ($request->ca == 3) {
+                    $data->title = "Ca 6-7: ".$request->title;
+                    $data->type = 3;
+                    $data->start = date('d-m-Y', strtotime($request->date_borrow)).' '.'13:00';
+                    $data->end = date('d-m-Y', strtotime($request->date_borrow)).' '.'15:00';
+                } elseif ($request->ca == 4) {
+                    $data->type = 4;
+                    $data->title = "Ca 8-9: ".$request->title;
+                    $data->start = date('d-m-Y', strtotime($request->date_borrow)).' '.'15:30';
+                    $data->end = date('d-m-Y', strtotime($request->date_borrow)).' '.'17:30';
+                } elseif ($request->ca == 5) {
+                    $data->type = 5;
+                    $data->title = "Buổi sáng: ".$request->title;
+                    $data->start = date('d-m-Y', strtotime($request->date_borrow)).' '.'07:00';
+                    $data->end = date('d-m-Y', strtotime($request->date_borrow)).' '.'12:30';
+                } elseif ($request->ca == 6) {
+                    $data->title = "Buổi chiều: ".$request->title;
+                    $data->type = 6;
+                    $data->start = date('d-m-Y', strtotime($request->date_borrow)).' '.'01:00';
+                    $data->end = date('d-m-Y', strtotime($request->date_borrow)).' '.'17:30';
+                } else {
+                    $data->title = "Cả ngày: ".$request->title;
+                    $data->type = 7;
+                    $data->start = date('d-m-Y', strtotime($request->date_borrow)).' '.'07:00';
+                    $data->end = date('d-m-Y', strtotime($request->date_borrow)).' '.'17:30';
+                }
+                $data->date_borrow = date('d-m-Y', strtotime($request->date_borrow));
+                $data->description = $request->description;
+                $data->teacher_id = Auth::user()->teacher_id;
+                $data->status = 0;
+               
+                $data->save();
+                return redirect()->intended('teacher/calendars')->with('messages', 'Đăng ký thành công!');
+            } else {
+                return back()->with('messages', 'Ca đang chọn đã tồn tại! Làm ơn chọn ca khác!');
+            }
+            
         }
     }
 }

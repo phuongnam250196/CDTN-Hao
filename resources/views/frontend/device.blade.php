@@ -12,30 +12,34 @@
                             <ul class="nav nav-tabs" id="myTab" role="tablist">
                                 <li class="title">Trang thiết bị hiện có</li>
 
-                                <li class="nav-item">
+                               {{--  <li class="nav-item">
                                     <a class="nav-link active" id="tab1" data-toggle="tab" href="#world-tab-1" role="tab" aria-controls="world-tab-1" aria-selected="true">New</a>
                                 </li>
 
                                 <li class="nav-item">
                                     <a class="nav-link" id="tab2" data-toggle="tab" href="#world-tab-2" role="tab" aria-controls="world-tab-2" aria-selected="false">Old</a>
-                                </li>
+                                </li> --}}
                             </ul>
 
                             <div class="tab-content" id="myTabContent">
 
                                 <div class="tab-pane fade show active" id="world-tab-1" role="tabpanel" aria-labelledby="tab1">
                                     @foreach($data as $dat)
-                                    <div class="single-blog-post post-style-4 d-flex align-items-center">
+                                    <div class="single-blog-post post-style-4 d-flex align-items-center" style="margin-bottom: 20px;">
                                         <!-- Post Thumbnail -->
                                         <div class="post-thumbnail">
-                                            <img src="{{asset('/frontend')}}/img/blog-img/b18.jpg" alt="">
+                                            @if(!empty($dat->device_img))
+                                                <a href="{{url('/device/'.$dat->id)}}"><img style="height: 190px;" src="{{url('/'.$dat->device_img)}}" alt=""></a>
+                                            @else
+                                                <a href="{{url('/device/'.$dat->id)}}"><img style="height: 190px;" src="{{url('/')}}/uploads/images/nen.png" alt=""></a>
+                                            @endif
                                         </div>
                                         <!-- Post Content -->
                                         <div class="post-content">
                                             <a href="{{url('/device/'.$dat->id)}}" class="headline">
-                                                <h5>{{$dat->device_name}}</h5>
+                                                <h5 style="overflow: hidden;text-overflow: ellipsis;-webkit-line-clamp: 2;display: -webkit-box;-webkit-box-orient: vertical;">{{$dat->device_name}}</h5>
                                             </a>
-                                            <p>{!! $dat->device_description !!}</p>
+                                            <p style="overflow: hidden;text-overflow: ellipsis;-webkit-line-clamp: 3;display: -webkit-box;-webkit-box-orient: vertical;">{!! $dat->device_description !!}</p>
                                             <!-- Post Meta -->
                                             <div class="post-meta">
                                                 <p><a href="#" class="post-author">{{(empty($dat->Student->student_name)?'':$dat->Student->student_name)}}</a> on <a href="#" class="post-date">{{$dat->created_at->toDayDateTimeString()}}</a></p>
@@ -43,9 +47,14 @@
                                         </div>
                                     </div>
                                     @endforeach
+
+                                    <br>
+                                    <div class="text-center">
+                                        {{$data->links()}}
+                                    </div>
                                 </div>
 
-                                <div class="tab-pane fade" id="world-tab-2" role="tabpanel" aria-labelledby="tab2">
+                                {{-- <div class="tab-pane fade" id="world-tab-2" role="tabpanel" aria-labelledby="tab2">
                                     <!-- Single Blog Post -->
                                     <div class="single-blog-post post-style-4 d-flex align-items-center">
                                         <!-- Post Thumbnail -->
@@ -159,7 +168,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </div> --}}
                             </div>
                         </div>
                     </div>
@@ -179,16 +188,20 @@
                         <div class="sidebar-widget-area">
                             <h5 class="title">Thiết bị mới</h5>
                             <div class="widget-content">
-                                @foreach($data as $dat)
+                                @foreach($posts as $post)
                                     <div class="single-blog-post post-style-2 d-flex align-items-center widget-post">
                                         <!-- Post Thumbnail -->
                                         <div class="post-thumbnail">
-                                            <img src="{{asset('/frontend')}}/img/blog-img/b11.jpg" alt="">
+                                            @if(!empty($post->post_img))
+                                                <a href="{{url('/news/'.$post->id)}}"><img style="height: 70px;" src="{{url('/'.$post->post_img)}}" alt=""></a>
+                                            @else
+                                                <a href="{{url('/news/'.$post->id)}}"><img style="height: 70px;" src="{{url('/')}}/uploads/images/nen.png" alt=""></a>
+                                            @endif
                                         </div>
                                         <!-- Post Content -->
                                         <div class="post-content">
-                                            <a href="{{url('/device/'.$dat->id)}}" class="headline">
-                                                <h5 class="mb-0">{{$dat->device_name}}</h5>
+                                            <a href="{{url('/news/'.$post->id)}}" class="headline">
+                                                <h5 class="mb-0" style="overflow: hidden;text-overflow: ellipsis;-webkit-line-clamp: 4;display: -webkit-box;-webkit-box-orient: vertical;">{{$post->post_title}}</h5>
                                             </a>
                                         </div>
                                     </div>
@@ -199,14 +212,6 @@
                 </div>
             </div>
 
-            <!-- Load More btn -->
-            <div class="row">
-                <div class="col-12">
-                    <div class="load-more-btn mt-50 text-center">
-                        {{$data->links()}}
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
 @endsection

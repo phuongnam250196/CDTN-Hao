@@ -24,12 +24,16 @@
 
                             <div class="tab-content" id="myTabContent">
 
-                                <div class="info">
-                                    <p>Họ tên: {{$data->student_name}}</p>
-                                    <p>Mã sinh viên: {{$data->student_code}}</p>
-                                    <p>Email: {{$data->student_email}}</p>
-                                    <p>Số điện thoại: {{$data->student_phone}}</p>
-                                    <p>Ảnh đại điện: <br> <img width="300" src="{{url('').'/'.$data->student_avatar}}" alt=""></p>
+                                <div class="info row">
+                                    <div class="col-md-8">
+                                        <p>Họ tên: {{$data->student_name}}</p>
+                                        <p>Mã sinh viên: {{$data->student_code}}</p>
+                                        <p>Email: {{$data->student_email}}</p>
+                                        <p>Số điện thoại: {{$data->student_phone}}</p>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <img style="width: 100%; height: 130px;" src="{{url('').'/'.$data->student_avatar}}" alt="">
+                                    </div>
                                 </div>
                             </div>
                         </div>

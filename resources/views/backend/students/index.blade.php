@@ -29,7 +29,13 @@
                                     @foreach($data as $dat)
                                         <tr>
                                             <th scope="row">{{$dem++}}</th>
-                                            <td><img src="{{url('/').'/'.$dat->student_avatar}}" width="100" height="80"></td>
+                                            <td>
+                                                @if(!empty($dat->student_avatar))
+                                                    <img src="{{url('/').'/'.$dat->student_avatar}}" width="100" height="80">
+                                                @else
+                                                    <img style="height: 80px;width: 100px;" src="{{url('/')}}/uploads/images/nen.png" alt="">
+                                                @endif
+                                            </td>
                                             <td>{{$dat->student_name}}</td>
                                             <td>{{$dat->student_code}}</td>
                                             <td>{{$dat->student_phone}}</td>

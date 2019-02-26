@@ -19,14 +19,14 @@
                                         <label>Họ & tên</label>
                                     </div>
                                 </div>
-                                <div class="col-12 col-md-6">
+                                {{-- <div class="col-12 col-md-6">
                                     <div class="group">
                                         <input type="email" name="email" id="email" required>
                                         <span class="highlight"></span>
                                         <span class="bar"></span>
                                         <label>Email</label>
                                     </div>
-                                </div>
+                                </div> --}}
                                 <div class="col-12">
                                     <div class="group">
                                         <textarea name="message" id="message" required></textarea>
@@ -39,6 +39,7 @@
                                     <button type="submit" class="btn world-btn">Gửi</button>
                                 </div>
                             </div>
+                            {{csrf_field()}}
                         </form>
                     </div>
                 </div>
