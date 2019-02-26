@@ -172,8 +172,8 @@
                             </ul>
                             <!-- Search Form  -->
                             <div id="search-wrapper">
-                                <form action="#" method="POST">
-                                    <input type="text" id="search" placeholder="Tìm kiếm ít thôi">
+                                <form action="{{url('/search')}}" method="get">
+                                    <input type="text" id="search" name="search" placeholder="Tìm kiếm ít thôi">
                                     <div id="close-icon"></div>
                                     <input class="d-none" type="submit" value="">
                                 </form>

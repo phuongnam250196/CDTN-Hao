@@ -11,6 +11,7 @@ use App\Contact;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\OrderShipped;
 use Validator;
+use Auth;
 
 class HomeController extends Controller
 {
@@ -97,6 +98,13 @@ class HomeController extends Controller
     }
 
     public function getSearch(Request $request) {
-        return view('frontend.search');
+        $posts = Posts::where('post_title', 'like', '%'.$request->search.'%')->where('post_status', 1)->orderBy('created_at', 'desc')->paginate(5);
+        // dd($data);
+        if(!empty(Auth::user()->student_id)) {
+             return view('frontend.student.index', compact('posts'));
+        } else {
+            return view('frontend.teacher.index', compact('posts'));
+        }
+       
     }
 }

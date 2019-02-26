@@ -42,7 +42,11 @@
                                     @endforeach
                                     <br>
                                     <div class="text-center">
-                                        {{$posts->links()}}
+                                        @if(Request::is('student'))
+                                            {{$posts->links()}}
+                                        @else
+                                            {{$posts->appends(['search' => $_GET['search']])->links()}}
+                                        @endif
                                     </div>
                                 </div>
 
