@@ -250,7 +250,7 @@ class StudentsController extends Controller
 
 
     public function listCalendars() {
-    	$data = Calendar::where('status', 0)->where('student_id', Auth::user()->student_id)->get();
+    	$data = Calendar::where('status', 1)->where('student_id', Auth::user()->student_id)->get();
     	// dd($data);
     	return view('frontend.student.calendars', compact('data'));
     }

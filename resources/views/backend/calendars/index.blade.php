@@ -8,9 +8,11 @@
                     <div class="card">
                         <div class="card-header">
                             <strong class="card-title">Quản lý lịch trực</strong>
-                            <a href="{{url('/admin/calendars/list_teacher')}}" class="btn btn-outline-success pull-right">Giáo viên</a href="{{url('/admin/posts/')}}">
+                            <a href="{{url('/admin/calendars/list_teacher')}}" class="btn btn-outline-success pull-right ml-2">Xác nhận</a href="{{url('/admin/posts/')}}">
+                            <a href="{{url('/admin/calendars/list_allow')}}" class="btn btn-outline-info pull-right ml-2">Đã mượn</a href="{{url('/admin/posts/')}}">
+                            <a href="{{url('/admin/calendars/list_deny')}}" class="btn btn-outline-danger pull-right ml-2">Từ chối</a href="{{url('/admin/posts/')}}">
 
-                            <a href="{{url('/admin/posts/create')}}" class="btn btn-outline-success pull-right">Thêm mới</a href="{{url('/admin/posts/')}}">
+                            {{-- <a href="{{url('/admin/posts/create')}}" class="btn btn-outline-success pull-right">Thêm mới</a href="{{url('/admin/posts/')}}"> --}}
                         </div>
                         {{-- <div class="card-body"> --}}
                             <div class="calendarContOuter"></div>

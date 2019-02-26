@@ -10,6 +10,7 @@ use App\Device;
 use App\Contact;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\OrderShipped;
+use Validator;
 
 class HomeController extends Controller
 {
@@ -21,17 +22,39 @@ class HomeController extends Controller
     }
 
     public function getContact() {
-    	$name = 'a';
-            Mail::send('emails.test',['name'=> $name], function($m) use ($name) {
-                        $m->to('phuongnam250196@gmail.com')->subject('test');
-                    });
+    	// $name = 'a';
+     //        Mail::send('emails.test',['name'=> $name], function($m) use ($name) {
+     //                    $m->to('phuongnam250196@gmail.com')->subject('tdsfsdfdsest');
+     //                });
+        return view('frontend.contact');
     }
     public function postContact(Request $request) {
-        
-            $name = 'a';
-            Mail::send('emails.test',['name'=> $name], function($m) use ($name) {
-                        $m->to('phuongnam250196@gmail.com')->subject('test');
-                    });
+        $rules = [
+            'name' => 'required',
+            'email' => 'required | email',
+            'message' => 'required',
+        ];
+        $messages = [
+            'name.required' => 'Họ tên không được để trống',
+            'email.required' => 'Email không được để trống',
+            'email.email' => 'Email không đúng định dạng',
+            'message.required' => 'Nội dung không được để trống',
+        ];
+        $validator = Validator::make($request->all(), $rules, $messages);
+        if ($validator->fails()) {
+            return back()->withInput()->withErrors($validator->errors());
+        } else {
+            $data = new Contact;
+            $data->name = $request->name;
+            $data->email = $request->email;
+            $data->content = $request->message;
+            if($data->save()) {
+                Mail::send('emails.contact',['data'=> $data], function($m) use ($data) {
+                    $m->to('Taxuanhao0207@gmail.com')->subject('Liên hệ từ '.$data->name);
+                });
+            }
+            return back()->with('messages', 'Bạn đã gửi tin nhắn thành công cho quản trị viên.');
+        }
     }
 
     public function getIntro() {

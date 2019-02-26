@@ -188,7 +188,7 @@ class TeachersController extends Controller
     }
 
     public function listCalendars() {
-        $data = Calendar::where('status', 0)->where('teacher_id', Auth::user()->teacher_id)->get();
+        $data = Calendar::where('status', 1)->whereNotNull('teacher_id')->get();
         // dd($data);
         return view('frontend.teacher.calendars', compact('data'));
     }

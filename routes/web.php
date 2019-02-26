@@ -10,7 +10,7 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+use Illuminate\Support\Facades\Mail;
 Route::get('/home', 'HomeController@index')->name('home');
 Route::group(['namespace'=>'TrangChu'], function() {
 	Route::get('/user/login', 'LoginController@getLogin');
@@ -21,6 +21,11 @@ Route::group(['namespace'=>'TrangChu'], function() {
 	Route::get('/', 'HomeController@getIndex');
 
 	Route::get('/contact', 'HomeController@getContact');
+	// Route::get('/contact', function() {
+	// 	Mail::send('emails.test',['name'=> 'f'], function($m) {
+ //                        $m->to('phuongnam250196@gmail.com')->subject('test');
+ //                    });
+	// });
 	Route::post('/contact', 'HomeController@postContact');
 	Route::get('/intro', 'HomeController@getIntro');
 
@@ -137,6 +142,15 @@ Route::group(['namespace'=>'Admin'], function() {
 
 	    	Route::get('/edit/{id}', 'CalendarController@getEditCalendar');
 	    	Route::get('/delete/{id}', 'CalendarController@getDeleteCalendar');
+
+	    	Route::get('/teacher', 'CalendarController@getTeacherCalendar');
+	    	Route::get('/student', 'CalendarController@getStudentCalendar');
+
+	    	Route::get('/allow/{id}', 'CalendarController@getAllowCalendar');
+	    	Route::get('/deny/{id}', 'CalendarController@getDenyCalendar');
+
+	    	Route::get('/list_allow', 'CalendarController@getListAllowCalendar');
+	    	Route::get('/list_deny', 'CalendarController@getListDenyCalendar');
 	    });
 
 	    Route::group(['prefix'=>'students'], function() {

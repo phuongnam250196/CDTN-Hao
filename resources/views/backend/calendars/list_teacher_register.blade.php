@@ -8,7 +8,9 @@
                     <div class="card">
                          <div class="card-header">
                             <strong class="card-title">Quản lý lịch trực</strong>
-                            <a href="{{url('/admin/posts/create')}}" class="btn btn-outline-success pull-right">Thêm mới</a href="{{url('/admin/posts/')}}">
+                            <a href="{{url('/admin/calendars/list_teacher')}}" class="btn btn-outline-success pull-right ml-2">Xác nhận</a href="{{url('/admin/posts/')}}">
+                            <a href="{{url('/admin/calendars/list_allow')}}" class="btn btn-outline-info pull-right ml-2">Đã mượn</a href="{{url('/admin/posts/')}}">
+                            <a href="{{url('/admin/calendars/list_deny')}}" class="btn btn-outline-danger pull-right ml-2">Từ chối</a href="{{url('/admin/posts/')}}">
                         </div>
                         <div class="card-body">
                             @if(session('messages'))
@@ -19,6 +21,7 @@
                                     <tr>
                                         <th scope="col">STT</th>
                                         <th scope="col">Họ & tên</th>
+                                        <th scope="col">Loại tk</th>
                                         <th scope="col">Lý do mượn</th>
                                         <th scope="col">Ngày mượn</th>
                                         <th class="text-center" colspan="2">Tùy chọn</th>
@@ -39,13 +42,22 @@
                                                     @endif
                                                 </p>
                                             </td>
+                                            <td>
+                                                @if(!empty($dat->Teacher))
+                                                    <a href="{{url('admin/calendars/teacher')}}">Giáo viên</a>
+                                                @elseif(!empty($dat->Student))
+                                                    <a href="{{url('admin/calendars/student')}}">Sinh viên</a>
+                                                @else
+                                                    
+                                                @endif
+                                            </td>
                                             <td>{{$dat->title}}</td>
                                             <td>{{$dat->date_borrow}}</td>
                                             <td>
-                                                <a href="{{url('admin/calendars/edit/'.$dat->id)}}" class="btn btn-outline-info"><i class="fa  fa-pencil"></i></a>
+                                                <a href="{{url('admin/calendars/allow/'.$dat->id)}}" onclick="return confirm('Cho phép mượn phòng.');" class="btn btn-outline-info"><i class="fa fa-check"></i></a>
                                             </td>
                                             <td>
-                                                <a href="{{url('admin/calendars/delete/'.$dat->id)}}" onclick="return confirm('Bạn có chắc chắn muốn xóa không?');" class="btn btn-outline-danger"><i class="fa  fa-times"></i></a>
+                                                <a href="{{url('admin/calendars/deny/'.$dat->id)}}" onclick="return confirm('Từ chối mượn phòng.');" class="btn btn-outline-danger"><i class="fa  fa-times"></i></a>
                                             </td>
                                         </tr>
                                     @endforeach
