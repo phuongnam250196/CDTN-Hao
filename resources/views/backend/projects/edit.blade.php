@@ -32,6 +32,18 @@
                                     @endif
                                 </div>
                                 <div class="form-group">
+                                    <label class="form-control-label">Trạng thái đề tài</label>
+                                    {{-- <input type="text" name="device_type"  class="form-control"> --}}
+                                    <select name="project_status" class="form-control">
+                                        <option value="">Chọn trạng thái</option>
+                                        <option value="dangthuchien" @if($data->project_status == 'dangthuchien') selected @endif>Đang thực hiện</option>
+                                        <option value="hoanthanh" @if($data->project_status == 'hoanthanh') selected @endif>Hoàn thành</option>
+                                    </select>
+                                    @if ($errors->has('project_status'))
+                                        <p class="text-danger">{{ $errors->first('project_status') }}</p>
+                                    @endif
+                                </div>
+                                <div class="form-group">
                                     <label class=" form-control-label">Ảnh minh họa</label>
                                     <input id="img" type="file" name="project_img" value="{{$data->project_img}}" class="form-control" style="display: none" onchange="changeImg(this)" ><br>
                                     @if(!empty($data->project_img))

@@ -138,8 +138,18 @@
                     <li class="@if(Request::is('admin/devices') || Request::is('admin/devices/*')) active @endif">
                         <a href="{{url('/admin/devices/')}}" class="dropdown-toggle"> <i class="menu-icon fa fa-share-alt-square"></i>Quản lý trang thiết bị</a>
                     </li>
-                    <li class="@if(Request::is('admin/projects') || Request::is('admin/projects/*')) active @endif">
+                    {{-- <li class="@if(Request::is('admin/projects') || Request::is('admin/projects/*')) active @endif">
                         <a href="{{url('/admin/projects/')}}" class="dropdown-toggle"> <i class="menu-icon fa fa-product-hunt"></i></i>Quản lý đồ án</a>
+                    </li> --}}
+                    <li class="menu-item-has-children dropdown @if(Request::is('admin/projects') || Request::is('admin/projects/*')) active @endif">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-laptop"></i>Quản lý đồ án</a>
+                        <ul class="sub-menu children active dropdown-menu">
+                            <li><i class="fa fa-puzzle-piece"></i><a href="{{url('/admin/projects/')}}">Danh sách</a></li>
+                            <li><i class="fa fa-puzzle-piece"></i><a href="{{url('/admin/projects/create')}}">Thêm mới</a></li>
+                            <li><i class="fa fa-id-badge"></i><a href="{{url('/admin/projects/cdtn')}}">Chuyên đề</a></li>
+                            <li><i class="fa fa-bars"></i><a href="{{url('/admin/projects/kltn')}}">Khóa luận</a></li>
+                            <li><i class="fa fa-bars"></i><a href="{{url('/admin/projects/nckh')}}">Nckl</a></li>
+                        </ul>
                     </li>
                     <li class="@if(Request::is('admin/students') || Request::is('admin/students/*')) active @endif">
                         <a href="{{url('/admin/students/')}}"> <i class="menu-icon fa fa-graduation-cap"></i>Quản lý sinh viên</a>

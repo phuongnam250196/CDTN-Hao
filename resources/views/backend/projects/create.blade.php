@@ -32,6 +32,18 @@
                                     @endif
                                 </div>
                                 <div class="form-group">
+                                    <label class="form-control-label">Trạng thái đề tài</label>
+                                    {{-- <input type="text" name="device_type"  class="form-control"> --}}
+                                    <select name="project_status" class="form-control">
+                                        <option value="">Chọn trạng thái</option>
+                                        <option value="dangthuchien">Đang thực hiện</option>
+                                        <option value="hoanthanh">Hoàn thành</option>
+                                    </select>
+                                    @if ($errors->has('project_status'))
+                                        <p class="text-danger">{{ $errors->first('project_status') }}</p>
+                                    @endif
+                                </div>
+                                <div class="form-group">
                                     <label class=" form-control-label">Ảnh minh họa</label>
                                     {{-- <input type="file" name="post-img" class="form-control"> --}}
                                     <input id="img" type="file" name="project_img" class="form-control" style="display: none" onchange="changeImg(this)" ><br>

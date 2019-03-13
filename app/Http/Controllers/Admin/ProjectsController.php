@@ -22,6 +22,7 @@ class ProjectsController extends Controller
             'project_img' => 'required | mimes:jpg,png,jpeg',
             'project_instructor' => 'required',
             'project_type' => 'required',
+            'project_status' => 'required',
             'project_confectioner' => 'required',
             'project_name' => 'required',
             'project_content' => 'required',
@@ -38,6 +39,7 @@ class ProjectsController extends Controller
             'project_data_start.required' => 'Ngày bắt đầu không được để trống',
             'project_data_finish.required' => 'Ngày hoàn thành không được để trống',
             'project_type.required' => 'Bạn chưa chọn loại đề tài',
+            'project_status.required' => 'Bạn chưa chọn trạng thái đề tài',
         ];
         $validator = Validator::make($request->all(), $rules, $messages);
         if ($validator->fails()) {
@@ -48,6 +50,7 @@ class ProjectsController extends Controller
             $data->project_confectioner = $request->project_confectioner;
             $data->project_name = $request->project_name;
             $data->project_type = $request->project_type;
+            $data->project_status = $request->project_status;
             $data->project_content = $request->project_content;
             $data->project_data_start = $request->project_data_start;
             $data->project_data_finish = $request->project_data_finish;
@@ -77,6 +80,7 @@ class ProjectsController extends Controller
             'project_confectioner' => 'required',
             'project_name' => 'required',
             'project_type' => 'required',
+            'project_status' => 'required',
             'project_content' => 'required',
             'project_data_start' => 'required',
             'project_data_finish' => 'required',
@@ -90,6 +94,7 @@ class ProjectsController extends Controller
             'project_data_start.required' => 'Ngày bắt đầu không được để trống',
             'project_data_finish.required' => 'Ngày hoàn thành không được để trống',
             'project_type.required' => 'Bạn chưa chọn loại đề tài',
+            'project_status.required' => 'Bạn chưa chọn trạng thái đề tài',
         ];
         $validator = Validator::make($request->all(), $rules, $messages);
         if ($validator->fails()) {
@@ -100,6 +105,7 @@ class ProjectsController extends Controller
             $data->project_confectioner = $request->project_confectioner;
             $data->project_name = $request->project_name;
             $data->project_type = $request->project_type;
+            $data->project_status = $request->project_status;
             $data->project_content = $request->project_content;
             $data->project_data_start = $request->project_data_start;
             $data->project_data_finish = $request->project_data_finish;
@@ -135,6 +141,12 @@ class ProjectsController extends Controller
 
     public function getNckh() {
         $data = Project::where('project_type', 'nckh')->orderBy('created_at', 'desc')->paginate(10);
+        return view('backend.projects.index', compact('data'));
+    }
+
+    public function getSearch(Request $request) {
+        $data = Project::where('project_name', 'like', '%'.$request->search.'%')->paginate(5);
+        // dd($data);
         return view('backend.projects.index', compact('data'));
     }
 }

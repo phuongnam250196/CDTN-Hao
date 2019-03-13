@@ -8,10 +8,18 @@
                     <div class="card">
                         <div class="card-header">
                             <strong class="card-title">Quản lý đề tài</strong>
-                            <a href="{{url('/admin/projects/cdtn')}}" class="btn btn-outline-warning pull-right ml-2">Chuyên đề</a>
+                            {{-- <a href="{{url('/admin/projects/cdtn')}}" class="btn btn-outline-warning pull-right ml-2">Chuyên đề</a>
                             <a href="{{url('/admin/projects/nckh')}}" class="btn btn-outline-danger pull-right ml-2">NCKH</a>
-                            <a href="{{url('/admin/projects/kltn')}}" class="btn btn-outline-info pull-right ml-2">Khóa luận</a>
-                            <a href="{{url('/admin/projects/create')}}" class="btn btn-outline-success pull-right">Thêm mới</a>
+                            <a href="{{url('/admin/projects/kltn')}}" class="btn btn-outline-info pull-right ml-2">Khóa luận</a> --}}
+                            <a href="{{url('/admin/projects/create')}}" class="btn btn-outline-success pull-right ml-3">Thêm mới</a>
+                            <div class="pull-right">
+                                <form class="form-inline" method="GET" action="{{url('admin/projects/search')}}">
+                                  <input type="text" class="form-control" name="search" style="border-radius: 0;">
+                                  <button type="submit" class="btn btn-primary">Tìm kiếm</button>
+                                  {{csrf_field()}}
+                                </form>
+                            </div>
+                            
                         </div>
                         <div class="card-body">
                             @if(session('messages'))
@@ -25,7 +33,7 @@
                                         <th scope="col">Người hướng dẫn</th>
                                         <th scope="col">Người thực hiện</th>
                                         <th scope="col">Nội dung</th>
-                                        <th scope="col">Thời gian</th>
+                                        <th scope="col">Trạng thái</th>
                                         <th class="text-center" colspan="2">Tùy chọn</th>
                                     </tr>
                                 </thead>
@@ -38,7 +46,13 @@
                                             <td>{{$dat->project_confectioner}}</td>
                                             
                                             <td><div class="post-content-text">{!! strip_tags(preg_replace("/<img[^>]+\>/i", "(image) ", $dat->project_content)) !!}</div></td>
-                                            <td>{{$dat->project_data_start}} - {{$dat->project_data_finish}}</td>
+                                            <td>
+                                                @if($dat->project_status == 'hoanthanh')
+                                                    Hoàn thành
+                                                @else
+                                                    Đang thực hiện
+                                                @endif
+                                            </td>
                                             <td><a href="{{url('admin/projects/edit/'.$dat->id)}}" class="btn btn-outline-info"><i class="fa  fa-pencil"></i></a></td>
                                             <td>
                                                 <a href="{{url('admin/projects/delete/'.$dat->id)}}" onclick="return confirm('Bạn có chắc chắn muốn xóa không?');" class="btn btn-outline-danger"><i class="fa  fa-times"></i></a>

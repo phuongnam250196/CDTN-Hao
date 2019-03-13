@@ -197,6 +197,7 @@ Route::group(['namespace'=>'Admin'], function() {
 	    	Route::get('/kltn', 'ProjectsController@getKltn');
 	    	Route::get('/cdtn', 'ProjectsController@getCdtn');
 	    	Route::get('/nckh', 'ProjectsController@getNckh');
+	    	Route::get('/search', 'ProjectsController@getSearch');
 	    });
 	});
 });
