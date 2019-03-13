@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 26, 2019 at 10:47 AM
+-- Generation Time: Mar 13, 2019 at 03:29 PM
 -- Server version: 10.1.34-MariaDB
 -- PHP Version: 7.2.7
 
@@ -223,6 +223,7 @@ CREATE TABLE `projects` (
   `project_data_start` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `project_data_finish` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `project_gallery` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `project_type` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -231,13 +232,13 @@ CREATE TABLE `projects` (
 -- Dumping data for table `projects`
 --
 
-INSERT INTO `projects` (`id`, `project_instructor`, `project_confectioner`, `project_name`, `project_img`, `project_content`, `project_data_start`, `project_data_finish`, `project_gallery`, `created_at`, `updated_at`) VALUES
-(2, 'Cường', 'Quân', 'Tập bơi', NULL, '<p>fsa</p>', '2019-01-25', '2019-02-03', NULL, '2019-01-10 03:19:51', '2019-01-10 03:19:51'),
-(3, 'dsfdsf', 'fdsfds', 'fsdfdsfsf', NULL, '<p>fds</p>', '2019-01-12', '2019-01-18', NULL, '2019-01-14 21:31:01', '2019-01-14 21:31:01'),
-(4, 'fdsfdsf', 'fdsfdsf', 'dsfdff', NULL, '<p>fds</p>', '2019-01-16', '2019-01-20', NULL, '2019-01-14 21:31:41', '2019-01-14 21:31:41'),
-(5, 'fffffffffs', 'fdfdf', 'fffffff', 'uploads/projects/5/1549957504-bg.png', '<p>fd</p>', '2019-01-11', '2019-01-18', 'projects/5/messages/8noP0GcT2WFS6U5IA4KgsO9H11iFAvFb0m7MhiPq.png', '2019-01-14 21:33:29', '2019-02-12 00:45:04'),
-(6, 'Mai Thúy Nga', 'Đậu Minh Quân', 'Hệ thống kết nối đại học thăng long với uec', 'uploads/projects/6/1549958155-48923824_1972709192842145_1513714691799515136_n.jpg', '<p>đ&atilde; ho&agrave;n th&agrave;nh.</p>', '2019-01-02', '2019-01-31', NULL, '2019-02-12 00:55:55', '2019-02-12 00:55:55'),
-(7, 'Nguyễn Minh Hòa', 'Nguyễn Thọ Việt', 'Lập trình hệ thống hỗ trợ kết nối trên nền tảng java', 'uploads/projects/7/1549961098-46459181_1689740161130121_3947295371335565312_n.jpg', '<p>Đ&atilde; ho&agrave;n th&agrave;nh.</p>', '2019-01-28', '2019-02-23', NULL, '2019-02-12 01:44:58', '2019-02-12 01:44:58');
+INSERT INTO `projects` (`id`, `project_instructor`, `project_confectioner`, `project_name`, `project_img`, `project_content`, `project_data_start`, `project_data_finish`, `project_gallery`, `project_type`, `created_at`, `updated_at`) VALUES
+(2, 'Cường', 'Quân', 'Tập bơi', NULL, '<p>fsa</p>', '2019-01-25', '2019-02-03', NULL, NULL, '2019-01-10 03:19:51', '2019-01-10 03:19:51'),
+(3, 'dsfdsf', 'fdsfds', 'fsdfdsfsf', NULL, '<p>fds</p>', '2019-01-12', '2019-01-18', NULL, NULL, '2019-01-14 21:31:01', '2019-01-14 21:31:01'),
+(4, 'fdsfdsf', 'fdsfdsf', 'dsfdff', NULL, '<p>fds</p>', '2019-01-16', '2019-01-20', NULL, NULL, '2019-01-14 21:31:41', '2019-01-14 21:31:41'),
+(5, 'fffffffffs', 'fdfdf', 'fffffff', 'uploads/projects/5/1552050034-31(1).png', '<p>fd</p>', '2019-01-11', '2019-01-18', 'projects/5/messages/8noP0GcT2WFS6U5IA4KgsO9H11iFAvFb0m7MhiPq.png', 'kltn', '2019-01-14 21:33:29', '2019-03-08 06:00:34'),
+(6, 'Mai Thúy Nga', 'Đậu Minh Quân', 'Hệ thống kết nối đại học thăng long với uec', 'uploads/projects/6/1549958155-48923824_1972709192842145_1513714691799515136_n.jpg', '<p>đ&atilde; ho&agrave;n th&agrave;nh.</p>', '2019-01-02', '2019-01-31', NULL, NULL, '2019-02-12 00:55:55', '2019-02-12 00:55:55'),
+(7, 'Nguyễn Minh Hòa', 'Nguyễn Thọ Việt', 'Lập trình hệ thống hỗ trợ kết nối trên nền tảng java', 'uploads/projects/7/1549961098-46459181_1689740161130121_3947295371335565312_n.jpg', '<p>Đ&atilde; ho&agrave;n th&agrave;nh.</p>', '2019-01-28', '2019-02-23', NULL, NULL, '2019-02-12 01:44:58', '2019-02-12 01:44:58');
 
 -- --------------------------------------------------------
 
@@ -329,7 +330,7 @@ INSERT INTO `users` (`id`, `name`, `email`, `level`, `avatar`, `content`, `stude
 (9, 'C:\\xampp\\tmp\\php8285.tmp', 'C:\\xampp\\tmp\\php8285.tmp', 3, NULL, NULL, NULL, NULL, NULL, '$2y$10$9FeQ4CIqBhCR1GrqdJz/H.d4FkAU9vJx.Q2Qc9dtAAoQdilgivDUq', NULL, '2019-01-10 09:36:19', '2019-01-10 09:36:19'),
 (10, 'hfsdfaoti27@gmail.com', 'hfsdfaoti27@gmail.com', 3, NULL, NULL, NULL, NULL, NULL, '$2y$10$18bjPEKl7Rq5LxDdluyXxev99tFSzr6O3LKZz6jA7A8DdZekNa3TO', NULL, '2019-01-10 09:39:29', '2019-01-10 09:39:29'),
 (12, 'a25288', 'tpn250196@gmail.com', 2, NULL, NULL, NULL, NULL, NULL, '$2y$10$0Y3ULuKyH54lkGdeAVm4weFHcLNtvwBtI3fzkfON31HWIYQEkVY66', 'RtBzKlp9d1SSxc2hAU7ao3Hn8uMSQIrA7gKmghkPfxU2a4unG0v6Y1qdCjSM', '2019-01-12 19:35:40', '2019-01-12 19:35:40'),
-(13, 'a123123', 'haotfsfsfi27@gmail.com', 2, NULL, NULL, 6, NULL, NULL, '$2y$10$owxcb5HDUvrZcL9.sjnE6uinuMtIb6TqH91VRhmM6ZVK40NiA0JN2', 'HIUxcWmcE66wbVOUYnLwRlkDQun36ywrsnSM1DLRt1JqJ8OrLG0z8spfXfVz', '2019-01-12 20:41:39', '2019-02-11 23:34:11'),
+(13, 'a123123', 'haotfsfsfi27@gmail.com', 2, NULL, NULL, 6, NULL, NULL, '$2y$10$owxcb5HDUvrZcL9.sjnE6uinuMtIb6TqH91VRhmM6ZVK40NiA0JN2', 'BZTQItWFZvMadJm8VFolKDRweOxM67srECdGff39lrCFNZj6PpkqIcTrO1mg', '2019-01-12 20:41:39', '2019-02-11 23:34:11'),
 (14, 'gv@gmail.com', 'gv@gmail.com', 3, NULL, NULL, NULL, 4, NULL, '$2y$10$MxNyfz2n.4R7ug0w36g3DOH20kkgZp/Tnt4zAFG/bl5RBKMBt9ane', '9fZopfbe18s70K25zkeZh1HLGNywgN4CP02QUZ3o7LmM2fRgHt6B3iUGR6vB', '2019-01-12 20:43:16', '2019-01-12 20:43:16'),
 (16, 'consenicki@gmail.com', 'consenicki@gmail.com', 3, NULL, NULL, NULL, 6, NULL, '$2y$10$9u5MniF6yiKAko2dkPxGJuhNxAFzJAVCgLvnEz2dgT/iTRQOyBl76', NULL, '2019-02-26 02:19:41', '2019-02-26 02:19:41');
 

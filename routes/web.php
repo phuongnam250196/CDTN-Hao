@@ -194,6 +194,9 @@ Route::group(['namespace'=>'Admin'], function() {
 	    	Route::get('/edit/{id}', 'ProjectsController@getEdit');
 	    	Route::post('/edit/{id}', 'ProjectsController@postEdit');
 	    	Route::get('/delete/{id}', 'ProjectsController@getDelete');
+	    	Route::get('/kltn', 'ProjectsController@getKltn');
+	    	Route::get('/cdtn', 'ProjectsController@getCdtn');
+	    	Route::get('/nckh', 'ProjectsController@getNckh');
 	    });
 	});
 });

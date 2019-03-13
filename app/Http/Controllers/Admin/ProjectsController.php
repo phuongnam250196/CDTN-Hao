@@ -21,6 +21,7 @@ class ProjectsController extends Controller
     	$rules = [
             'project_img' => 'required | mimes:jpg,png,jpeg',
             'project_instructor' => 'required',
+            'project_type' => 'required',
             'project_confectioner' => 'required',
             'project_name' => 'required',
             'project_content' => 'required',
@@ -36,6 +37,7 @@ class ProjectsController extends Controller
             'project_content.required' => 'Nội dung không được để trống',
             'project_data_start.required' => 'Ngày bắt đầu không được để trống',
             'project_data_finish.required' => 'Ngày hoàn thành không được để trống',
+            'project_type.required' => 'Bạn chưa chọn loại đề tài',
         ];
         $validator = Validator::make($request->all(), $rules, $messages);
         if ($validator->fails()) {
@@ -45,6 +47,7 @@ class ProjectsController extends Controller
             $data->project_instructor = $request->project_instructor;
             $data->project_confectioner = $request->project_confectioner;
             $data->project_name = $request->project_name;
+            $data->project_type = $request->project_type;
             $data->project_content = $request->project_content;
             $data->project_data_start = $request->project_data_start;
             $data->project_data_finish = $request->project_data_finish;
@@ -69,16 +72,16 @@ class ProjectsController extends Controller
     }
     public function postEdit(Request $request, $id) {
     	$rules = [
-            'project_img' => 'required | mimes:jpg,png,jpeg',
+            'project_img' => 'mimes:jpg,png,jpeg',
             'project_instructor' => 'required',
             'project_confectioner' => 'required',
             'project_name' => 'required',
+            'project_type' => 'required',
             'project_content' => 'required',
             'project_data_start' => 'required',
             'project_data_finish' => 'required',
         ];
         $messages = [
-            'project_img.required' => 'Ảnh minh họa không được để trống',
             'project_img.mimes' => 'Ảnh minh họa không đúng định dạng',
             'project_instructor.required' => 'Người hướng dẫn không được để trống',
             'project_confectioner.required' => 'Người thực hiện không được để trống',
@@ -86,6 +89,7 @@ class ProjectsController extends Controller
             'project_content.required' => 'Nội dung không được để trống',
             'project_data_start.required' => 'Ngày bắt đầu không được để trống',
             'project_data_finish.required' => 'Ngày hoàn thành không được để trống',
+            'project_type.required' => 'Bạn chưa chọn loại đề tài',
         ];
         $validator = Validator::make($request->all(), $rules, $messages);
         if ($validator->fails()) {
@@ -95,6 +99,7 @@ class ProjectsController extends Controller
             $data->project_instructor = $request->project_instructor;
             $data->project_confectioner = $request->project_confectioner;
             $data->project_name = $request->project_name;
+            $data->project_type = $request->project_type;
             $data->project_content = $request->project_content;
             $data->project_data_start = $request->project_data_start;
             $data->project_data_finish = $request->project_data_finish;
@@ -115,5 +120,21 @@ class ProjectsController extends Controller
     public function getDelete($id) {
     	Project::destroy($id);
         return back()->with("messages", "Đề tài được xóa thành công!");
+    }
+
+    public function getKltn() {
+        $data = Project::where('project_type', 'kltn')->orderBy('created_at', 'desc')->paginate(10);
+        // $data = Project::orderBy('created_at', 'desc')->paginate(5);
+        return view('backend.projects.index', compact('data'));
+    }
+
+    public function getCdtn() {
+         $data = Project::where('project_type', 'cdtn')->orderBy('created_at', 'desc')->paginate(10);
+        return view('backend.projects.index', compact('data'));
+    }
+
+    public function getNckh() {
+        $data = Project::where('project_type', 'nckh')->orderBy('created_at', 'desc')->paginate(10);
+        return view('backend.projects.index', compact('data'));
     }
 }

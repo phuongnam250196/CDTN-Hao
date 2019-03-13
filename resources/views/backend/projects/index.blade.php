@@ -8,6 +8,9 @@
                     <div class="card">
                         <div class="card-header">
                             <strong class="card-title">Quản lý đề tài</strong>
+                            <a href="{{url('/admin/projects/cdtn')}}" class="btn btn-outline-warning pull-right ml-2">Chuyên đề</a>
+                            <a href="{{url('/admin/projects/nckh')}}" class="btn btn-outline-danger pull-right ml-2">NCKH</a>
+                            <a href="{{url('/admin/projects/kltn')}}" class="btn btn-outline-info pull-right ml-2">Khóa luận</a>
                             <a href="{{url('/admin/projects/create')}}" class="btn btn-outline-success pull-right">Thêm mới</a>
                         </div>
                         <div class="card-body">

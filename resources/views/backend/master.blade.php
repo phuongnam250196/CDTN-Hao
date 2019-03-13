@@ -64,6 +64,7 @@
             font-size: 14px;
         }
     </style>
+    @if(Request::is('admin/calendars'))
      <script type="text/javascript">
 
         jQuery(function($){
@@ -103,6 +104,7 @@
         });
         
     </script>
+    @endif
 </head>
 
 <body>
@@ -117,7 +119,7 @@
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-menu" aria-controls="main-menu" aria-expanded="false" aria-label="Toggle navigation">
                     <i class="fa fa-bars"></i>
                 </button>
-                <a class="navbar-brand" href="./"><p class="text-uppercase" style="font-size: 24px !important;">Quản lý đồ án</p></a>
+                <a class="navbar-brand" href="./"><p class="text-uppercase" style="font-size: 24px !important; padding-top: 15px;">Quản lý sản phẩm <br> phòng LAB</p></a>
                 <a class="navbar-brand hidden" href="./"><img src="{{asset('/backend')}}/images/logo2.png" alt="Logo"></a>
             </div>
 
