@@ -12,14 +12,14 @@
                             <ul class="nav nav-tabs" id="myTab" role="tablist">
                                 <li class="title text-uppercase">Bài viết</li>
 
-                                <li class="nav-item">
+                                {{-- <li class="nav-item">
                                     <a class="nav-link active" id="tab1" data-toggle="tab" href="#world-tab-1" role="tab" aria-controls="world-tab-1" aria-selected="true">New</a>
                                 </li>
 
                                 <li class="nav-item">
                                     <a class="nav-link" id="tab2" data-toggle="tab" href="#world-tab-2" role="tab" aria-controls="world-tab-2" aria-selected="false">Old</a>
                                 </li>
-
+ --}}
                                
                             </ul>
 
@@ -259,30 +259,12 @@
 
                         <!-- Single Blog Post -->
                         <div class="single-blog-post wow fadeInUpBig" data-wow-delay="0.2s">
-                            <!-- Post Thumbnail -->
-                            <div class="post-thumbnail">
-                                <img src="{{asset('/frontend')}}/img/blog-img/b7.jpg" alt="">
-                                <!-- Catagory -->
-                                <div class="post-cta"><a href="#">travel</a></div>
-                                <!-- Video Button -->
-                                <a href="https://www.youtube.com/watch?v=IhnqEwFSJRg" class="video-btn"><i class="fa fa-play"></i></a>
-                            </div>
-                            <!-- Post Content -->
-                            <div class="post-content">
-                                <a href="#" class="headline">
-                                    <h5>How Did van Gogh’s Turbulent Mind Depict One of the Most Complex Concepts in Physics?</h5>
-                                </a>
-                                <p>How Did van Gogh’s Turbulent Mind Depict One of the Most Complex Concepts in...</p>
-                                <!-- Post Meta -->
-                                <div class="post-meta">
-                                    <p><a href="#" class="post-author">Katy Liu</a> on <a href="#" class="post-date">Sep 29, 2017 at 9:48 am</a></p>
-                                </div>
-                            </div>
+                            <iframe width="100%" height="315" src="https://www.youtube.com/embed/XH549YEtZQE" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                         </div>
 
                         <!-- Single Blog Post -->
                         <div class="single-blog-post wow fadeInUpBig" data-wow-delay="0.4s">
-                            <iframe width="100%" height="auto" src="https://www.youtube.com/embed/E0XKOfvuPmk" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            <iframe width="100%" height="315" src="https://www.youtube.com/embed/Vh3O7oGd9-0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                         </div>
 
                     </div>

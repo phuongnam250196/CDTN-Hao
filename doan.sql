@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 13, 2019 at 03:29 PM
+-- Generation Time: Mar 13, 2019 at 06:40 PM
 -- Server version: 10.1.34-MariaDB
 -- PHP Version: 7.2.7
 
@@ -69,7 +69,8 @@ INSERT INTO `calendars` (`id`, `title`, `description`, `start`, `end`, `date_bor
 (24, 'Ca 3-4-5: abc', NULL, '27-02-2019 09:30', '27-02-2019 12:30', '27-02-2019', 2, NULL, NULL, NULL, 2, 6, NULL, '2019-02-25 20:15:30', '2019-02-26 00:06:35'),
 (25, 'Ca 3-4-5: fa', NULL, '27-02-2019 09:30', '27-02-2019 12:30', '27-02-2019', 2, NULL, NULL, NULL, 1, 6, NULL, '2019-02-25 20:15:51', '2019-02-26 02:10:41'),
 (26, 'Buổi sáng: abc', NULL, '25-02-2019 07:00', '25-02-2019 12:30', '25-02-2019', 5, NULL, NULL, NULL, 1, 6, NULL, '2019-02-25 20:27:42', '2019-02-26 02:15:10'),
-(27, 'Ca 1-2: test', 'a', '20-02-2019 07:00', '20-02-2019 09:00', '20-02-2019', 1, NULL, NULL, NULL, 1, NULL, 6, '2019-02-26 02:22:56', '2019-02-26 02:34:51');
+(27, 'Ca 1-2: test', 'a', '20-02-2019 07:00', '20-02-2019 09:00', '20-02-2019', 1, NULL, NULL, NULL, 1, NULL, 6, '2019-02-26 02:22:56', '2019-02-26 02:34:51'),
+(28, 'Ca 6-7: fsdfsdf', 'abc', '23-03-2019 13:00', '23-03-2019 15:00', '23-03-2019', 3, NULL, NULL, NULL, 1, NULL, 6, '2019-03-13 10:31:57', '2019-03-13 10:32:18');
 
 -- --------------------------------------------------------
 
@@ -224,6 +225,7 @@ CREATE TABLE `projects` (
   `project_data_finish` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `project_gallery` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `project_type` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `project_status` char(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -232,13 +234,14 @@ CREATE TABLE `projects` (
 -- Dumping data for table `projects`
 --
 
-INSERT INTO `projects` (`id`, `project_instructor`, `project_confectioner`, `project_name`, `project_img`, `project_content`, `project_data_start`, `project_data_finish`, `project_gallery`, `project_type`, `created_at`, `updated_at`) VALUES
-(2, 'Cường', 'Quân', 'Tập bơi', NULL, '<p>fsa</p>', '2019-01-25', '2019-02-03', NULL, NULL, '2019-01-10 03:19:51', '2019-01-10 03:19:51'),
-(3, 'dsfdsf', 'fdsfds', 'fsdfdsfsf', NULL, '<p>fds</p>', '2019-01-12', '2019-01-18', NULL, NULL, '2019-01-14 21:31:01', '2019-01-14 21:31:01'),
-(4, 'fdsfdsf', 'fdsfdsf', 'dsfdff', NULL, '<p>fds</p>', '2019-01-16', '2019-01-20', NULL, NULL, '2019-01-14 21:31:41', '2019-01-14 21:31:41'),
-(5, 'fffffffffs', 'fdfdf', 'fffffff', 'uploads/projects/5/1552050034-31(1).png', '<p>fd</p>', '2019-01-11', '2019-01-18', 'projects/5/messages/8noP0GcT2WFS6U5IA4KgsO9H11iFAvFb0m7MhiPq.png', 'kltn', '2019-01-14 21:33:29', '2019-03-08 06:00:34'),
-(6, 'Mai Thúy Nga', 'Đậu Minh Quân', 'Hệ thống kết nối đại học thăng long với uec', 'uploads/projects/6/1549958155-48923824_1972709192842145_1513714691799515136_n.jpg', '<p>đ&atilde; ho&agrave;n th&agrave;nh.</p>', '2019-01-02', '2019-01-31', NULL, NULL, '2019-02-12 00:55:55', '2019-02-12 00:55:55'),
-(7, 'Nguyễn Minh Hòa', 'Nguyễn Thọ Việt', 'Lập trình hệ thống hỗ trợ kết nối trên nền tảng java', 'uploads/projects/7/1549961098-46459181_1689740161130121_3947295371335565312_n.jpg', '<p>Đ&atilde; ho&agrave;n th&agrave;nh.</p>', '2019-01-28', '2019-02-23', NULL, NULL, '2019-02-12 01:44:58', '2019-02-12 01:44:58');
+INSERT INTO `projects` (`id`, `project_instructor`, `project_confectioner`, `project_name`, `project_img`, `project_content`, `project_data_start`, `project_data_finish`, `project_gallery`, `project_type`, `project_status`, `created_at`, `updated_at`) VALUES
+(2, 'Cường', 'Quân', 'Tập bơi', NULL, '<p>fsa</p>', '2019-01-25', '2019-02-03', NULL, NULL, NULL, '2019-01-10 03:19:51', '2019-01-10 03:19:51'),
+(3, 'dsfdsf', 'fdsfds', 'fsdfdsfsf', NULL, '<p>fds</p>', '2019-01-12', '2019-01-18', NULL, NULL, NULL, '2019-01-14 21:31:01', '2019-01-14 21:31:01'),
+(4, 'fdsfdsf', 'fdsfdsf', 'dsfdff', NULL, '<p>fds</p>', '2019-01-16', '2019-01-20', NULL, NULL, NULL, '2019-01-14 21:31:41', '2019-01-14 21:31:41'),
+(5, 'fffffffffs', 'fdfdf', 'fffffff', 'uploads/projects/5/1552050034-31(1).png', '<p>fd</p>', '2019-01-11', '2019-01-18', 'projects/5/messages/8noP0GcT2WFS6U5IA4KgsO9H11iFAvFb0m7MhiPq.png', 'kltn', NULL, '2019-01-14 21:33:29', '2019-03-08 06:00:34'),
+(6, 'Mai Thúy Nga', 'Đậu Minh Quân', 'Hệ thống kết nối đại học thăng long với uec', 'uploads/projects/6/1549958155-48923824_1972709192842145_1513714691799515136_n.jpg', '<p>đ&atilde; ho&agrave;n th&agrave;nh.</p>', '2019-01-02', '2019-01-31', NULL, NULL, NULL, '2019-02-12 00:55:55', '2019-02-12 00:55:55'),
+(7, 'Nguyễn Minh Hòa', 'Nguyễn Thọ Việt', 'Lập trình hệ thống hỗ trợ kết nối trên nền tảng java', 'uploads/projects/7/1549961098-46459181_1689740161130121_3947295371335565312_n.jpg', '<p>Đ&atilde; ho&agrave;n th&agrave;nh.</p>', '2019-01-28', '2019-02-23', NULL, NULL, NULL, '2019-02-12 01:44:58', '2019-02-12 01:44:58'),
+(8, 'abc', 'abc', 'abc', 'uploads/projects/8/1552497962-7(3).png', '<p>a</p>', '2019-03-21', '2019-03-22', NULL, 'nckh', 'dangthuchien', '2019-03-13 10:26:02', '2019-03-13 10:26:02');
 
 -- --------------------------------------------------------
 
@@ -449,7 +452,7 @@ ALTER TABLE `user_device`
 -- AUTO_INCREMENT for table `calendars`
 --
 ALTER TABLE `calendars`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT for table `contacts`
@@ -479,7 +482,7 @@ ALTER TABLE `posts`
 -- AUTO_INCREMENT for table `projects`
 --
 ALTER TABLE `projects`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `students`
