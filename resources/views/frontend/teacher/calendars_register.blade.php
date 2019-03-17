@@ -64,10 +64,10 @@
                                             @endif
                                           </div>
                                           
-                                          <div class="form-group">
+                                          {{-- <div class="form-group">
                                             <label>Nhận xét</label>
                                             <textarea name="description" id="" class="form-control" cols="30" rows="4">{{old('description')}}</textarea>
-                                          </div>
+                                          </div> --}}
                                           <div class="form-group">
                                             <button type="submit" class="btn btn-primary">Đăng ký</button>
                                             <a href="{{url('teacher/calendars')}}" class="btn btn-secondary">Hủy bỏ</a>

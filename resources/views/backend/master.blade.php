@@ -158,11 +158,11 @@
                         <a href="{{url('/admin/teachers/')}}"> <i class="menu-icon fa fa-object-ungroup"></i>Quản lý giáo viên</a>
                     </li>
 
-                    <h3 class="menu-title">Các chức năng phụ</h3><!-- /.menu-title -->
+                   {{--  <h3 class="menu-title">Các chức năng phụ</h3><!-- /.menu-title -->
 
                     <li class="menu-item-has-children dropdown">
                         <a href="#"> <i class="menu-icon fa fa-tasks"></i>Quản lý khoa</a>
-                    </li>
+                    </li> --}}
                 </ul>
             </div><!-- /.navbar-collapse -->
         </nav>

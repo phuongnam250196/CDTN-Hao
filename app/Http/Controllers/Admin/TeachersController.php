@@ -21,13 +21,15 @@ class TeachersController extends Controller
     public function postCreate(Request $request) {
     	$rules = [
             'teacher_name' => 'required',
-            'teacher_email' => 'required',
+            'teacher_email' => 'required | email | unique',
             'teacher_phone' => 'required',
             'teacher_avatar' => 'mimes:jpg,png,jpeg',
         ];
         $messages = [
             'teacher_name.required' => 'Họ tên không được để trống',
             'teacher_email.required' => 'Email không được để trống',
+            'teacher_email.email' => 'Email không đúng định dạng',
+            'teacher_email.unique' => 'Email đã tồn tại',
             'teacher_phone.required' => 'Số điện thoại không được để trống',
             'teacher_avatar.mimes' => 'Ảnh đại diện không đúng định dạng',
         ];
@@ -41,24 +43,30 @@ class TeachersController extends Controller
             $data->teacher_email = $request->teacher_email;
             
             if($data->save()) {
-                $user = new User;
-                $user->name = $request->teacher_email;
-                $user->email = $request->teacher_email;
-                $user->teacher_id = $data->id;
-                $user->password = bcrypt($request->password);
-                $user->level = 3;
-                $user->save();
-                if(!empty($request->teacher_avatar) && $request->teacher_avatar != "undefined"){
-                    $file =  $request->teacher_avatar;
-                    $path = 'uploads/teachers/'.$data->id.'/';
-                    $modifiedFileName = time().'-'.$file->getClientOriginalName();
-                    if($file->move($path,$modifiedFileName)){
-                        $data->teacher_avatar = $path.$modifiedFileName;
-                        $data->save();
+                $user = User::where('email', $request->teacher_email);
+                if(!empty($user)) {
+                    return back()->with('messages', 'Email đã tồn tại!');
+                } else {
+                    $user = new User;
+                    $user->name = $request->teacher_email;
+                    $user->email = $request->teacher_email;
+                    $user->teacher_id = $data->id;
+                    $user->password = bcrypt($request->password);
+                    $user->level = 3;
+                    $user->save();
+                    if(!empty($request->teacher_avatar) && $request->teacher_avatar != "undefined"){
+                        $file =  $request->teacher_avatar;
+                        $path = 'uploads/teachers/'.$data->id.'/';
+                        $modifiedFileName = time().'-'.$file->getClientOriginalName();
+                        if($file->move($path,$modifiedFileName)){
+                            $data->teacher_avatar = $path.$modifiedFileName;
+                            $data->save();
+                        }
                     }
+                    return redirect()->intended('admin/teachers')->with('messages', 'Thêm mới thành công!');
                 }
             }
-            return redirect()->intended('admin/teachers')->with('messages', 'Thêm mới thành công!');
+            
         }
     }
 
@@ -102,6 +110,8 @@ class TeachersController extends Controller
 
     public function getDelete($id) {
     	Teacher::destroy($id);
+        $user = User::where('teacher_id', $id)->first();
+        $user->delete();
         return back()->with("messages", "Đề tài được xóa thành công!");
     }
 }

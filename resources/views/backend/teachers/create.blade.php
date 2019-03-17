@@ -9,8 +9,12 @@
                         <div class="card-header">
                             <strong>Thêm mới </strong> Tài khoản giáo viên
                         </div>
+
                         <form method="POST" enctype="multipart/form-data">
                             <div class="card-body card-block">
+                                @if(session('messages'))
+                                    <p class="alert alert-danger">{{session('messages')}}</p>
+                                @endif
                                 <div class="form-group">
                                     <label class="form-control-label">Email</label>
                                     <input type="text" name="teacher_email" placeholder="Nhập tiêu đề" class="form-control">

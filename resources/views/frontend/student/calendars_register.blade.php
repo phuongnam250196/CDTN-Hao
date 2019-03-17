@@ -103,7 +103,7 @@
                 // alert(date);
 
                 $.ajax({
-                    url: '/student/calendars/change_date/' + date,
+                    url: '/QLDA/public/student/calendars/change_date/' + date,
                     type: 'get',
                     headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
                     success:function(data){
@@ -131,7 +131,7 @@
                           $('select[name = "ca"]').append("<option value='7'>Cả ngày</option>")
                         }
                       }
-                        // console.log(data.calendars)
+                        console.log(data.calendars)
                       
                     },
                     errors: function (err) {

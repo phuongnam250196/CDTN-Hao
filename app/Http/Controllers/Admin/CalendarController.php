@@ -81,7 +81,7 @@ class CalendarController extends Controller
                     $m->to((!empty($data->Student->student_email))?$data->Student->student_email:$data->Teacher->teacher_email)->subject(((!empty($data->Student->student_name))?$data->Student->student_name:$data->Teacher->teacher_name).' Yêu cầu mượn phòng thành công ');
                 });
             }
-    		return back()->with('messages', 'Xác nhận thành công.');
+    		return redirect()->intended('admin/calendars/list_allow')->with('messages', 'Xác nhận thành công.');
     	}
     	// dd($data);
     }
@@ -97,7 +97,7 @@ class CalendarController extends Controller
                     $m->to((!empty($data->Student->student_email))?$data->Student->student_email:$data->Teacher->teacher_email)->subject(((!empty($data->Student->student_name))?$data->Student->student_name:$data->Teacher->teacher_name).' Yêu cầu mượn phòng thất bại ');
                 });
             }
-    		return back()->with('messages', 'Từ chối mượn phòng thành công.');
+    		return redirect()->intended('admin/calendars/list_deny')->with('messages', 'Từ chối mượn phòng thành công.');
     	}
     }
 }

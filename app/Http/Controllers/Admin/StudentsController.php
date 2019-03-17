@@ -44,24 +44,30 @@ class StudentsController extends Controller
             $data->student_email = $request->student_email;
 
             if($data->save()) {
-                $user = new User;
-                $user->name = $request->student_code;
-                $user->email = $request->student_email;
-                $user->student_id = $data->id;
-                $user->password = bcrypt($request->password);
-                $user->level = 2;
-                $user->save();
-                if(!empty($request->student_avatar) && $request->student_avatar != "undefined"){
-                    $file =  $request->student_avatar;
-                    $path = 'uploads/students/'.$data->id.'/';
-                    $modifiedFileName = time().'-'.$file->getClientOriginalName();
-                    if($file->move($path,$modifiedFileName)){
-                        $data->student_avatar = $path.$modifiedFileName;
-                        $data->save();
+                $user = User::where('email', $request->student_email);
+                if(!empty($user)) {
+                    return back()->with('messages', 'Email đã tồn tại!');
+                } else {
+                    $user = new User;
+                    $user->name = $request->student_code;
+                    $user->email = $request->student_email;
+                    $user->student_id = $data->id;
+                    $user->password = bcrypt($request->password);
+                    $user->level = 2;
+                    $user->save();
+                    if(!empty($request->student_avatar) && $request->student_avatar != "undefined"){
+                        $file =  $request->student_avatar;
+                        $path = 'uploads/students/'.$data->id.'/';
+                        $modifiedFileName = time().'-'.$file->getClientOriginalName();
+                        if($file->move($path,$modifiedFileName)){
+                            $data->student_avatar = $path.$modifiedFileName;
+                            $data->save();
+                        }
                     }
+                    return redirect()->intended('admin/students')->with('messages', 'Thêm mới thành công!');
                 }
             }
-            return redirect()->intended('admin/students')->with('messages', 'Thêm mới thành công!');
+            
         }
     }
 
@@ -106,6 +112,8 @@ class StudentsController extends Controller
 
     public function getDelete($id) {
     	Student::destroy($id);
+        $user = User::where('student_id', $id)->first();
+        $user->delete();
         return back()->with("messages", "Đề tài được xóa thành công!");
     }
 }

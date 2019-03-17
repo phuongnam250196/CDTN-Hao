@@ -51,7 +51,7 @@ class HomeController extends Controller
             $data->content = $request->message;
             if($data->save()) {
                 Mail::send('emails.contact',['data'=> $data], function($m) use ($data) {
-                    $m->to('Taxuanhao0207@gmail.com')->subject('Liên hệ từ '.$data->name);
+                    $m->to('taxuanhao5@gmail.com')->subject('Liên hệ từ '.$data->name);
                 });
             }
             return back()->with('messages', 'Bạn đã gửi tin nhắn thành công cho quản trị viên.');
