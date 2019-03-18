@@ -21,7 +21,7 @@ class TeachersController extends Controller
     public function postCreate(Request $request) {
     	$rules = [
             'teacher_name' => 'required',
-            'teacher_email' => 'required | email | unique',
+            'teacher_email' => 'required | email',
             'teacher_phone' => 'required',
             'teacher_avatar' => 'mimes:jpg,png,jpeg',
         ];
@@ -29,7 +29,6 @@ class TeachersController extends Controller
             'teacher_name.required' => 'Họ tên không được để trống',
             'teacher_email.required' => 'Email không được để trống',
             'teacher_email.email' => 'Email không đúng định dạng',
-            'teacher_email.unique' => 'Email đã tồn tại',
             'teacher_phone.required' => 'Số điện thoại không được để trống',
             'teacher_avatar.mimes' => 'Ảnh đại diện không đúng định dạng',
         ];

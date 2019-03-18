@@ -40,9 +40,9 @@
                                             <td class="text-center">{{$dat->device_count_change}}</td>
                                             <td>
                                                 @if($dat->device_count_change == 0)
-                                                    <a href="#" class="btn btn-secondary">Mượn</a>
+                                                    <a href="#" class="btn btn-secondary">Đăng ký</a>
                                                 @else
-                                                    <a href="{{url('teacher/devices/'.$dat->id)}}" class="btn btn-primary" onclick="return confirm('Bạn có chắc chắn muốn mượn chứ!');">Mượn</a>
+                                                    <a href="{{url('teacher/devices/'.$dat->id)}}" class="btn btn-primary" onclick="return confirm('Bạn có chắc chắn muốn mượn chứ!');">Đăng ký</a>
                                                 @endif
                                             </td>
                                           </tr>

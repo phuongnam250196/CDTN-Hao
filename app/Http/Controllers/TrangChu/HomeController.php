@@ -17,9 +17,11 @@ class HomeController extends Controller
 {
     public function getIndex() {
         $posts= Posts::orderBy('created_at', 'desc')->where('post_status', 1)->limit(5)->get();
-        $projects = Project::orderBy('created_at', 'desc')->paginate(5);
+        $kltn = Project::where('project_type', 'kltn')->orderBy('created_at', 'desc')->limit(3)->get();
+        $cdtn = Project::where('project_type', 'cdtn')->orderBy('created_at', 'desc')->limit(3)->get();
+        $nckh = Project::where('project_type', 'nckh')->orderBy('created_at', 'desc')->limit(3)->get();
         $devices = Device::limit(3)->get();
-    	return view('frontend.index', compact('posts', 'projects', 'devices'));
+    	return view('frontend.index', compact('posts', 'kltn', 'cdtn', 'nckh', 'devices'));
     }
 
     public function getContact() {
@@ -106,5 +108,12 @@ class HomeController extends Controller
             return view('frontend.teacher.index', compact('posts'));
         }
        
+    }
+
+    public function getProjectType($type) {
+        $data = Project::where('project_type', $type)->orderBy('created_at', 'desc')->paginate(9);
+        // dd($data);
+        $posts = Posts::where('post_status', 1)->orderBy('created_at', 'desc')->limit(5)->get();
+        return view('frontend.project', compact('data', 'posts'));
     }
 }

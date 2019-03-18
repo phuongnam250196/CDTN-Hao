@@ -12,14 +12,6 @@
                         <div class="world-catagory-area">
                             <ul class="nav nav-tabs" id="myTab2" role="tablist">
                                 <li class="title">Danh sách đồ án</li>
-
-                                {{-- <li class="nav-item">
-                                    <a class="nav-link active" id="tab10" data-toggle="tab" href="#world-tab-10" role="tab" aria-controls="world-tab-10" aria-selected="true">New</a>
-                                </li>
-
-                                <li class="nav-item">
-                                    <a class="nav-link" id="tab11" data-toggle="tab" href="#world-tab-11" role="tab" aria-controls="world-tab-11" aria-selected="false">Old</a>
-                                </li> --}}
                             </ul>
 
                             <div class="tab-content" id="myTabContent2">
@@ -42,7 +34,7 @@
                                                 <!-- Post Content -->
                                                 <div class="post-content">
                                                     <a href="{{url('/project/'.$dat->id)}}" class="headline">
-                                                        <h5 style="overflow: hidden;text-overflow: ellipsis;-webkit-line-clamp: 2;display: -webkit-box;-webkit-box-orient: vertical;">{{$dat->project_name}}</h5>
+                                                        <h5 style="overflow: hidden;text-overflow: ellipsis;-webkit-line-clamp: 2;display: -webkit-box;-webkit-box-orient: vertical;">{{(!empty($dat->project_name)?($dat->project_name):'Đã xóa')}}</h5>
                                                     </a>
                                                     <p style="overflow: hidden;text-overflow: ellipsis;-webkit-line-clamp: 3;display: -webkit-box;-webkit-box-orient: vertical;">{!! $dat->project_content !!}</p>
                                                     <!-- Post Meta -->

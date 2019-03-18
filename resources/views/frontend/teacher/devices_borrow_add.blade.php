@@ -34,7 +34,7 @@
                                             @endif
                                           </div>
                                           <div class="form-group">
-                                            <label>Số lượng mượn</label>
+                                            <label>Số lượng đăng ký</label>
                                             <input type="number" name="count" class="form-control">
                                             @if($errors->has('count'))
                                               <p class="help text-danger">{{ $errors->first('count') }}</p>
@@ -42,7 +42,7 @@
                                           </div>
                                         
                                           <div class="form-group">
-                                            <button type="submit" class="btn btn-primary">Mượn</button>
+                                            <button type="submit" class="btn btn-primary">Đăng ký</button>
                                             <a href="{{url('teacher/devices')}}" class="btn btn-secondary">Hủy bỏ</a>
                                           </div>
                                           {{csrf_field()}}

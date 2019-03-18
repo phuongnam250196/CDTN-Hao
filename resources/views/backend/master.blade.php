@@ -119,7 +119,7 @@
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-menu" aria-controls="main-menu" aria-expanded="false" aria-label="Toggle navigation">
                     <i class="fa fa-bars"></i>
                 </button>
-                <a class="navbar-brand" href="./"><p class="text-uppercase" style="font-size: 24px !important; padding-top: 15px;">Quản lý sản phẩm <br> phòng LAB</p></a>
+                <a class="navbar-brand" href="./"><p class="text-uppercase" style="font-size: 24px !important; padding-top: 15px;">Quản lý sản phẩm <br> IOT</p></a>
                 <a class="navbar-brand hidden" href="./"><img src="{{asset('/backend')}}/images/logo2.png" alt="Logo"></a>
             </div>
 
@@ -142,7 +142,7 @@
                         <a href="{{url('/admin/projects/')}}" class="dropdown-toggle"> <i class="menu-icon fa fa-product-hunt"></i></i>Quản lý đồ án</a>
                     </li> --}}
                     <li class="menu-item-has-children dropdown @if(Request::is('admin/projects') || Request::is('admin/projects/*')) active @endif">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-laptop"></i>Quản lý đồ án</a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-laptop"></i>Quản lý sản phẩm</a>
                         <ul class="sub-menu children active dropdown-menu">
                             <li><i class="fa fa-puzzle-piece"></i><a href="{{url('/admin/projects/')}}">Danh sách</a></li>
                             <li><i class="fa fa-puzzle-piece"></i><a href="{{url('/admin/projects/create')}}">Thêm mới</a></li>

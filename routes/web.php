@@ -38,6 +38,8 @@ Route::group(['namespace'=>'TrangChu'], function() {
 	Route::get('/project', 'HomeController@getProject');
 	Route::get('/project/{id}', 'HomeController@getProjectDetail');
 
+	Route::get('/project/type/{type}', 'HomeController@getProjectType');
+
 	Route::group(['prefix'=>'student', 'middleware'=>['checkstudent']], function() {
 		Route::get('/', 'StudentsController@getIndex');
 		Route::get('/change', 'StudentsController@getChange');

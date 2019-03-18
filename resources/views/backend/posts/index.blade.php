@@ -10,7 +10,6 @@
                             <strong class="card-title">Danh sách bài viết chờ duyệt</strong>
                             <a href="{{url('/admin/post/deny')}}" class="btn btn-outline-secondary pull-right">Bài đã ẩn</a>
                             <a href="{{url('/admin/post/allow')}}" class="btn btn-outline-success pull-right mr-2">Bài viết đã duyệt</a>
-                            <a href="{{url('/admin/posts/create')}}" class="btn btn-outline-info pull-right mr-2">Thêm mới</a>
                         </div>
                         <div class="card-body">
                             @if(session('messages'))

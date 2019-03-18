@@ -18,7 +18,7 @@
                             <ul class="nav nav-tabs" id="myTab" role="tablist">
                                 <li class="title">Danh sách thiết bị của tôi</li>
                                 <li class="nav-item">
-                                    <a class="btn btn-primary"  href="{{url('student/devices/all')}}">Mượn</a>
+                                    <a class="btn btn-primary"  href="{{url('student/devices/all')}}">Đăng ký</a>
                                 </li>
                             </ul>
 
@@ -34,7 +34,7 @@
                                             <th>Tên thiết bị</th>
                                             <th>Loại</th>
                                             <th>Trạng thái</th>
-                                            <th>Ngày mượn</th>
+                                            <th>Ngày đăng ký</th>
                                           </tr>
                                         </thead>
                                         <tbody {{$dem =1}}>

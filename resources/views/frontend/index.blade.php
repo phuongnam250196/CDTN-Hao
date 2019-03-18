@@ -19,7 +19,7 @@
                                 <li class="nav-item">
                                     <a class="nav-link" id="tab2" data-toggle="tab" href="#world-tab-2" role="tab" aria-controls="world-tab-2" aria-selected="false">Old</a>
                                 </li>
- --}}
+                                            --}}
                                
                             </ul>
 
@@ -77,114 +77,13 @@
                                     </div>
                                 </div>
 
-                                <div class="tab-pane fade" id="world-tab-2" role="tabpanel" aria-labelledby="tab2">
-                                    <div class="row">
-                                        <div class="col-12 col-md-6">
-                                            <!-- Single Blog Post -->
-                                            <div class="single-blog-post">
-                                                <!-- Post Thumbnail -->
-                                                <div class="post-thumbnail">
-                                                    <img src="{{asset('/frontend')}}/img/blog-img/b1.jpg" alt="">
-                                                    <!-- Catagory -->
-                                                    <div class="post-cta"><a href="#">travel</a></div>
-                                                </div>
-                                                <!-- Post Content -->
-                                                <div class="post-content">
-                                                    <a href="#" class="headline">
-                                                        <h5>How Did van Gogh’s Turbulent Mind Depict One of the Most Complex Concepts in Physics?</h5>
-                                                    </a>
-                                                    <p>How Did van Gogh’s Turbulent Mind Depict One of the Most Complex Concepts in...</p>
-                                                    <!-- Post Meta -->
-                                                    <div class="post-meta">
-                                                        <p><a href="#" class="post-author">Katy Liu</a> on <a href="#" class="post-date">Sep 29, 2017 at 9:48 am</a></p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-12 col-md-6">
-                                            <!-- Single Blog Post -->
-                                            <div class="single-blog-post post-style-2 d-flex align-items-center">
-                                                <!-- Post Thumbnail -->
-                                                <div class="post-thumbnail">
-                                                    <img src="{{asset('/frontend')}}/img/blog-img/b10.jpg" alt="">
-                                                </div>
-                                                <!-- Post Content -->
-                                                <div class="post-content">
-                                                    <a href="#" class="headline">
-                                                        <h5>How Did van Gogh’s Turbulent Mind Depict One of the Most</h5>
-                                                    </a>
-                                                    <!-- Post Meta -->
-                                                    <div class="post-meta">
-                                                        <p><a href="#" class="post-author">Katy Liu</a> on <a href="#" class="post-date">Sep 29, 2017 at 9:48 am</a></p>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <!-- Single Blog Post -->
-                                            <div class="single-blog-post post-style-2 d-flex align-items-center">
-                                                <!-- Post Thumbnail -->
-                                                <div class="post-thumbnail">
-                                                    <img src="{{asset('/frontend')}}/img/blog-img/b11.jpg" alt="">
-                                                </div>
-                                                <!-- Post Content -->
-                                                <div class="post-content">
-                                                    <a href="#" class="headline">
-                                                        <h5>How Did van Gogh’s Turbulent Mind Depict One of the Most</h5>
-                                                    </a>
-                                                    <!-- Post Meta -->
-                                                    <div class="post-meta">
-                                                        <p><a href="#" class="post-author">Katy Liu</a> on <a href="#" class="post-date">Sep 29, 2017 at 9:48 am</a></p>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <!-- Single Blog Post -->
-                                            <div class="single-blog-post post-style-2 d-flex align-items-center">
-                                                <!-- Post Thumbnail -->
-                                                <div class="post-thumbnail">
-                                                    <img src="{{asset('/frontend')}}/img/blog-img/b12.jpg" alt="">
-                                                </div>
-                                                <!-- Post Content -->
-                                                <div class="post-content">
-                                                    <a href="#" class="headline">
-                                                        <h5>How Did van Gogh’s Turbulent Mind Depict One of the Most</h5>
-                                                    </a>
-                                                    <!-- Post Meta -->
-                                                    <div class="post-meta">
-                                                        <p><a href="#" class="post-author">Katy Liu</a> on <a href="#" class="post-date">Sep 29, 2017 at 9:48 am</a></p>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <!-- Single Blog Post -->
-                                            <div class="single-blog-post post-style-2 d-flex align-items-center">
-                                                <!-- Post Thumbnail -->
-                                                <div class="post-thumbnail">
-                                                    <img src="{{asset('/frontend')}}/img/blog-img/b13.jpg" alt="">
-                                                </div>
-                                                <!-- Post Content -->
-                                                <div class="post-content">
-                                                    <a href="#" class="headline">
-                                                        <h5>How Did van Gogh’s Turbulent Mind Depict One of the Most</h5>
-                                                    </a>
-                                                    <!-- Post Meta -->
-                                                    <div class="post-meta">
-                                                        <p><a href="#" class="post-author">Katy Liu</a> on <a href="#" class="post-date">Sep 29, 2017 at 9:48 am</a></p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="title wow fadeInUpBig">
-                <h5>Trang thiết bị </h5>
+                <h5 style="font-weight: bold;">Trang thiết bị </h5>
             </div>
             <div class="row justify-content-center">
                 @foreach($devices as $device)
@@ -215,56 +114,110 @@
                 @endforeach
 
             </div>
+            
+            <br><br>
+            <div class="title wow fadeInUpBig">
+                <h5>Đồ án </h5>
+            </div>
+            <div class="row justify-content-center">
+                <!-- ============= Post Content Area Start ============= -->
+                <div class="col-12 col-lg-12">
+                    <div class="post-content-area">
+                        <div class="world-catagory-area">
 
-            <div class="world-latest-articles">
-                <div class="row">
-                    <div class="col-12 col-lg-8">
-                        <div class="title">
-                            <h5>Đồ án mẫu</h5>
-                        </div>
+                            <div class="tab-content" id="myTabContent2">
+                                <div class="tab-pane fade show active" id="world-tab-10" role="tabpanel" aria-labelledby="tab10">
+                                    <div class="row">
+                                       
+                                        <div class="col-12 col-md-4 mb-3">
+                                            <h6 style="margin-bottom: 5px; text-align: center;">Khóa Luận tốt nghiệp</h6>
+                                            <hr style="width: 20%; margin:0 auto; margin-bottom: 16px;">
+                                             @foreach($kltn as $dat)
+                                            <div class="single-blog-post wow fadeInUpBig" data-wow-delay="0.3s">
+                                                <div class="post-thumbnail">
+                                                    @if(!empty($dat->project_img))
+                                                        <img style="height: 200px;" src="{{asset(''.$dat->project_img)}}" alt="">
+                                                    @else
+                                                        <img style="height: 200px;" src="{{url('/')}}/uploads/images/nen.png" alt="">
+                                                    @endif
+                                                    <div class="post-cta"><a href="{{url('/project/'.$dat->id)}}">Chi tiết</a></div>
+                                                </div>
+                                                <div class="post-content">
+                                                    <a href="{{url('/project/'.$dat->id)}}" class="headline">
+                                                        <h5 style="overflow: hidden;text-overflow: ellipsis;-webkit-line-clamp: 2;display: -webkit-box;-webkit-box-orient: vertical;">{{$dat->project_name}}</h5>
+                                                    </a>
+                                                    <p style="overflow: hidden;text-overflow: ellipsis;-webkit-line-clamp: 3;display: -webkit-box;-webkit-box-orient: vertical;">{!! $dat->project_content !!}</p>
+                                                    <div class="post-meta">
+                                                        <p><a href="#" class="post-author">{{$dat->project_confectioner}}</a> on <a href="#" class="post-date">{{$dat->created_at->toDayDateTimeString()}}</a></p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            @endforeach
+                                            <div class="text-center" style="margin-top: 30px;">
+                                                <a href="{{url('/project/type/kltn')}}" class="btn btn-outline-secondary">Xem thêm</a>
+                                            </div>
+                                        </div>
 
-                        @foreach($projects as $project)
-                        <div class="single-blog-post post-style-4 d-flex align-items-center wow fadeInUpBig" data-wow-delay="0.2s">
-                            <!-- Post Thumbnail -->
-                            <div class="post-thumbnail">
-                                @if(!empty($project->project_img))
-                                    <a href="{{url('project/'.$project->id)}}"><img style="height: 180px;" src="{{url('/').'/'.$project->project_img}}" alt=""></a>
-                                @else
-                                <a href="{{url('project/'.$project->id)}}">
-                                    <img style="height: 180px;" src="{{url('/')}}/uploads/images/nen.png" alt="">
-                                </a>
-                                @endif
-                            </div>
-                            <!-- Post Content -->
-                            <div class="post-content">
-                                <a href="{{url('project/'.$project->id)}}" class="headline">
-                                    <h5 style="overflow: hidden;text-overflow: ellipsis;-webkit-line-clamp: 2;display: -webkit-box;-webkit-box-orient: vertical;">{{$project->project_name}}</h5>
-                                </a>
-                                <p style="overflow: hidden;text-overflow: ellipsis;-webkit-line-clamp: 3;display: -webkit-box;-webkit-box-orient: vertical;">{!! $project->project_content !!}</p>
-                                <!-- Post Meta -->
-                                <div class="post-meta">
-                                    <p><a href="#" class="post-author">{{$project->project_confectioner}}</a> on <a href="#" class="post-date">Sep 29, 2017 at 9:48 am</a></p>
+                                        <div class="col-12 col-md-4 mb-3">
+                                            <h6 style="margin-bottom: 5px; text-align: center;">Chuyên đề tốt nghiệp</h6>
+                                            <hr style="width: 20%; margin:0 auto; margin-bottom: 16px;">
+                                             @foreach($cdtn as $dat)
+                                            <div class="single-blog-post wow fadeInUpBig" data-wow-delay="0.3s">
+                                                <div class="post-thumbnail">
+                                                    @if(!empty($dat->project_img))
+                                                        <img style="height: 200px;" src="{{asset(''.$dat->project_img)}}" alt="">
+                                                    @else
+                                                        <img style="height: 200px;" src="{{url('/')}}/uploads/images/nen.png" alt="">
+                                                    @endif
+                                                    <div class="post-cta"><a href="{{url('/project/'.$dat->id)}}">Chi tiết</a></div>
+                                                </div>
+                                                <div class="post-content">
+                                                    <a href="{{url('/project/'.$dat->id)}}" class="headline">
+                                                        <h5 style="overflow: hidden;text-overflow: ellipsis;-webkit-line-clamp: 2;display: -webkit-box;-webkit-box-orient: vertical;">{{$dat->project_name}}</h5>
+                                                    </a>
+                                                    <p style="overflow: hidden;text-overflow: ellipsis;-webkit-line-clamp: 3;display: -webkit-box;-webkit-box-orient: vertical;">{!! $dat->project_content !!}</p>
+                                                    <div class="post-meta">
+                                                        <p><a href="#" class="post-author">{{$dat->project_confectioner}}</a> on <a href="#" class="post-date">{{$dat->created_at->toDayDateTimeString()}}</a></p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            @endforeach
+                                            <div class="text-center" style="margin-top: 30px;">
+                                                <a href="{{url('/project/type/cdtn')}}" class="btn btn-outline-secondary">Xem thêm</a>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-12 col-md-4 mb-3">
+                                            <h6 style="margin-bottom: 5px; text-align: center;">Đề tài NCKH</h6>
+                                            <hr style="width: 20%; margin:0 auto; margin-bottom: 16px;">
+                                             @foreach($nckh as $dat)
+                                            <div class="single-blog-post wow fadeInUpBig" data-wow-delay="0.3s">
+                                                <div class="post-thumbnail">
+                                                    @if(!empty($dat->project_img))
+                                                        <img style="height: 200px;" src="{{asset(''.$dat->project_img)}}" alt="">
+                                                    @else
+                                                        <img style="height: 200px;" src="{{url('/')}}/uploads/images/nen.png" alt="">
+                                                    @endif
+                                                    <div class="post-cta"><a href="{{url('/project/'.$dat->id)}}">Chi tiết</a></div>
+                                                </div>
+                                                <div class="post-content">
+                                                    <a href="{{url('/project/'.$dat->id)}}" class="headline">
+                                                        <h5 style="overflow: hidden;text-overflow: ellipsis;-webkit-line-clamp: 2;display: -webkit-box;-webkit-box-orient: vertical;">{{$dat->project_name}}</h5>
+                                                    </a>
+                                                    <p style="overflow: hidden;text-overflow: ellipsis;-webkit-line-clamp: 3;display: -webkit-box;-webkit-box-orient: vertical;">{!! $dat->project_content !!}</p>
+                                                    <div class="post-meta">
+                                                        <p><a href="#" class="post-author">{{$dat->project_confectioner}}</a> on <a href="#" class="post-date">{{$dat->created_at->toDayDateTimeString()}}</a></p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            @endforeach
+                                            <div class="text-center" style="margin-top: 30px;">
+                                                <a href="{{url('/project/type/nckh')}}" class="btn btn-outline-secondary">Xem thêm</a>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        @endforeach
-                        <br>
-                        {{$projects->links()}}
-                    </div>
-
-                    <div class="col-12 col-lg-4">
-                        <div class="title">
-                            <h5>Quảng cáo </h5>
-                        </div>
-
-                        <!-- Single Blog Post -->
-                        <div class="single-blog-post wow fadeInUpBig" data-wow-delay="0.2s">
-                            <iframe width="100%" height="315" src="https://www.youtube.com/embed/XH549YEtZQE" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                        </div>
-
-                        <!-- Single Blog Post -->
-                        <div class="single-blog-post wow fadeInUpBig" data-wow-delay="0.4s">
-                            <iframe width="100%" height="315" src="https://www.youtube.com/embed/Vh3O7oGd9-0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                         </div>
 
                     </div>
