@@ -66,7 +66,7 @@
             cursor: pointer;
         }  
     </style>
-
+    @if(Request::is('teacher/calendars') || Request::is('student/calendars'))
     <script type="text/javascript">
     
         $(function() 
@@ -108,6 +108,7 @@
             
         }); 
     </script>
+    @endif
 </head>
 
 <body>
