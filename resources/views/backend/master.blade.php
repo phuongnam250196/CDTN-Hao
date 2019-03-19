@@ -142,7 +142,7 @@
                         <a href="{{url('/admin/projects/')}}" class="dropdown-toggle"> <i class="menu-icon fa fa-product-hunt"></i></i>Quản lý đồ án</a>
                     </li> --}}
                     <li class="menu-item-has-children dropdown @if(Request::is('admin/projects') || Request::is('admin/projects/*')) active @endif">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-laptop"></i>Quản lý sản phẩm</a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-laptop"></i>Quản lý sản phẩm IOT</a>
                         <ul class="sub-menu children active dropdown-menu">
                             <li><i class="fa fa-puzzle-piece"></i><a href="{{url('/admin/projects/')}}">Danh sách</a></li>
                             <li><i class="fa fa-puzzle-piece"></i><a href="{{url('/admin/projects/create')}}">Thêm mới</a></li>
