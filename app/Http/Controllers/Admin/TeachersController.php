@@ -42,10 +42,10 @@ class TeachersController extends Controller
             $data->teacher_email = $request->teacher_email;
             
             if($data->save()) {
-                $user = User::where('email', $request->teacher_email);
-                if(!empty($user)) {
-                    return back()->with('messages', 'Email đã tồn tại!');
-                } else {
+                // $user = User::where('email', $request->teacher_email);
+                // if(!empty($user)) {
+                //     return back()->with('messages', 'Email đã tồn tại!');
+                // } else {
                     $user = new User;
                     $user->name = $request->teacher_email;
                     $user->email = $request->teacher_email;
@@ -63,7 +63,7 @@ class TeachersController extends Controller
                         }
                     }
                     return redirect()->intended('admin/teachers')->with('messages', 'Thêm mới thành công!');
-                }
+                // }
             }
             
         }

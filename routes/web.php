@@ -203,3 +203,21 @@ Route::group(['namespace'=>'Admin'], function() {
 	    });
 	});
 });
+
+Route::get('abc', function() {
+	 $arr = [
+		["id"=> "1", "name"=> 'Iron Man', "comic"=> 'Marvel'], 
+		["id"=> "2", "name"=> 'Batman', "comic"=> 'DC'],
+		["id"=> "3", "name"=> 'Superman', "comic"=> 'DC'],
+		["id"=> "4", "name"=> 'Daredevil', "comic"=> 'Marvel'],
+		["id"=> "5", "name"=> 'Flash',"comic"=> 'DC']
+	];
+	
+	$dem = 0; $dem2=0;
+	foreach($arr as $a) {
+		if($a['comic'] == 'Marvel') {
+			$dem++;
+		}
+	}
+	dd($dem);
+});

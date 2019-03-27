@@ -25,7 +25,7 @@ class DevicesController extends Controller
             'device_count' => 'required',
             'device_type' => 'required',
             'device_description' => 'required',
-            'device_img' => 'mines:jpg,png,jpeg',
+            'device_img' => 'mimes:jpg,png,jpeg',
         ];
         $messages = [
             'device_code.required' => 'Mã thiết bị không được để trống',
